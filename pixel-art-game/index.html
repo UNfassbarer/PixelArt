@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel art Game</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+
+    <link rel="stylesheet" href="./CSS/symbols.css">
+    <link rel="stylesheet" href="./CSS/animations.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+    <!-- Mute smybol -->
+    <img id="mute_Symbol" src="img/mute_Icon_off_day.png" alt="mute icon" onclick="ToggleGameSounds()">
+
+    <!-- Menu tooltip -->
+    <button type="button" class="TooltipWrapper centeredObject centerContent">
+        <div id="GameTooltip" class="GameTooltip" role="banner" onclick="setTimeout(OpenMenu,1250)">
+        </div>
+        <span class="centerContent">Start Game</span>
+    </button>
+
+    <!-- Game menu -->
+    <div id="Game_Menu" class="centerContent hiddenContent">
+
+        <div id="Menu_Poster" class="centerContent">
+            <div id="Poster_Caption">M</div>
+            <canvas role="presentation"></canvas> <!-- -> class="BiggerPosterCanvas" -->
+        </div>
+
+        <div id="Menu_Content" class="hiddenContent">
+
+            <span class="Menu_Head">MENU</span>
+
+            <div class="Content_Buttons">
+                <button class="button" type="button" id="NewGame">
+                    <span class="centeredObject">New Game</span>
+                    <canvas role="presentation"></canvas>
+                </button>
+                <button class="button" type="button" id="IDK">
+                    <span class="centeredObject">IDK</span>
+                    <canvas role="presentation"></canvas>
+                </button>
+                <button class="button" type="button" id="Graphics">
+                    <span class="centeredObject">Graphics</span>
+                    <canvas role="presentation"></canvas>
+                </button>
+                <button class="button" type="button" id="Settings">
+                    <span class="centeredObject">Settings</span>
+                    <canvas role="presentation"></canvas>
+                </button>
+                <button class="button" type="button" id="Exit">
+                    <span class="centeredObject">Exit</span>
+                    <canvas role="presentation"></canvas>
+                </button>
+            </div>
+
+            <div id="Menu_Settings" class="Menu_Settings new_hiddenContent centerContent">
+
+                <button id="Toggle_GameStats" type="button" class="Settings_Category" onclick="ToggleGameStats(this)">
+                    Game stats <span>off</span>
+                </button>
+                <button id="Toggle_GameSounds" type="button" class="Settings_Category" onclick="ToggleGameSounds()">
+                    Game sounds <span>off</span>
+                </button>
+
+                <button id="Settings_KeyAssignment" type="button" class="Settings_Category " onclick="ToggleKeys()">Key
+                    assignment</button>
+
+                <button id="..." type="button" class="Settings_Category ">Instructions</button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="gameWrapper centeredObject centerContent">
+
+        <video class="gameVideo hiddenContent" preload="auto" muted playsinline>
+            <source src="video/test60_a.mp4" type="video/mp4" />
+        </video>
+
+        <video class="gameVideo hiddenContent" preload="auto" muted playsinline>
+            <source src="video/test60_b.mp4" type="video/mp4" />
+        </video>
+
+        <canvas id="gameContainer" class="hiddenContent gameBox"></canvas>
+    </div>
+
+    <h1 id="gameOver" class="GameOverBoard hiddenContent">GameOver</h1>
+
+    <div id="gameInfo" class="GameInfoFade new_hiddenContent">
+        <div class="centerContent">Deaths:</div><span id="deaths" class="centerContent">
+            <h5>/</h5>
+        </span>
+        <div class="centerContent">Game:</div><span id="gamesPlayed" class="centerContent">
+            <h5>/</h5>
+        </span>
+        <div class="centerContent">Time:</div><span id="survivedTime" class="centerContent">
+            <h5>/</h5>
+        </span>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>

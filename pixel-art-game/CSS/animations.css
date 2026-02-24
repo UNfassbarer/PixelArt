@@ -1,0 +1,226 @@
+@keyframes rotateLeft {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes particle {
+  to {
+    transform: translateY(-200px) scale(0) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Jump animation for player */
+@keyframes jumpParticle {
+  0% {
+    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(100px) scale(0.25) rotateX(180deg);
+    opacity: 0;
+    border: rgb(9, 255, 0) 1px solid;
+  }
+}
+
+/* Hilighted Elemment for key assignment */
+@keyframes Blink {
+  50% {
+    outline: rgba(255, 255, 255, 0) 5px solid;
+  }
+
+  100% {
+    outline: #ff00ee 2px dashed;
+  }
+
+}
+
+/*glowing menu button per click*/
+@keyframes click-glow {
+  0% {
+    box-shadow: 0 0 0px rgba(0, 200, 255, 0);
+    color: blue;
+  }
+
+  20% {
+    box-shadow: 0 0 15px rgba(0, 200, 255, 0.8), 0 0 30px rgba(0, 200, 255, 0.6);
+    transform: scale(0.9);
+    color: rgb(204, 0, 255);
+  }
+
+  100% {
+    box-shadow: 0 0 0px rgba(0, 200, 255, 0);
+  }
+}
+
+/*animated "M" for Menu */
+@keyframes Menu_loading_M {
+  50% {
+    text-shadow:
+      -2px 0px 1px rgba(var(--pink), 0.5),
+      2px 0px 1px rgba(var(--turquoise), 0.9),
+      0px -2px 1px rgba(var(--pink), 0.5),
+      0px 2px 1px rgba(var(--turquoise), 0.9);
+    scale: 0.75;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    text-shadow:
+      -1px 0px 1px rgba(var(--turquoise), 0.5),
+      1px 0px 1px rgba(var(--pink), 0.9),
+      0px -1px 1px rgba(var(--turquoise), 0.5),
+      0px 1px 1px rgba(var(--pink), 0.9);
+  }
+}
+
+/* Universal spin animation with "var(--deg)" */
+@keyframes spin {
+  to {
+    transform: rotate(var(--deg));
+  }
+}
+
+/* Menu box border animation */
+@keyframes moveGradient {
+  50% {
+    background-position: 100%;
+  }
+}
+
+/*Rotating lines after menu open*/
+@keyframes colorChange {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.1);
+    opacity: 0.25;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+}
+
+/*Universal resize animation */
+@keyframes resize {
+  0% {
+    transform: scale(2);
+  }
+
+  50% {
+    transform: scale(3);
+  }
+
+  100% {
+    transform: scale(2);
+  }
+}
+
+/* Star glowing animation */
+@keyframes glow {
+  0% {
+    transform: scale(0.1) translateY(-5px);
+    opacity: 0;
+  }
+
+  25% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+
+  75% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Game-Over animation */
+@keyframes gradientFlow {
+  0% {
+    transform: scale(0.5) rotate(0deg);
+    background-position: 0% 50%;
+  }
+
+  50% {
+    transform: scale(1.25) rotate(-12.5deg);
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes RotateNumbers {
+  0% {
+    transform: translateY(-500px) rotateY(180deg);
+  }
+
+  100% {
+    transform: translateY(500px) rotateY(-180deg);
+  }
+}
+
+/* Start game button */
+@keyframes TooltipClick {
+  25% {
+    transform: scale(0.75);
+  }
+
+  50% {
+    box-shadow:
+      -2px -1px 15px 0px rgb(var(--pink)),
+      1px 1px 25px 0px rgba(var(--white)),
+      1px 1px 25px 0px rgba(var(--white)),
+      -1px -2px 15px 0px rgb(var(--pink));
+  }
+
+  75% {
+    transform: scale(1.25);
+  }
+}
+
+@keyframes TooltipClick_Span {
+  25% {
+    /* font-size: 14px; */
+    transform: scale(0.75);
+  }
+
+  50% {
+    color: rgb(var(--white));
+    text-shadow:
+      1px 1px 0px rgb(var(--pink)),
+      2px 2px 0px rgb(var(--white));
+  }
+
+  60% {
+    /* font-size: 18px; */
+    transform: scale(1.125);
+  }
+}
+
+@keyframes TooltipClick_After {
+  25% {
+    top: -100%;
+  }
+
+  50% {
+    top: -130%;
+  }
+}

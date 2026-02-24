@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": false,
+  "liveSassCompile.settings.watchOnLaunch": true,
+  "liveSassCompile.settings.compileOnWatch": true,
+  "liveSassCompile.settings.useNewCompiler": true,
+  "liveSassCompile.settings.showOutputWindowOn":"None",
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "pixel-art-game/CSS"
+    }
+  ]
+}

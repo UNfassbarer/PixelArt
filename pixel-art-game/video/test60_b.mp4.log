@@ -1,0 +1,21 @@
+C:/Program Files/Krita (x64)/bin/ffmpeg.exe -hide_banner -y -y -r 60 -start_number 0 -start_number_range 1 -i C:/Users/djona/OneDrive/Desktop/VS Code/Unfassbarer/Html/main/pikel art game/video/frame%04d.png -c:v libopenh264 -b:v 5000k C:/Users/djona/OneDrive/Desktop/VS Code/Unfassbarer/Html/main/pikel art game/video/test60_b.mp4
+=====================================================
+Input #0, image2, from 'C:/Users/djona/OneDrive/Desktop/VS Code/Unfassbarer/Html/main/pikel art game/video/frame%04d.png':
+  Duration: 00:00:01.44, start: 0.000000, bitrate: N/A
+  Stream #0:0: Video: png, rgba(pc, gbr/unknown/unknown), 600x400 [SAR 11811:11811 DAR 3:2], 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> h264 (libopenh264))
+Press [q] to stop, [?] for help
+[libopenh264 @ 000001b604b9ed80] [OpenH264] this = 0x000001B606DDECB0, Warning:layerId(0) doesn't support profile(578), change to UNSPECIFIC profile
+[libopenh264 @ 000001b604b9ed80] [OpenH264] this = 0x000001B606DDECB0, Warning:bEnableFrameSkip = 0,bitrate can't be controlled for RC_QUALITY_MODE,RC_BITRATE_MODE and RC_TIMESTAMP_MODE without enabling skip frame.
+Output #0, mp4, to 'C:/Users/djona/OneDrive/Desktop/VS Code/Unfassbarer/Html/main/pikel art game/video/test60_b.mp4':
+  Metadata:
+    encoder         : Lavf61.7.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 600x400 [SAR 1:1 DAR 3:2], q=2-31, 5000 kb/s, 60 fps, 15360 tbn
+      Metadata:
+        encoder         : Lavc61.19.101 libopenh264
+      Side data:
+        ICC Profile
+        cpb: bitrate max/min/avg: 5000000/0/5000000 buffer size: 0 vbv_delay: N/A
+[out#0/mp4 @ 000001b604b7c000] video:156KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 6.291668%
+frame=   36 fps=0.0 q=-0.0 Lsize=     166KiB time=00:00:00.60 bitrate=2270.3kbits/s speed=8.64x    
