@@ -5,7 +5,6 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel art Game</title>
     <link rel="stylesheet" href="./CSS/style.css">
-
     <link rel="stylesheet" href="./CSS/symbols.css">
     <link rel="stylesheet" href="./CSS/animations.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
@@ -14,94 +13,99 @@
 
 <body>
     <!-- Mute smybol -->
-    <img id="mute_Symbol" src="img/mute_Icon_off_day.png" alt="mute icon" onclick="ToggleGameSounds()">
+    <img id="Mute_Symbol" class="MuteSymbol" src="img/mute_Icon_off_day.png" alt="mute icon"
+        onclick="ToggleGameSounds()">
 
     <!-- Menu tooltip -->
-    <button type="button" class="TooltipWrapper centeredObject centerContent">
-        <div id="GameTooltip" class="GameTooltip" role="banner" onclick="setTimeout(OpenMenu,1250)">
-        </div>
-        <span class="centerContent">Start Game</span>
+    <button type="button" class="TooltipWrapper CenterObject CenterContent">
+        <div class="GameTooltip" role="banner" onclick="setTimeout(OpenMenu,1250)"></div>
+        <span class="CenterContent">Start Game</span>
     </button>
 
     <!-- Game menu -->
-    <div id="Game_Menu" class="centerContent hiddenContent">
+    <div id="Game_Menu" class="GameMenu CenterContent HiddenContent">
 
-        <div id="Menu_Poster" class="centerContent">
-            <div id="Poster_Caption">M</div>
+        <div id="Menu_Poster" class="MenuPoster CenterContent">
+            <div id="Poster_Caption" class="PosterCaption">M</div>
             <canvas role="presentation"></canvas> <!-- -> class="BiggerPosterCanvas" -->
         </div>
 
-        <div id="Menu_Content" class="hiddenContent">
+        <div id="Menu_Content" class="MenuContent HiddenContent">
 
-            <span class="Menu_Head">MENU</span>
+            <span class="MenuHead">MENU</span>
 
-            <div class="Content_Buttons">
-                <button class="button" type="button" id="NewGame">
-                    <span class="centeredObject">New Game</span>
+            <div class="MenuButtons">
+                <button class="MenuButton" type="button" id="New_Game">
+                    <span class="CenterObject">New Game</span>
                     <canvas role="presentation"></canvas>
                 </button>
-                <button class="button" type="button" id="IDK">
-                    <span class="centeredObject">IDK</span>
+                <button class="MenuButton" type="button" id="IDK">
+                    <span class="CenterObject">IDK</span>
                     <canvas role="presentation"></canvas>
                 </button>
-                <button class="button" type="button" id="Graphics">
-                    <span class="centeredObject">Graphics</span>
+                <button class="MenuButton" type="button" id="Graphics">
+                    <span class="CenterObject">Graphics</span>
                     <canvas role="presentation"></canvas>
                 </button>
-                <button class="button" type="button" id="Settings">
-                    <span class="centeredObject">Settings</span>
+                <button class="MenuButton" type="button" id="Settings">
+                    <span class="CenterObject">Settings</span>
                     <canvas role="presentation"></canvas>
                 </button>
-                <button class="button" type="button" id="Exit">
-                    <span class="centeredObject">Exit</span>
+                <button class="MenuButton" type="button" id="Exit">
+                    <span class="CenterObject">Exit</span>
                     <canvas role="presentation"></canvas>
                 </button>
             </div>
 
-            <div id="Menu_Settings" class="Menu_Settings new_hiddenContent centerContent">
+            <div id="Menu_Settings" class="MenuSettings VanishedContent CenterContent">
 
-                <button id="Toggle_GameStats" type="button" class="Settings_Category" onclick="ToggleGameStats(this)">
+                <button type="button" class="Settings_Category" onclick="ToggleGameStats(this)">
                     Game stats <span>off</span>
                 </button>
-                <button id="Toggle_GameSounds" type="button" class="Settings_Category" onclick="ToggleGameSounds()">
+                <button type="button" class="Settings_Category" onclick="ToggleGameSounds()">
                     Game sounds <span>off</span>
                 </button>
 
-                <button id="Settings_KeyAssignment" type="button" class="Settings_Category " onclick="ToggleKeys()">Key
+                <button id="Settings_Key_Assignment" type="button" class="Settings_Category " onclick="ToggleKeys()">Key
                     assignment</button>
 
-                <button id="..." type="button" class="Settings_Category ">Instructions</button>
+                <button type="button" class="Settings_Category" onclick="alert('Not redy jet!')">Instructions</button>
 
             </div>
         </div>
     </div>
 
-    <div class="gameWrapper centeredObject centerContent">
+    <div class="gameWrapper CenterObject CenterContent">
 
-        <video class="gameVideo hiddenContent" preload="auto" muted playsinline>
+        <video class="gameVideo HiddenContent" preload="auto" muted playsinline>
             <source src="video/test60_a.mp4" type="video/mp4" />
         </video>
 
-        <video class="gameVideo hiddenContent" preload="auto" muted playsinline>
+        <video class="gameVideo HiddenContent" preload="auto" muted playsinline>
             <source src="video/test60_b.mp4" type="video/mp4" />
         </video>
 
-        <canvas id="gameContainer" class="hiddenContent gameBox"></canvas>
+        <canvas id="Game_Container" class="HiddenContent gameBox"></canvas>
     </div>
 
-    <h1 id="gameOver" class="GameOverBoard hiddenContent">GameOver</h1>
+    <h1 id="Game_Over" class="GameOverBoard HiddenContent">GameOver</h1>
 
-    <div id="gameInfo" class="GameInfoFade new_hiddenContent">
-        <div class="centerContent">Deaths:</div><span id="deaths" class="centerContent">
+    <div id="Game_Info" class="GameInfo GameInfoFade VanishedContent">
+        <div class="CenterContent">Deaths:</div><span id="Deaths" class="CenterContent">
             <h5>/</h5>
         </span>
-        <div class="centerContent">Game:</div><span id="gamesPlayed" class="centerContent">
+        <div class="CenterContent">Game:</div><span id="Games_Played" class="CenterContent">
             <h5>/</h5>
         </span>
-        <div class="centerContent">Time:</div><span id="survivedTime" class="centerContent">
+        <div class="CenterContent">Time:</div><span id="Survived_Time" class="CenterContent">
             <h5>/</h5>
         </span>
     </div>
+
+    <footer class="CenterContent">
+        <p> &copy; 2026 Pixel Art Game &mdash; Created by Jonas Dickert. All rights reserved. </p>
+        <a href="https://github.com/UNfassbarer" target="_blank" rel="noopener">Source code</a>
+    </footer>
 
     <script src="script.js"></script>
     <script src="game.js"></script>

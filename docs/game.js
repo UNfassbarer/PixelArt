@@ -1,11 +1,11 @@
-const Infobox = document.getElementById("gameInfo");
+const Infobox = document.getElementById("Game_Info");
 // Manage played games & deaths
 function updateGameStats(Category, Value) {
     Infobox.querySelector(`${Category}`).innerHTML = Value;
 }
 
 // Get canvas and context
-const canvas = document.getElementById("gameContainer");
+const canvas = document.getElementById("Game_Container");
 const ctx = canvas.getContext("2d");
 
 // Get CSS canvas for sizing background
@@ -108,22 +108,22 @@ function SetTimingInterval(previousTime) {
         if (GameOver) clearInterval(TimingInterval);
         let elapsedTime = Date.now() - startTime;
         survivedTime = (previousTime + elapsedTime / 1000).toFixed(2);
-        updateGameStats("#survivedTime >h5", `${survivedTime}s`);
+        updateGameStats("#Survived_Time >h5", `${survivedTime}s`);
     }, 100);
 }
 
 function newGame() {
     if (GameOver) {
         GameOver = false;
-        // document.getElementById("gameInfo").classList.remove("hiddenContent");
+        // document.getElementById("gameInfo").classList.remove("HiddenContent");
 
         SetTimingInterval(0);
-        !GameOverDiv.classList.contains("hiddenContent") ? toggleGameOverDiv() : null;
+        !GameOverDiv.classList.contains("HiddenContent") ? toggleGameOverDiv() : null;
         GamesPlayed++;
-        updateGameStats("#gamesPlayed  >h5", GamesPlayed);
+        updateGameStats("#Games_Played >h5", GamesPlayed);
 
         createStars = false;
-        canvas.classList.remove("hiddenContent");
+        canvas.classList.remove("HiddenContent");
 
         startVideo();
 
@@ -695,16 +695,16 @@ function checkPlayerCollision(object, o, i) {
         console.log("Total Death");
 }
 
-const GameOverDiv = document.getElementById("gameOver");
+const GameOverDiv = document.getElementById("Game_Over");
 
 function toggleGameOverDiv() {
-    GameOverDiv.classList.toggle("hiddenContent");
+    GameOverDiv.classList.toggle("HiddenContent");
     GameOverDiv.classList.toggle("ToggleAnimationState");
 }
 
 function resetGame() {
     DeathCounter++;
-    updateGameStats("#deaths >h5", DeathCounter);
+    updateGameStats("#Deaths >h5", DeathCounter);
     GameOver = true;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     toggleGameOverDiv();
@@ -743,7 +743,7 @@ function JumpAnimation(x, y) {
     const scaleX = rect.width / canvas.width;
     const scaleY = rect.height / canvas.height;
     const supportDiv = document.createElement("div");
-    supportDiv.className = "SupportCanvas centerContent";
+    supportDiv.className = "SupportCanvas CenterContent";
     supportDiv.style.left = rect.left + x * scaleX + "px";
     supportDiv.style.top = rect.top + y * scaleY + player.height * scaleY - 10 + "px"; // align to feet
     supportDiv.style.width = player.width * scaleX + "px";
@@ -761,7 +761,7 @@ function JumpAnimation(x, y) {
         const Length = player.width + EffectCounter * 10;
         const height = player.height / 6;
         const jumpEffect = document.createElement("div");
-        jumpEffect.className = "jumpParticle";
+        jumpEffect.className = "JumpParticle";
         jumpEffect.style.width = Length * scaleX + "px";
         jumpEffect.style.height = height * scaleY + "px";
         supportDiv.appendChild(jumpEffect);
@@ -774,7 +774,7 @@ function StartAnimation(StartTime, action) {
     let Intervall = null;
     const AnimationList = [];
     const ParentDiv = document.createElement("div");
-    ParentDiv.className = "StartAnimationBox centerContent centeredObject";
+    ParentDiv.className = "StartAnimationBox CenterContent CenterObject";
     AnimationList.push(ParentDiv);
     document.body.appendChild(ParentDiv);
     const CounterBoard = document.createElement("div");

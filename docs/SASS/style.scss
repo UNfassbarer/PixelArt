@@ -10,7 +10,7 @@
 }
 
 .color_preview {
-  color: #c819ff;
+  color: rgb(200, 25, 255);
   color: rgb(100, 0, 255);
   color: rgb(0, 50, 100);
   color: rgb(50, 255, 255);
@@ -24,58 +24,71 @@ body {
   transition: all 1s ease-in-out;
   overflow: hidden;
 }
+.DarkBody {
+  background-color: rgb(var(--black));
+}
 
 /* Global Classes */
-.hiddenContent {
+.HiddenContent {
   display: none;
   pointer-events: none;
   position: absolute;
   visibility: hidden;
 }
 
-.new_hiddenContent {
+.VanishedContent {
   opacity: 0;
   pointer-events: none;
   z-index: -100;
 }
 
-.centerContent {
+.CenterContent {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.centeredObject {
+.CenterObject {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 /* Menu */
-#Menu_Poster {
+.MenuPoster {
   position: absolute;
   width: inherit;
   height: inherit;
-}
+  canvas {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background: radial-gradient(
+      circle farthest-corner at center center,
+      rgba(var(--black), 0) 35%,
+      rgb(var(--turquoise)) 36%,
+      rgba(var(--black), 0.5) 38%,
+      rgb(var(--turquoise)) 40%,
+      rgba(var(--black), 0) 40%,
+      rgb(var(--white)) 55%,
+      rgb(var(--turquoise)) 55%,
+      rgb(var(--turquoise)) 57%,
+      rgba(var(--black), 0.5) 75%,
+      rgb(var(--black)) 100%
+    );
+  }
 
-#Menu_Poster canvas {
-  position: absolute;
-  width: inherit;
-  height: inherit;
-  background: radial-gradient(
-    circle farthest-corner at center center,
-    rgba(var(--black), 0) 35%,
-    rgb(var(--turquoise)) 36%,
-    rgba(var(--black), 0.5) 38%,
-    rgb(var(--turquoise)) 40%,
-    rgba(var(--black), 0) 40%,
-    rgb(var(--white)) 55%,
-    rgb(var(--turquoise)) 55%,
-    rgb(var(--turquoise)) 57%,
-    rgba(var(--black), 0.5) 75%,
-    rgb(var(--black)) 100%
-  );
+  .PosterCaption {
+    color: rgb(var(--turquoise));
+    text-shadow:
+      -1px 0px 1px rgba(var(--turquoise), 0.5),
+      1px 0px 1px rgba(var(--pink), 0.9),
+      0px -1px 1px rgba(var(--turquoise), 0.5),
+      0px 1px 1px rgba(var(--pink), 0.9);
+    animation: Menu_loading_M 10s ease-in-out infinite;
+    font-size: 40px;
+  }
 }
 
 .BiggerPosterCanvas {
@@ -92,33 +105,7 @@ body {
   ) !important;
 }
 
-#Poster_Caption {
-  color: rgb(var(--turquoise));
-  text-shadow:
-    -1px 0px 1px rgba(var(--turquoise), 0.5),
-    1px 0px 1px rgba(var(--pink), 0.9),
-    0px -1px 1px rgba(var(--turquoise), 0.5),
-    0px 1px 1px rgba(var(--pink), 0.9);
-  animation: Menu_loading_M 10s ease-in-out infinite;
-  font-size: 40px;
-}
-
-#Menu_Loading_Animation {
-  position: absolute;
-  scale: 1;
-  transition: scale ease-in-out;
-}
-
-.Menu_Loading {
-  position: absolute;
-  border-radius: 50%;
-  border: 3px solid rgba(0, 0, 0, 0);
-  border-top: 3px solid var(--color);
-  animation: spin linear infinite;
-}
-
 /* Game tooltip */
-
 .TooltipWrapper {
   position: absolute;
   width: 120px;
@@ -212,7 +199,7 @@ body {
   );
 }
 
-#Game_Menu {
+.GameMenu {
   position: absolute;
   height: 90px;
   width: 90px;
@@ -224,14 +211,13 @@ body {
   -webkit-user-select: none;
   user-select: none;
 }
-
-#Game_Menu.OpenMenu {
+.OpenMenu {
   height: 500px;
   width: 300px;
 }
 
 /*Rotating menu background*/
-#Game_Menu::before {
+.GameMenu::before {
   content: "";
   position: absolute;
   width: 200%;
@@ -246,11 +232,11 @@ body {
   );
 }
 
-#Game_Menu.MenuBefore::before {
+.GameMenu.MenuBefore::before {
   animation: rotateLeft 10s ease-in-out infinite;
 }
 
-#Game_Menu::after {
+.GameMenu::after {
   content: "";
   position: absolute;
   inset: -2px;
@@ -268,113 +254,112 @@ body {
   );
   background-size: 200% 100%;
   -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+    linear-gradient(rgb(var(--white)) 0 0) content-box,
+    linear-gradient(rgb(var(--white)) 0 0);
   -webkit-mask-composite: xor;
   mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+    linear-gradient(rgb(var(--white)) 0 0) content-box,
+    linear-gradient(rgb(var(--white)) 0 0);
   mask-composite: exclude;
   pointer-events: none;
 }
 
-#Game_Menu.MenuAfter::after {
+.GameMenu.MenuAfter::after {
   animation: moveGradient 4s linear infinite;
 }
 
-#Menu_Content {
+.MenuContent {
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 10px;
-}
-
-.Menu_Head {
-  position: relative;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-  margin-left: 10px;
-  font-size: 80px;
-  letter-spacing: 30px;
-  background: -moz-linear-gradient(
-    to top,
-    rgb(var(--turquoise)) 15%,
-    rgb(var(--pink)) 20%,
-    rgb(var(--pink)) 39%,
-    rgb(var(--turquoise)) 47%,
-    rgb(var(--turquoise)) 64%,
-    rgb(var(--pink)) 74%,
-    rgb(var(--pink)) 86%,
-    rgb(var(--turquoise)) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.5px rgb(var(--white));
-}
-
-.Content_Buttons {
-  display: grid;
-  grid-template-rows: repeat(5, auto);
-  gap: 35px;
-  margin-right: 10px;
-
-  .button {
+  .MenuHead {
     position: relative;
-    width: 175px;
-    height: 50px;
-    background: radial-gradient(
-      circle at center,
-      rgba(var(--turquoise), 0.6) 15%,
-      rgb(var(--darkBlue)) 100%
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    margin-left: 10px;
+    font-size: 80px;
+    letter-spacing: 30px;
+    background: -moz-linear-gradient(
+      to top,
+      rgb(var(--turquoise)) 15%,
+      rgb(var(--pink)) 20%,
+      rgb(var(--pink)) 39%,
+      rgb(var(--turquoise)) 47%,
+      rgb(var(--turquoise)) 64%,
+      rgb(var(--pink)) 74%,
+      rgb(var(--pink)) 86%,
+      rgb(var(--turquoise)) 100%
     );
-    border: 1.5px rgba(var(--turquoise), 0.75) solid;
-    transition: 0.125s all ease-in-out;
-    border-radius: 10px;
-    cursor: pointer;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.5px rgb(var(--white));
+  }
 
-    span {
-      position: absolute;
-      width: inherit;
-      font-size: 20px;
-      background: linear-gradient(
-        0deg,
-        rgb(var(--white)),
-        rgb(var(--pink)),
-        rgba(var(--darkBlue), 0.75),
-        rgb(var(--turquoise)),
-        rgb(var(--white)),
-        rgb(var(--turquoise))
-      );
-      background-size: 100% 125%;
-      background-position: 0% 0%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: all 0.125s ease-in-out;
-    }
+  .MenuButtons {
+    display: grid;
+    grid-template-rows: repeat(5, auto);
+    gap: 35px;
+    margin-right: 10px;
 
-    canvas {
-      position: absolute;
-      width: 125px;
-      height: 3px;
-      top: 20%;
-      left: 50%;
-      transform: translate(-50%, -20%);
-      background: linear-gradient(
-        90deg,
-        rgb(var(--turquoise)),
-        rgba(var(--purple), 0.75),
-        rgb(var(--pink))
+    .MenuButton {
+      position: relative;
+      width: 175px;
+      height: 50px;
+      background: radial-gradient(
+        circle at center,
+        rgba(var(--turquoise), 0.6) 15%,
+        rgb(var(--darkBlue)) 100%
       );
-      background-color: rgb(var(--turquoise));
-      border-radius: inherit;
-      transition: 0.5s all ease-in-out;
-      opacity: 0.75;
+      border: 1.75px rgba(var(--turquoise), 0.75) solid;
+      transition: 0.125s all ease-in-out;
+      border-radius: 10px;
+      cursor: pointer;
+
+      span {
+        position: absolute;
+        width: inherit;
+        font-size: 20px;
+        background: linear-gradient(
+          0deg,
+          rgb(var(--white)),
+          rgb(var(--pink)),
+          rgba(var(--darkBlue), 0.75),
+          rgb(var(--turquoise)),
+          rgb(var(--white)),
+          rgb(var(--turquoise))
+        );
+        background-size: 100% 125%;
+        background-position: 0% 0%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all 0.125s ease-in-out;
+      }
+
+      canvas {
+        position: absolute;
+        width: 125px;
+        height: 3px;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -20%);
+        background: linear-gradient(
+          90deg,
+          rgb(var(--turquoise)),
+          rgba(var(--purple), 0.75),
+          rgb(var(--pink))
+        );
+        background-color: rgb(var(--turquoise));
+        border-radius: inherit;
+        transition: 0.5s all ease-in-out;
+        opacity: 0.75;
+      }
     }
   }
 }
 
-.button:hover {
+.MenuButton:hover {
   border: 1.5px rgba(var(--turquoise), 0.25) solid;
   transform: scale(1.1);
   font-size: 125%;
@@ -390,7 +375,7 @@ body {
   }
 }
 
-.button:focus:not(:active) {
+.MenuButton:focus:not(:active) {
   animation: click-glow 0.75s ease;
   color: rgb(var(--white));
   border: 1.5px rgba(var(--white), 0.75) solid;
@@ -405,16 +390,15 @@ body {
     width: 120px;
   }
 }
-
 /* Backgound star particles */
-.particle {
+.Particle {
   position: fixed;
   border-radius: 50%;
   pointer-events: none;
   opacity: 0.5;
   z-index: 10;
 }
-.jumpParticle {
+.JumpParticle {
   position: absolute;
   border: rgb(var(--turquoise)) 3px solid;
   border-radius: 50%;
@@ -423,7 +407,7 @@ body {
   animation: jumpParticle 0.75s ease-in forwards;
 }
 
-/* .jumpParticle::after {
+/* .JumpParticle::after {
   position: absolute;
   height: 100px; 
   width: 100px;
@@ -443,7 +427,7 @@ body {
   animation: Blink 1s infinite;
 }
 
-.Menu_Settings {
+.MenuSettings {
   overflow-x: auto;
   top: 39.25%;
   left: 55%;
@@ -598,7 +582,7 @@ body {
 }
 
 /* Game Info display */
-#gameInfo {
+.GameInfo {
   position: absolute;
   bottom: 3%;
   width: 150px;
@@ -641,9 +625,30 @@ body {
       font-size: 11cqw;
     }
   }
+  span::after {
+    content: "";
+    position: absolute;
+    width: 100.5%;
+    height: 113%;
+    bottom: -12%;
+    border-radius: inherit;
+    outline: rgba(var(--turquoise), 0.75) 1.25px solid;
+    background-color: rgb(var(--gray));
+    z-index: -2;
+  }
+  span::before {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    box-shadow: inset -2px 2px 0px 0px rgba(var(--black), 0.5);
+    border-radius: inherit;
+    outline: rgba(var(--darkBlue), 0.75) 1.25px solid;
+    background-color: rgb(var(--white));
+  }
 }
 
-#gameInfo::before {
+.GameInfo::before {
   width: 100%;
   height: 100%;
   content: "";
@@ -659,34 +664,11 @@ body {
   z-index: -3;
 }
 
-#gameInfo span::after {
-  content: "";
-  position: absolute;
-  width: 100.5%;
-  height: 113%;
-  bottom: -12%;
-  border-radius: inherit;
-  outline: rgba(var(--turquoise), 0.75) 1.25px solid;
-  background-color: rgb(var(--gray));
-  z-index: -2;
-}
-
-#gameInfo span::before {
-  content: "";
-  position: absolute;
-  width: 60%;
-  height: 60%;
-  box-shadow: inset -2px 2px 0px 0px rgba(var(--black), 0.5);
-  border-radius: inherit;
-  outline: rgba(var(--darkBlue), 0.75) 1.25px solid;
-  background-color: rgb(var(--white));
-}
-
 .GameInfoFade {
   transform: translateX(75%);
 }
 
-// Future plans: 
+// Future plans:
 //   Cool sun in space ;)
 // body{
 //   background: radial-gradient(circle at 50%,
@@ -707,4 +689,26 @@ body {
   position: absolute;
   font-size: 25vh;
   color: rgb(var(--pink));
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  height: clamp(50px, 8vw, 60px);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  bottom: 0px;
+  left: 0px;
+  p {
+    position: absolute;
+    font-size: clamp(10px, 1.25vw, 16px);
+    letter-spacing: clamp(2px, 1vw, 6px);
+    bottom: 20%;
+  }
+  a {
+    position: absolute;
+    font-size: clamp(8px, 1vw, 14px);
+    letter-spacing: clamp(2px, 1vw, 6px);
+    bottom: 15%;
+  }
 }

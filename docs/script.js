@@ -24,7 +24,7 @@ HTMLElement.prototype.handleEvent = function (action, event, callback) {
   this[`${action}EventListener`](event, callback)
 };
 // Clickevents for menu buttons
-document.querySelectorAll(".button").forEach((button) => {
+document.querySelectorAll(".MenuButton").forEach((button) => {
   button.handleEvent("add", "click", () => ButtonClick(button));
 });
 
@@ -49,15 +49,15 @@ function toggleButtonPress(status) {
 
 // Menu button actions
 const menu_actions = {
-  NewGame: (el) => {
+  New_Game: (el) => {
     console.log(el.id);
     StartAnimation(3, newGame);
     CloseMenu();
   },
-  LoadGame: (el) => {
+  IDK: (el) => {
     console.log(el.id);
   },
-  SaveGame: (el) => {
+  Graphics: (el) => {
     console.log(el.id);
   },
   Settings: (el) => {
@@ -69,7 +69,7 @@ const menu_actions = {
   },
 };
 
-// Button actions & particle creation
+// Button actions & Particle creation
 let counter = 0;
 let particleIntervalId = null;
 function ButtonClick(el) {
@@ -94,7 +94,7 @@ function ButtonClick(el) {
   }
 }
 
-// Manage particle animation for button click
+// Manage Particle animation for button click
 function LoadAnimation(el) {
 
   // Generate coler between two defined colors
@@ -116,12 +116,12 @@ function LoadAnimation(el) {
     background: `${RGB(getRandomInt(0, 255), 255)}`,
     left: `${x + el.offsetWidth / 2 + getRandomInt(-el.offsetWidth / 2, el.offsetWidth / 2)}px`,
     top: `${y + el.offsetHeight / 2 + getRandomInt(-el.offsetHeight / 2, el.offsetHeight / 2)}px`,
-    animation: `particle ${getRandomInt(0.75, 2)}s forwards`,
+    animation: `Particle ${getRandomInt(0.75, 2)}s forwards`,
   });
-  particle.className = "particle";
+  particle.className = "Particle";
   document.body.appendChild(particle);
 
-  // Delay & particle clear
+  // Delay & Particle clear
   setTimeout(() => {
     particle.remove();
   }, 2000);
@@ -143,13 +143,13 @@ const MenuHidden = (condition) => {
 
   if (condition) {//Hide menu
     Menu.classList.remove("OpenMenu");
-    MenuContent.classList.add("hiddenContent");
-    MenuCaptionText.classList.remove("hiddenContent");
+    MenuContent.classList.add("HiddenContent");
+    MenuCaptionText.classList.remove("HiddenContent");
     MenuCaptionBackground.classList.remove("BiggerPosterCanvas");
   } else { //Reveal menu
     Menu.classList.add("OpenMenu");
-    MenuContent.classList.remove("hiddenContent");
-    MenuCaptionText.classList.add("hiddenContent");
+    MenuContent.classList.remove("HiddenContent");
+    MenuCaptionText.classList.add("HiddenContent");
     MenuCaptionBackground.classList.add("BiggerPosterCanvas");
   }
 };
@@ -171,10 +171,10 @@ function OpenMenu() {
   // First menu open
   if (!menuStart) {
     menuStart = true;
-    Menu.classList.remove("hiddenContent");
+    Menu.classList.remove("HiddenContent");
     Menu.classList.add("MenuBefore", "MenuAfter");
-    document.querySelector(".TooltipWrapper").classList.add("hiddenContent");
-    document.body.style.backgroundColor = "black";
+    document.querySelector(".TooltipWrapper").classList.add("HiddenContent");
+    document.body.classList.add("DarkBody");
     ToggleGameSounds(true);
     createStar();
   }
@@ -192,15 +192,15 @@ function CloseMenu() {
 const settingsMenu = document.getElementById("Menu_Settings");
 
 function SettingsHidden(condition) {
-  if (condition === undefined) return settingsMenu.classList.contains("new_hiddenContent");
+  if (condition === undefined) return settingsMenu.classList.contains("new_hiVanishedContentddenContent");
   condition ?
-    settingsMenu.classList.add("new_hiddenContent") :
-    settingsMenu.classList.remove("new_hiddenContent");
+    settingsMenu.classList.add("VanishedContent") :
+    settingsMenu.classList.remove("VanishedContent");
 
   // document.addEventListener("click", (e) => {
   //   console.log("click")
   //   settingsMenu.querySelectorAll('[data-group="GeneratedSettingsElement"]').forEach((el) => {
-  //     el.classList.add("hiddenContent");
+  //     el.classList.add("HiddenContent");
   //   });
   // });
 }
@@ -215,15 +215,15 @@ settingsMenu.addEventListener("wheel", (e) => {
     : settingsMenu.scrollLeft -= delta;
 });
 
-const GameInfoBox = document.getElementById("gameInfo");
+const GameInfoBox = document.getElementById("Game_Info");
 
 const ToggleGameStats = (element) => {
-  GameInfoBox.classList.toggle("new_hiddenContent");
+  GameInfoBox.classList.toggle("VanishedContent");
   GameInfoBox.classList.toggle("GameInfoFade");
   ToggleInnerSettings(element.id);
 };
 
-const SoundIcon = document.getElementById("mute_Symbol");
+const SoundIcon = document.getElementById("Mute_Symbol");
 const ToggleGameSounds = (DayToNight) => {
 
   if (DayToNight) { // First time menu open
@@ -254,7 +254,7 @@ function ToggleInnerSettings(el) {
 }
 
 // Game key assignment toggle (KA)
-const KA_Button = document.getElementById("Settings_KeyAssignment");
+const KA_Button = document.getElementById("Settings_Key_Assignment");
 
 // When clicked, show/hide key assignment options
 const ToggleKeys = () => {
@@ -262,7 +262,7 @@ const ToggleKeys = () => {
     document.addEventListener("click", GlobalClickControll) :
     document.removeEventListener("click", GlobalClickControll);
 
-  KA_Button.querySelectorAll(".KA_Category").forEach((el) => { el.classList.toggle("hiddenContent") });
+  KA_Button.querySelectorAll(".KA_Category").forEach((el) => { el.classList.toggle("HiddenContent") });
   KA_Button.classList.toggle("Toggle_KA");
   //adjusted height & padding
   settingsMenu.classList.toggle("ToggleMenuSettings"); //for settings menu
@@ -292,7 +292,7 @@ function GlobalClickControll() {
 for (const [action, keys] of Object.entries(AssignmentKeys)) {
   const NewButton = document.createElement("button");
   NewButton.dataset.group = "GeneratedSettingsElement";
-  NewButton.className = "KA_Category hiddenContent centerContent";
+  NewButton.className = "KA_Category HiddenContent CenterContent";
 
   // Create action catagory
   const Action_Div = document.createElement("div");
@@ -362,7 +362,7 @@ function createStar() {
   // const Top = getRandomInt(0, window.innerHeight);
   // console.log(`Creating star at (${Left}, ${Top})`);
   const star = document.createElement("canvas");
-  star.className = "star centeredObject";
+  star.className = "star CenterObject";
   const size = getRandomInt(1, 2);
   star.editStyle({
     width: `${size}px`,

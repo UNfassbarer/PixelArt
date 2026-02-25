@@ -10,7 +10,7 @@
 }
 
 .color_preview {
-  color: #c819ff;
+  color: rgb(200, 25, 255);
   color: rgb(100, 0, 255);
   color: rgb(0, 50, 100);
   color: rgb(50, 255, 255);
@@ -25,70 +25,58 @@ body {
   overflow: hidden;
 }
 
+.DarkBody {
+  background-color: rgb(var(--black));
+}
+
 /* Global Classes */
-.hiddenContent {
+.HiddenContent {
   display: none;
   pointer-events: none;
   position: absolute;
   visibility: hidden;
 }
 
-.new_hiddenContent {
+.VanishedContent {
   opacity: 0;
   pointer-events: none;
   z-index: -100;
 }
 
-.centerContent {
+.CenterContent {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.centeredObject {
+.CenterObject {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 /* Menu */
-#Menu_Poster {
+.MenuPoster {
   position: absolute;
   width: inherit;
   height: inherit;
 }
-
-#Menu_Poster canvas {
+.MenuPoster canvas {
   position: absolute;
   width: inherit;
   height: inherit;
   background: radial-gradient(circle farthest-corner at center center, rgba(var(--black), 0) 35%, rgb(var(--turquoise)) 36%, rgba(var(--black), 0.5) 38%, rgb(var(--turquoise)) 40%, rgba(var(--black), 0) 40%, rgb(var(--white)) 55%, rgb(var(--turquoise)) 55%, rgb(var(--turquoise)) 57%, rgba(var(--black), 0.5) 75%, rgb(var(--black)) 100%);
 }
-
-.BiggerPosterCanvas {
-  background: radial-gradient(circle farthest-corner at center center, rgba(var(--black), 0) 35%, rgb(var(--turquoise)) 36%, rgba(var(--black), 0.5) 38%, rgb(var(--turquoise)) 40%, rgba(var(--black), 0) 40%, rgb(var(--white)) 85%, rgb(var(--turquoise)) 85%, rgba(var(--black), 0.25) 100%) !important;
-}
-
-#Poster_Caption {
+.MenuPoster .PosterCaption {
   color: rgb(var(--turquoise));
   text-shadow: -1px 0px 1px rgba(var(--turquoise), 0.5), 1px 0px 1px rgba(var(--pink), 0.9), 0px -1px 1px rgba(var(--turquoise), 0.5), 0px 1px 1px rgba(var(--pink), 0.9);
   animation: Menu_loading_M 10s ease-in-out infinite;
   font-size: 40px;
 }
 
-#Menu_Loading_Animation {
-  position: absolute;
-  scale: 1;
-  transition: scale ease-in-out;
-}
-
-.Menu_Loading {
-  position: absolute;
-  border-radius: 50%;
-  border: 3px solid rgba(0, 0, 0, 0);
-  border-top: 3px solid var(--color);
-  animation: spin linear infinite;
+.BiggerPosterCanvas {
+  background: radial-gradient(circle farthest-corner at center center, rgba(var(--black), 0) 35%, rgb(var(--turquoise)) 36%, rgba(var(--black), 0.5) 38%, rgb(var(--turquoise)) 40%, rgba(var(--black), 0) 40%, rgb(var(--white)) 85%, rgb(var(--turquoise)) 85%, rgba(var(--black), 0.25) 100%) !important;
 }
 
 /* Game tooltip */
@@ -158,7 +146,7 @@ body {
   background: linear-gradient(90deg, rgba(var(--pink), 0), rgba(var(--darkBlue), 0.2), rgba(var(--turquoise), 0.6), rgb(var(--white)), rgba(var(--turquoise), 0.8), rgb(var(--gray)));
 }
 
-#Game_Menu {
+.GameMenu {
   position: absolute;
   height: 90px;
   width: 90px;
@@ -171,13 +159,13 @@ body {
   user-select: none;
 }
 
-#Game_Menu.OpenMenu {
+.OpenMenu {
   height: 500px;
   width: 300px;
 }
 
 /*Rotating menu background*/
-#Game_Menu::before {
+.GameMenu::before {
   content: "";
   position: absolute;
   width: 200%;
@@ -185,11 +173,11 @@ body {
   background: linear-gradient(90deg, rgba(var(--black)), rgb(var(--pink)), rgba(var(--white), 0.5), rgb(var(--pink)), rgb(var(--pink)));
 }
 
-#Game_Menu.MenuBefore::before {
+.GameMenu.MenuBefore::before {
   animation: rotateLeft 10s ease-in-out infinite;
 }
 
-#Game_Menu::after {
+.GameMenu::after {
   content: "";
   position: absolute;
   inset: -2px;
@@ -197,24 +185,23 @@ body {
   border-radius: 18px;
   background: linear-gradient(45deg, rgb(var(--white)), rgb(var(--darkBlue)), rgb(var(--pink)), rgb(var(--turquoise)), rgb(var(--pink)), rgb(var(--darkBlue)), rgb(var(--white)));
   background-size: 200% 100%;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(rgb(var(--white)) 0 0) content-box, linear-gradient(rgb(var(--white)) 0 0);
   -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(rgb(var(--white)) 0 0) content-box, linear-gradient(rgb(var(--white)) 0 0);
   mask-composite: exclude;
   pointer-events: none;
 }
 
-#Game_Menu.MenuAfter::after {
+.GameMenu.MenuAfter::after {
   animation: moveGradient 4s linear infinite;
 }
 
-#Menu_Content {
+.MenuContent {
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 10px;
 }
-
-.Menu_Head {
+.MenuContent .MenuHead {
   position: relative;
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -227,24 +214,23 @@ body {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 0.5px rgb(var(--white));
 }
-
-.Content_Buttons {
+.MenuContent .MenuButtons {
   display: grid;
   grid-template-rows: repeat(5, auto);
   gap: 35px;
   margin-right: 10px;
 }
-.Content_Buttons .button {
+.MenuContent .MenuButtons .MenuButton {
   position: relative;
   width: 175px;
   height: 50px;
   background: radial-gradient(circle at center, rgba(var(--turquoise), 0.6) 15%, rgb(var(--darkBlue)) 100%);
-  border: 1.5px rgba(var(--turquoise), 0.75) solid;
+  border: 1.75px rgba(var(--turquoise), 0.75) solid;
   transition: 0.125s all ease-in-out;
   border-radius: 10px;
   cursor: pointer;
 }
-.Content_Buttons .button span {
+.MenuContent .MenuButtons .MenuButton span {
   position: absolute;
   width: inherit;
   font-size: 20px;
@@ -256,7 +242,7 @@ body {
   -webkit-text-fill-color: transparent;
   transition: all 0.125s ease-in-out;
 }
-.Content_Buttons .button canvas {
+.MenuContent .MenuButtons .MenuButton canvas {
   position: absolute;
   width: 125px;
   height: 3px;
@@ -270,32 +256,32 @@ body {
   opacity: 0.75;
 }
 
-.button:hover {
+.MenuButton:hover {
   border: 1.5px rgba(var(--turquoise), 0.25) solid;
   transform: scale(1.1);
   font-size: 125%;
   box-shadow: 5px 5px 15px rgba(var(--pink), 0.4);
 }
-.button:hover span {
+.MenuButton:hover span {
   background-position: 0% 115%;
 }
-.button:hover canvas {
+.MenuButton:hover canvas {
   width: 130%;
   opacity: 0.5;
 }
 
-.button:focus:not(:active) {
+.MenuButton:focus:not(:active) {
   animation: click-glow 0.75s ease;
   color: rgb(var(--white));
   border: 1.5px rgba(var(--white), 0.75) solid;
 }
-.button:focus:not(:active) canvas {
+.MenuButton:focus:not(:active) canvas {
   background: linear-gradient(-90deg, rgb(var(--turquoise)), rgba(var(--purple), 0.75), rgb(var(--pink)));
   width: 120px;
 }
 
 /* Backgound star particles */
-.particle {
+.Particle {
   position: fixed;
   border-radius: 50%;
   pointer-events: none;
@@ -303,7 +289,7 @@ body {
   z-index: 10;
 }
 
-.jumpParticle {
+.JumpParticle {
   position: absolute;
   border: rgb(var(--turquoise)) 3px solid;
   border-radius: 50%;
@@ -312,7 +298,7 @@ body {
   animation: jumpParticle 0.75s ease-in forwards;
 }
 
-/* .jumpParticle::after {
+/* .JumpParticle::after {
   position: absolute;
   height: 100px; 
   width: 100px;
@@ -331,7 +317,7 @@ body {
   animation: Blink 1s infinite;
 }
 
-.Menu_Settings {
+.MenuSettings {
   overflow-x: auto;
   top: 39.25%;
   left: 55%;
@@ -351,7 +337,7 @@ body {
   padding-left: 40px;
   padding-right: 40px;
 }
-.Menu_Settings .Settings_Category {
+.MenuSettings .Settings_Category {
   cursor: pointer;
   position: relative;
   flex: 0 0 170px;
@@ -468,7 +454,7 @@ body {
 }
 
 /* Game Info display */
-#gameInfo {
+.GameInfo {
   position: absolute;
   bottom: 3%;
   width: 150px;
@@ -484,7 +470,7 @@ body {
   padding: 10px;
   /* background-color: rgba(var(--gray), 0.125); */
 }
-#gameInfo div {
+.GameInfo div {
   position: relative;
   color: rgb(var(--turquoise));
   text-shadow: 1px 1px 0px rgba(var(--darkBlue), 0.5);
@@ -493,29 +479,19 @@ body {
   /* outline: rgba(var(--turquoise), 0.5) 1.5px solid; */
   box-shadow: 1px 1px 0px 0px rgba(var(--gray), 0.375), 2px 2px 0px 0px rgba(var(--gray), 0.375), 3px 3px 0px 0px rgba(var(--gray), 0.375), 4px 4px 0px 0px rgba(var(--gray), 0.375);
 }
-#gameInfo span {
+.GameInfo span {
   position: relative;
   outline: rgba(var(--turquoise), 0.75) 1.5px solid;
   background-color: rgb(var(--gray));
   border-radius: 15px;
 }
-#gameInfo span h5 {
+.GameInfo span h5 {
   position: absolute;
   color: rgba(var(--turquoise), 0.8);
   text-shadow: 1px 1px 0px rgba(var(--darkBlue), 0.6);
   font-size: 11cqw;
 }
-
-#gameInfo::before {
-  width: 100%;
-  height: 100%;
-  content: "";
-  position: absolute;
-  background: radial-gradient(circle farthest-corner at center center, rgb(var(--gray)) 20%, rgb(var(--white)) 59%, rgb(var(--pink)) 60%, rgb(var(--gray)) 61%, rgb(var(--darkGray)) 100%);
-  z-index: -3;
-}
-
-#gameInfo span::after {
+.GameInfo span::after {
   content: "";
   position: absolute;
   width: 100.5%;
@@ -526,8 +502,7 @@ body {
   background-color: rgb(var(--gray));
   z-index: -2;
 }
-
-#gameInfo span::before {
+.GameInfo span::before {
   content: "";
   position: absolute;
   width: 60%;
@@ -536,6 +511,15 @@ body {
   border-radius: inherit;
   outline: rgba(var(--darkBlue), 0.75) 1.25px solid;
   background-color: rgb(var(--white));
+}
+
+.GameInfo::before {
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  background: radial-gradient(circle farthest-corner at center center, rgb(var(--gray)) 20%, rgb(var(--white)) 59%, rgb(var(--pink)) 60%, rgb(var(--gray)) 61%, rgb(var(--darkGray)) 100%);
+  z-index: -3;
 }
 
 .GameInfoFade {
@@ -553,4 +537,26 @@ body {
   position: absolute;
   font-size: 25vh;
   color: rgb(var(--pink));
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  height: clamp(50px, 8vw, 60px);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  bottom: 0px;
+  left: 0px;
+}
+footer p {
+  position: absolute;
+  font-size: clamp(10px, 1.25vw, 16px);
+  letter-spacing: clamp(2px, 1vw, 6px);
+  bottom: 20%;
+}
+footer a {
+  position: absolute;
+  font-size: clamp(8px, 1vw, 14px);
+  letter-spacing: clamp(2px, 1vw, 6px);
+  bottom: 15%;
 }

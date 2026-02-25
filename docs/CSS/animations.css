@@ -4,7 +4,7 @@
   }
 }
 
-@keyframes particle {
+@keyframes Particle {
   to {
     transform: translateY(-200px) scale(0) translateX(100px);
     opacity: 0;
