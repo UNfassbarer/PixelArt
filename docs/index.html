@@ -12,9 +12,6 @@
 </head>
 
 <body>
-    <!-- Mute smybol -->
-    <img id="Mute_Symbol" class="MuteSymbol" src="img/mute_Icon_off_day.png" alt="mute icon"
-        onclick="ToggleGameSounds()">
 
     <!-- Menu tooltip -->
     <button type="button" class="TooltipWrapper CenterObject CenterContent">
@@ -59,10 +56,10 @@
 
             <div id="Menu_Settings" class="MenuSettings VanishedContent CenterContent">
 
-                <button type="button" class="Settings_Category" onclick="ToggleGameStats(this)">
+                <button id="Game_Stats" type="button" class="Settings_Category" onclick="ToggleGameStats(this)">
                     Game stats <span>off</span>
                 </button>
-                <button type="button" class="Settings_Category" onclick="ToggleGameSounds()">
+                <button id="Game_Sounds" type="button" class="Settings_Category" onclick="ToggleGameSounds()">
                     Game sounds <span>off</span>
                 </button>
 
@@ -102,9 +99,18 @@
         </span>
     </div>
 
-    <footer class="CenterContent">
-        <p> &copy; 2026 Pixel Art Game &mdash; Created by Jonas Dickert. All rights reserved. </p>
-        <a href="https://github.com/UNfassbarer" target="_blank" rel="noopener">Source code</a>
+    <footer>
+        <div class="MuteSymbolWrapper">
+            <img id="Mute_Symbol" class="MuteSymbol" src="img/mute_Icon_off_day.png" alt="mute icon"
+                onclick="ToggleGameSounds()">
+        </div>
+        <div class="FootContetWrapper">
+            <p class="CenterContent"> &copy; 2026 Pixel Art Game &mdash; Created by Jonas Dickert. All rights reserved.
+            </p>
+            <a class="CenterContent" href="https://github.com/UNfassbarer" target="_blank" rel="noopener">
+                Source code
+            </a>
+        </div>
     </footer>
 
     <script src="script.js"></script>

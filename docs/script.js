@@ -192,7 +192,7 @@ function CloseMenu() {
 const settingsMenu = document.getElementById("Menu_Settings");
 
 function SettingsHidden(condition) {
-  if (condition === undefined) return settingsMenu.classList.contains("new_hiVanishedContentddenContent");
+  if (condition === undefined) return settingsMenu.classList.contains("VanishedContent");
   condition ?
     settingsMenu.classList.add("VanishedContent") :
     settingsMenu.classList.remove("VanishedContent");
@@ -241,7 +241,7 @@ const ToggleGameSounds = (DayToNight) => {
       SoundIcon.src = "img/mute_Icon_on_day.png" :
       SoundIcon.src = "img/mute_Icon_off_day.png";
   }
-  ToggleInnerSettings("Toggle_GameSounds");
+  ToggleInnerSettings("Game_Sounds");
 };
 
 function ToggleInnerSettings(el) {
