@@ -583,7 +583,7 @@ footer .FootContetWrapper a {
 footer .FootContetWrapper a:hover {
   color: rgba(var(--white), 0.75);
   text-shadow: 1px 0px 1px rgba(var(--turquoise), 0.75);
-  font-size: clamp(9px, 1vw, 15px);
+  font-size: 9px;
 }
 
 body.DarkBody .MuteSymbol:hover {
