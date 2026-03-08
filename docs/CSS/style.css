@@ -121,6 +121,16 @@ body {
   transform: scale(1.2);
   box-shadow: -2px -1px 15px 0px rgb(var(--white)), 0px 2px 15px 0px rgb(var(--pink));
 }
+.TooltipWrapper:hover .GameTooltip::after {
+  content: "";
+  position: absolute;
+  left: 32%;
+  top: -125%;
+  rotate: 87deg;
+  width: 40%;
+  height: 375%;
+  background: linear-gradient(90deg, rgba(var(--pink), 0), rgba(var(--darkBlue), 0.2), rgba(var(--turquoise), 0.6), rgb(var(--white)), rgba(var(--turquoise), 0.8), rgb(var(--gray)));
+}
 .TooltipWrapper:hover span {
   font-size: 21px;
 }
@@ -135,17 +145,6 @@ body {
   animation: TooltipClick_Span 1s alternate;
 }
 
-.GameTooltip::after {
-  content: "";
-  position: absolute;
-  left: 32%;
-  top: -125%;
-  rotate: 87deg;
-  width: 40%;
-  height: 375%;
-  background: linear-gradient(90deg, rgba(var(--pink), 0), rgba(var(--darkBlue), 0.2), rgba(var(--turquoise), 0.6), rgb(var(--white)), rgba(var(--turquoise), 0.8), rgb(var(--gray)));
-}
-
 .GameMenu {
   position: absolute;
   height: 90px;
@@ -157,14 +156,8 @@ body {
   transition: all 0.5s ease-in-out;
   -webkit-user-select: none;
   user-select: none;
+  /*Rotating menu background*/
 }
-
-.OpenMenu {
-  height: 500px;
-  width: 300px;
-}
-
-/*Rotating menu background*/
 .GameMenu::before {
   content: "";
   position: absolute;
@@ -172,11 +165,6 @@ body {
   height: 200%;
   background: linear-gradient(90deg, rgba(var(--black)), rgb(var(--pink)), rgba(var(--white), 0.5), rgb(var(--pink)), rgb(var(--pink)));
 }
-
-.GameMenu.MenuBefore::before {
-  animation: rotateLeft 10s ease-in-out infinite;
-}
-
 .GameMenu::after {
   content: "";
   position: absolute;
@@ -190,6 +178,15 @@ body {
   mask: linear-gradient(rgb(var(--white)) 0 0) content-box, linear-gradient(rgb(var(--white)) 0 0);
   mask-composite: exclude;
   pointer-events: none;
+}
+
+.OpenMenu {
+  height: 500px;
+  width: 300px;
+}
+
+.GameMenu.MenuBefore::before {
+  animation: rotateLeft 10s ease-in-out infinite;
 }
 
 .GameMenu.MenuAfter::after {
@@ -468,7 +465,14 @@ body {
   grid-template-rows: 2fr 2fr 2fr;
   gap: 10px;
   padding: 10px;
-  /* background-color: rgba(var(--gray), 0.125); */
+}
+.GameInfo::before {
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  background: radial-gradient(circle farthest-corner at center center, rgb(var(--gray)) 20%, rgb(var(--white)) 59%, rgb(var(--pink)) 60%, rgb(var(--gray)) 61%, rgb(var(--darkGray)) 100%);
+  z-index: -3;
 }
 .GameInfo div {
   position: relative;
@@ -484,12 +488,6 @@ body {
   outline: rgba(var(--turquoise), 0.75) 1.5px solid;
   background-color: rgb(var(--gray));
   border-radius: 15px;
-}
-.GameInfo span h5 {
-  position: absolute;
-  color: rgba(var(--turquoise), 0.8);
-  text-shadow: 1px 1px 0px rgba(var(--darkBlue), 0.6);
-  font-size: 11cqw;
 }
 .GameInfo span::after {
   content: "";
@@ -512,14 +510,11 @@ body {
   outline: rgba(var(--darkBlue), 0.75) 1.25px solid;
   background-color: rgb(var(--white));
 }
-
-.GameInfo::before {
-  width: 100%;
-  height: 100%;
-  content: "";
+.GameInfo span h5 {
   position: absolute;
-  background: radial-gradient(circle farthest-corner at center center, rgb(var(--gray)) 20%, rgb(var(--white)) 59%, rgb(var(--pink)) 60%, rgb(var(--gray)) 61%, rgb(var(--darkGray)) 100%);
-  z-index: -3;
+  color: rgba(var(--turquoise), 0.8);
+  text-shadow: 1px 1px 0px rgba(var(--darkBlue), 0.6);
+  font-size: 11cqw;
 }
 
 .GameInfoFade {
@@ -542,49 +537,79 @@ body {
 footer {
   position: absolute;
   width: 100%;
-  height: 50px;
+  height: 10vh;
   background: rgba(var(--darkBlue), 0.5);
   bottom: 0px;
   left: 0px;
   -webkit-user-select: none;
   user-select: none;
+  display: grid;
+  grid-template-columns: 1fr 20fr;
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
 }
-footer .MuteSymbolWrapper {
-  position: absolute;
-  left: 5px;
-  top: 4px;
-}
-footer .MuteSymbolWrapper .MuteSymbol {
-  width: 45px;
-  height: 45px;
+footer .MuteSymbol {
   image-rendering: pixelated;
-  transition: filter 0.125s ease-in-out;
-  cursor: pointer;
+  grid-row: 1/span 2;
+  height: 90%;
+  align-self: center;
+  margin-left: 6px;
 }
-footer .MuteSymbolWrapper .MuteSymbol:hover {
+footer .MuteSymbol:hover {
   filter: drop-shadow(0px 3px 2px rgb(var(--turquoise))) drop-shadow(0px 0px 1px rgba(var(--darkBlue), 0.75));
 }
-footer .FootContetWrapper p {
-  width: 90%;
-  position: relative;
-  font-size: 10px;
-  letter-spacing: 4px;
+footer div {
+  grid-column-start: 2;
+  font-size: calc((1vw + 2vh) / 2);
+  letter-spacing: 5px;
   color: rgba(var(--turquoise), 0.75);
   text-shadow: 1px 0px 0px rgba(var(--pink), 0.75);
 }
-footer .FootContetWrapper a {
+footer a {
   position: relative;
-  width: 25%;
-  font-size: 8px;
-  letter-spacing: 2px;
-  color: rgba(var(--purple), 0.75);
-  text-shadow: 1px 0px 1px rgba(var(--pink), 0.75);
+  grid-column-start: 2;
+  grid-row-start: 2;
+  height: 1.25vh;
+  width: fit-content;
+  font-size: calc((1vw + 2vh) / 2);
+  letter-spacing: 3px;
   transition: all 0.25s ease-in-out;
+  text-decoration: unset;
+  background: linear-gradient(to bottom left, rgb(var(--turquoise)), rgb(var(--purple)), rgb(var(--pink)), rgb(var(--turquoise)));
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-footer .FootContetWrapper a:hover {
-  color: rgba(var(--white), 0.75);
-  text-shadow: 1px 0px 1px rgba(var(--turquoise), 0.75);
-  font-size: 9px;
+footer a::before {
+  content: "Source code";
+  position: absolute;
+  white-space: nowrap;
+  font-size: inherit;
+  letter-spacing: inherit;
+  transform: scaleY(-1);
+  top: -25%;
+  transition: inherit;
+}
+footer a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 20%;
+  border-radius: 2px;
+  top: 100%;
+  transition: inherit;
+  background: linear-gradient(to left, rgba(var(--pink), 0.75) 40%, rgba(var(--turquoise), 0.75));
+}
+footer a:hover {
+  background-position: 0% 85%;
+}
+footer a:hover::before {
+  text-shadow: 0px -10px 0px rgba(var(--turquoise), 0.25);
+}
+footer a:hover::after {
+  width: 100%;
 }
 
 body.DarkBody .MuteSymbol:hover {

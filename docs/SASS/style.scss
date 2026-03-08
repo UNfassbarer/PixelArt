@@ -162,6 +162,25 @@ body {
     box-shadow:
       -2px -1px 15px 0px rgb(var(--white)),
       0px 2px 15px 0px rgb(var(--pink));
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 32%;
+      top: -125%;
+      rotate: 87deg;
+      width: 40%;
+      height: 375%;
+      background: linear-gradient(
+        90deg,
+        rgba(var(--pink), 0),
+        rgba(var(--darkBlue), 0.2),
+        rgba(var(--turquoise), 0.6),
+        rgb(var(--white)),
+        rgba(var(--turquoise), 0.8),
+        rgb(var(--gray))
+      );
+    }
   }
   span {
     font-size: 21px;
@@ -171,32 +190,13 @@ body {
 .TooltipWrapper:focus:not(:active) {
   .GameTooltip {
     animation: TooltipClick 1s alternate;
-  }
-  .GameTooltip::after {
-    animation: TooltipClick_After 1s alternate;
+    &::after {
+      animation: TooltipClick_After 1s alternate;
+    }
   }
   span {
     animation: TooltipClick_Span 1s alternate;
   }
-}
-
-.GameTooltip::after {
-  content: "";
-  position: absolute;
-  left: 32%;
-  top: -125%;
-  rotate: 87deg;
-  width: 40%;
-  height: 375%;
-  background: linear-gradient(
-    90deg,
-    rgba(var(--pink), 0),
-    rgba(var(--darkBlue), 0.2),
-    rgba(var(--turquoise), 0.6),
-    rgb(var(--white)),
-    rgba(var(--turquoise), 0.8),
-    rgb(var(--gray))
-  );
 }
 
 .GameMenu {
@@ -210,58 +210,57 @@ body {
   transition: all 0.5s ease-in-out;
   -webkit-user-select: none;
   user-select: none;
+
+  /*Rotating menu background*/
+  &::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      90deg,
+      rgba(var(--black)),
+      rgb(var(--pink)),
+      rgba(var(--white), 0.5),
+      rgb(var(--pink)),
+      rgb(var(--pink))
+    );
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    padding: 5px;
+    border-radius: calc(15px + 3px);
+    background: linear-gradient(
+      45deg,
+      rgb(var(--white)),
+      rgb(var(--darkBlue)),
+      rgb(var(--pink)),
+      rgb(var(--turquoise)),
+      rgb(var(--pink)),
+      rgb(var(--darkBlue)),
+      rgb(var(--white))
+    );
+    background-size: 200% 100%;
+    -webkit-mask:
+      linear-gradient(rgb(var(--white)) 0 0) content-box,
+      linear-gradient(rgb(var(--white)) 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(rgb(var(--white)) 0 0) content-box,
+      linear-gradient(rgb(var(--white)) 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
 }
 .OpenMenu {
   height: 500px;
   width: 300px;
 }
 
-/*Rotating menu background*/
-.GameMenu::before {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    90deg,
-    rgba(var(--black)),
-    rgb(var(--pink)),
-    rgba(var(--white), 0.5),
-    rgb(var(--pink)),
-    rgb(var(--pink))
-  );
-}
-
 .GameMenu.MenuBefore::before {
   animation: rotateLeft 10s ease-in-out infinite;
-}
-
-.GameMenu::after {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  padding: 5px;
-  border-radius: calc(15px + 3px);
-  background: linear-gradient(
-    45deg,
-    rgb(var(--white)),
-    rgb(var(--darkBlue)),
-    rgb(var(--pink)),
-    rgb(var(--turquoise)),
-    rgb(var(--pink)),
-    rgb(var(--darkBlue)),
-    rgb(var(--white))
-  );
-  background-size: 200% 100%;
-  -webkit-mask:
-    linear-gradient(rgb(var(--white)) 0 0) content-box,
-    linear-gradient(rgb(var(--white)) 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(rgb(var(--white)) 0 0) content-box,
-    linear-gradient(rgb(var(--white)) 0 0);
-  mask-composite: exclude;
-  pointer-events: none;
 }
 
 .GameMenu.MenuAfter::after {
@@ -596,7 +595,22 @@ body {
   grid-template-rows: 2fr 2fr 2fr;
   gap: 10px;
   padding: 10px;
-  /* background-color: rgba(var(--gray), 0.125); */
+
+  &::before {
+    width: 100%;
+    height: 100%;
+    content: "";
+    position: absolute;
+    background: radial-gradient(
+      circle farthest-corner at center center,
+      rgb(var(--gray)) 20%,
+      rgb(var(--white)) 59%,
+      rgb(var(--pink)) 60%,
+      rgb(var(--gray)) 61%,
+      rgb(var(--darkGray)) 100%
+    );
+    z-index: -3;
+  }
 
   div {
     position: relative;
@@ -618,6 +632,28 @@ body {
     background-color: rgb(var(--gray));
     border-radius: 15px;
 
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100.5%;
+      height: 113%;
+      bottom: -12%;
+      border-radius: inherit;
+      outline: rgba(var(--turquoise), 0.75) 1.25px solid;
+      background-color: rgb(var(--gray));
+      z-index: -2;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      box-shadow: inset -2px 2px 0px 0px rgba(var(--black), 0.5);
+      border-radius: inherit;
+      outline: rgba(var(--darkBlue), 0.75) 1.25px solid;
+      background-color: rgb(var(--white));
+    }
+
     h5 {
       position: absolute;
       color: rgba(var(--turquoise), 0.8);
@@ -625,43 +661,6 @@ body {
       font-size: 11cqw;
     }
   }
-  span::after {
-    content: "";
-    position: absolute;
-    width: 100.5%;
-    height: 113%;
-    bottom: -12%;
-    border-radius: inherit;
-    outline: rgba(var(--turquoise), 0.75) 1.25px solid;
-    background-color: rgb(var(--gray));
-    z-index: -2;
-  }
-  span::before {
-    content: "";
-    position: absolute;
-    width: 60%;
-    height: 60%;
-    box-shadow: inset -2px 2px 0px 0px rgba(var(--black), 0.5);
-    border-radius: inherit;
-    outline: rgba(var(--darkBlue), 0.75) 1.25px solid;
-    background-color: rgb(var(--white));
-  }
-}
-
-.GameInfo::before {
-  width: 100%;
-  height: 100%;
-  content: "";
-  position: absolute;
-  background: radial-gradient(
-    circle farthest-corner at center center,
-    rgb(var(--gray)) 20%,
-    rgb(var(--white)) 59%,
-    rgb(var(--pink)) 60%,
-    rgb(var(--gray)) 61%,
-    rgb(var(--darkGray)) 100%
-  );
-  z-index: -3;
 }
 
 .GameInfoFade {
@@ -692,59 +691,92 @@ body {
 }
 
 footer {
-  // * {
-  //   outline: red 1px solid;
-  // }
-
   position: absolute;
   width: 100%;
-  height: 50px;
+  height: 10vh;
   background: rgba(var(--darkBlue), 0.5);
   bottom: 0px;
   left: 0px;
   -webkit-user-select: none;
   user-select: none;
+  display: grid;
+  grid-template-columns: 1fr 20fr;
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
 
-  .MuteSymbolWrapper {
-    position: absolute;
-    left: 5px;
-    top: 4px;
-    .MuteSymbol {
-      width: 45px;
-      height: 45px;
-      image-rendering: pixelated;
-      transition: filter 0.125s ease-in-out;
-      cursor: pointer;
+  .MuteSymbol {
+    image-rendering: pixelated;
+    grid-row: 1 / span 2;
+    height: 90%;
+    align-self: center;
+    margin-left: 6px;
+  }
+  .MuteSymbol:hover {
+    filter: drop-shadow(0px 3px 2px rgb(var(--turquoise)))
+      drop-shadow(0px 0px 1px rgba(var(--darkBlue), 0.75));
+  }
+  div {
+    grid-column-start: 2;
+    font-size: calc((1vw + 2vh) / 2);
+    letter-spacing: 5px;
+    color: rgba(var(--turquoise), 0.75);
+    text-shadow: 1px 0px 0px rgba(var(--pink), 0.75);
+  }
+  a {
+    position: relative;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    height: 1.25vh;
+    width: fit-content;
+    font-size: calc((1vw + 2vh) / 2);
+    letter-spacing: 3px;
+    transition: all 0.25s ease-in-out;
+    text-decoration: unset;
+    background: linear-gradient(
+      to bottom left,
+      rgb(var(--turquoise)),
+      rgb(var(--purple)),
+      rgb(var(--pink)),
+      rgb(var(--turquoise))
+    );
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    &::before {
+      content: "Source code";
+      position: absolute;
+      white-space: nowrap;
+      font-size: inherit;
+      letter-spacing: inherit;
+      transform: scaleY(-1);
+      top: -25%;
+      transition: inherit;
     }
-
-    .MuteSymbol:hover {
-      filter: drop-shadow(0px 3px 2px rgb(var(--turquoise)))
-        drop-shadow(0px 0px 1px rgba(var(--darkBlue), 0.75));
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 20%;
+      border-radius: 2px;
+      top: 100%;
+      transition: inherit;
+      background: linear-gradient(
+        to left,
+        rgba(var(--pink), 0.75) 40%,
+        rgba(var(--turquoise), 0.75)
+      );
     }
   }
 
-  .FootContetWrapper {
-    p {
-      width: 90%;
-      position: relative;
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: rgba(var(--turquoise), 0.75);
-      text-shadow: 1px 0px 0px rgba(var(--pink), 0.75);
+  a:hover {
+    background-position: 0% 85%;
+    &::before {
+      text-shadow: 0px -10px 0px rgba(var(--turquoise), 0.25);
     }
-    a {
-      position: relative;
-      width: 25%;
-      font-size: 8px;
-      letter-spacing: 2px;
-      color: rgba(var(--purple), 0.75);
-      text-shadow: 1px 0px 1px rgba(var(--pink), 0.75);
-      transition: all 0.25s ease-in-out;
-    }
-    a:hover {
-      color: rgba(var(--white), 0.75);
-      text-shadow: 1px 0px 1px rgba(var(--turquoise), 0.75);
-      font-size: 9px;
+    &::after {
+      width: 100%;
     }
   }
 }
