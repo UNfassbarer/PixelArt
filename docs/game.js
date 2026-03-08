@@ -1,7 +1,8 @@
 const Infobox = document.getElementById("Game_Info");
 // Manage played games & deaths
 function updateGameStats(Category, Value) {
-    Infobox.querySelector(`${Category}`).innerHTML = Value;
+    const el = Infobox.querySelector(`${Category}`);
+    if (el) el.innerHTML = Value;
 }
 
 // Get canvas and context
@@ -9,8 +10,8 @@ const canvas = document.getElementById("Game_Container");
 const ctx = canvas.getContext("2d");
 
 // Get CSS canvas for sizing background
-const HtmlVideos = document.querySelectorAll(".gameVideo");
-let Video = undefined;
+// const HtmlVideos = document.querySelectorAll(".gameVideo");
+// let Video = undefined;
 
 // Sync canvas internal resolution & make it adoptive to CSS size
 function resizeCanvas() {
@@ -67,10 +68,8 @@ const PlayerGroundImgSources = [
 const playerGroundImages = [];
 PlayerGroundImgSources.forEach(ImgLink => {
     const img = new Image();
-    // img.onload = () => {
     img.src = ImgLink;
     playerGroundImages.push(img);
-    // }
 });
 
 const PlayerJumpImgSources = [
@@ -82,22 +81,14 @@ const PlayerJumpImgSources = [
 const playerJumpImages = [];
 PlayerJumpImgSources.forEach(ImgLink => {
     const img = new Image();
-    // img.onload = () => {
     img.src = ImgLink;
     playerJumpImages.push(img);
-    // }
 });
 
-// const VideoSources = [
-//     "video/test60_a.mp4",
-//     "video/test60_b.mp4"
-//     // "video/test60_c.mp4"
-// ];
-
-const VideoSources = [];
-HtmlVideos.forEach(video => {
-    VideoSources.push(video.querySelector("source").getAttribute("src"));
-});
+// const VideoSources = [];
+// HtmlVideos.forEach(video => {
+//     VideoSources.push(video.querySelector("source").getAttribute("src"));
+// });
 
 // Manage game time display
 let survivedTime = 0;
@@ -112,11 +103,16 @@ function SetTimingInterval(previousTime) {
     }, 100);
 }
 
+const GameOverDiv = document.getElementById("Game_Over");
+
+function toggleGameOverDiv() {
+    GameOverDiv.classList.toggle("HiddenContent");
+    GameOverDiv.classList.toggle("ToggleAnimationState");
+}
+
 function newGame() {
     if (GameOver) {
         GameOver = false;
-        // document.getElementById("gameInfo").classList.remove("HiddenContent");
-
         SetTimingInterval(0);
         !GameOverDiv.classList.contains("HiddenContent") ? toggleGameOverDiv() : null;
         GamesPlayed++;
@@ -125,7 +121,7 @@ function newGame() {
         createStars = false;
         canvas.classList.remove("HiddenContent");
 
-        startVideo();
+        // startVideo();
 
         if (imgCounter === images.length) {
             requestAnimationFrame(gameLoop);
@@ -134,24 +130,24 @@ function newGame() {
     }
 }
 
-function startVideo() {
+// function startVideo() {
 
-    // Select random video
-    Video = HtmlVideos[getRandomInt(0, HtmlVideos.length - 1)];
-    Video.playbackRate = 0.125;
-    Video.currentTime = 0;
+//     // Select random video
+//     Video = HtmlVideos[getRandomInt(0, HtmlVideos.length - 1)];
+//     Video.playbackRate = 0.125;
+//     Video.currentTime = 0;
 
-    const playNext = () => {
-        Video.removeEventListener("canplaythrough", playNext);
-        Video.play();
-        Video.addEventListener("ended", startVideo, { once: true });
-    };
+//     const playNext = () => {
+//         Video.removeEventListener("canplaythrough", playNext);
+//         Video.play();
+//         Video.addEventListener("ended", startVideo, { once: true });
+//     };
 
-    // Check if video is already ready
-    Video.readyState >= 3 ?
-        playNext()
-        : Video.addEventListener("canplaythrough", playNext);
-}
+//     // Check if video is already ready
+//     Video.readyState >= 3 ?
+//         playNext()
+//         : Video.addEventListener("canplaythrough", playNext);
+// }
 
 const player = {
     x: 50, // position X
@@ -255,7 +251,7 @@ function renderLogic() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Render video background
-    ctx.drawImage(Video, 0, 0, canvas.width, canvas.height);
+    // ctx.drawImage(Video, 0, 0, canvas.width, canvas.height);
 
     // Move and draw obstacles
     drawObjects(obstacles, structureImage);
@@ -266,7 +262,7 @@ function renderLogic() {
     drawObjects(orbs, orbImage)
 
     // Draw player (no rounding needed - canvas handles it)
-    if (playerImage instanceof HTMLImageElement) ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+    ctx.drawImage(currentPlayerImage, player.x, player.y, player.width, player.height);
 }
 
 const widthSpike = player.width * (2 / 3);
@@ -501,9 +497,10 @@ function AnimatePlayerImg(ImgSources, Delay) {
 
 // Update player image based on state
 let playerImgState = 0;
+let currentPlayerImage = playerGroundImages[0]; // default
 function UpdatePlayerImg(ImgSources) {
-    playerImgState = (playerImgState + 1) % ImgSources.length; //Reset to 0 if over length
-    playerImage = ImgSources[playerImgState];
+    playerImgState = (playerImgState + 1) % ImgSources.length;
+    currentPlayerImage = ImgSources[playerImgState];
 }
 
 let playerImgDelay = 0; // frames between image changes
@@ -695,13 +692,6 @@ function checkPlayerCollision(object, o, i) {
         console.log("Total Death");
 }
 
-const GameOverDiv = document.getElementById("Game_Over");
-
-function toggleGameOverDiv() {
-    GameOverDiv.classList.toggle("HiddenContent");
-    GameOverDiv.classList.toggle("ToggleAnimationState");
-}
-
 function resetGame() {
     DeathCounter++;
     updateGameStats("#Deaths >h5", DeathCounter);
@@ -732,40 +722,38 @@ function resetGame() {
     player.onGround = true;
 }
 
-
 // Create a jump animation effect
 const Effects = [];// Store active effects for short jump delay
-const JumpEffectAmount = 2;
-let EffectCounter;
+const JumpEffectAmount = 3;
+let effectCounter;
 function JumpAnimation(x, y) {
-    EffectCounter = JumpEffectAmount;
     const rect = canvas.getBoundingClientRect();
-    const scaleX = rect.width / canvas.width;
-    const scaleY = rect.height / canvas.height;
-    const supportDiv = document.createElement("div");
-    supportDiv.className = "SupportCanvas CenterContent";
-    supportDiv.style.left = rect.left + x * scaleX + "px";
-    supportDiv.style.top = rect.top + y * scaleY + player.height * scaleY - 10 + "px"; // align to feet
-    supportDiv.style.width = player.width * scaleX + "px";
-    document.body.appendChild(supportDiv);
-    Effects.push(supportDiv);
-    const Intervall = setInterval(() => {
-        if (EffectCounter <= 0) {
-            clearInterval(Intervall);
-            EffectCounter = JumpEffectAmount;
+    const particleDiv = document.createElement("div");
+    particleDiv.className = "CenterContent";
+
+    // Position relative to canvas
+    particleDiv.style.position = "absolute";
+    particleDiv.style.left = rect.left + x + "px"; // x in canvas pixels
+    particleDiv.style.top = rect.top + y + "px";  // y in canvas pixels
+    particleDiv.style.width = player.width + "px";
+    particleDiv.style.height = player.height / 6 + "px"; // particle height
+    document.body.appendChild(particleDiv);
+
+    let effectCounter = JumpEffectAmount; // local counter
+    const interval = setInterval(() => {
+        if (effectCounter <= 0) {
             setTimeout(() => {
-                const el = Effects.shift();
-                el?.remove();
-            }, 1200);
+                clearInterval(interval);
+                particleDiv.remove();
+            }, 1000);
+            return;
         }
-        const Length = player.width + EffectCounter * 10;
-        const height = player.height / 6;
-        const jumpEffect = document.createElement("div");
-        jumpEffect.className = "JumpParticle";
-        jumpEffect.style.width = Length * scaleX + "px";
-        jumpEffect.style.height = height * scaleY + "px";
-        supportDiv.appendChild(jumpEffect);
-        EffectCounter--;
+        const particle = document.createElement("div");
+        particle.className = "JumpParticle";
+        particle.style.width = (player.width + effectCounter * 10) + "px";
+        particle.style.height = player.height / 6 + "px";
+        particleDiv.appendChild(particle);
+        effectCounter--;
     }, 50);
 }
 

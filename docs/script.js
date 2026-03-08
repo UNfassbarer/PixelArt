@@ -242,6 +242,7 @@ const ToggleGameSounds = (DayToNight) => {
       SoundIcon.src = "img/mute_Icon_off_day.png";
   }
   ToggleInnerSettings("Game_Sounds");
+  ButtonClick(SoundIcon);
 };
 
 function ToggleInnerSettings(el) {

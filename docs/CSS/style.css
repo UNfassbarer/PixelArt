@@ -103,6 +103,16 @@ body {
   box-sizing: border-box;
   background-clip: padding-box;
 }
+.TooltipWrapper .GameTooltip::after {
+  content: "";
+  position: absolute;
+  left: 32%;
+  top: -125%;
+  rotate: 87deg;
+  width: 40%;
+  height: 375%;
+  background: linear-gradient(90deg, rgba(var(--pink), 0), rgba(var(--darkBlue), 0.2), rgba(var(--turquoise), 0.6), rgb(var(--white)), rgba(var(--turquoise), 0.8), rgb(var(--gray)));
+}
 .TooltipWrapper span {
   pointer-events: none;
   position: absolute;
@@ -120,16 +130,6 @@ body {
   cursor: pointer;
   transform: scale(1.2);
   box-shadow: -2px -1px 15px 0px rgb(var(--white)), 0px 2px 15px 0px rgb(var(--pink));
-}
-.TooltipWrapper:hover .GameTooltip::after {
-  content: "";
-  position: absolute;
-  left: 32%;
-  top: -125%;
-  rotate: 87deg;
-  width: 40%;
-  height: 375%;
-  background: linear-gradient(90deg, rgba(var(--pink), 0), rgba(var(--darkBlue), 0.2), rgba(var(--turquoise), 0.6), rgb(var(--white)), rgba(var(--turquoise), 0.8), rgb(var(--gray)));
 }
 .TooltipWrapper:hover span {
   font-size: 21px;
@@ -421,17 +421,6 @@ body {
   display: block;
   /* zoom: 1; */
 }
-.gameWrapper .gameVideo {
-  position: absolute;
-  image-rendering: pixelated;
-  /* Ai improvement */
-  object-fit: contain;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  image-rendering: -moz-crisp-edges;
-}
 
 /* Game Over display */
 .GameOverBoard {
@@ -554,6 +543,7 @@ footer .MuteSymbol {
   height: 90%;
   align-self: center;
   margin-left: 6px;
+  cursor: pointer;
 }
 footer .MuteSymbol:hover {
   filter: drop-shadow(0px 3px 2px rgb(var(--turquoise))) drop-shadow(0px 0px 1px rgba(var(--darkBlue), 0.75));
@@ -569,7 +559,7 @@ footer a {
   position: relative;
   grid-column-start: 2;
   grid-row-start: 2;
-  height: 1.25vh;
+  height: 1.75vh;
   width: fit-content;
   font-size: calc((1vw + 2vh) / 2);
   letter-spacing: 3px;
@@ -589,14 +579,14 @@ footer a::before {
   font-size: inherit;
   letter-spacing: inherit;
   transform: scaleY(-1);
-  top: -25%;
+  top: 35%;
   transition: inherit;
 }
 footer a::after {
   content: "";
   position: absolute;
   width: 0%;
-  height: 20%;
+  height: 15%;
   border-radius: 2px;
   top: 100%;
   transition: inherit;
