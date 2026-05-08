@@ -1,0 +1,917 @@
+:root {
+  --purple: 100, 0, 255;
+  --darkBlue: 0, 50, 100;
+  --turquoise: 50, 255, 255;
+  --white: 255, 255, 255;
+  --gray: 128, 128, 128;
+  --darkGray: 64, 64, 64;
+  --black: 0, 0, 0;
+
+  --base-blue: blue;
+  --base-purple: rgb(194, 0, 194);
+  --base-turquoise: turquoise;
+  --dark: black;
+  --light: white;
+}
+
+body {
+  transition: all 1s ease-in-out;
+  overflow: hidden;
+  display:grid;
+  place-items: center;
+  min-height: 100vh;
+}
+.DarkBody {
+  background-color: rgb(var(--black));
+}
+
+/* Global Classes */
+.HiddenContent {
+  display: none;
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+.VanishedContent {
+  opacity: 0;
+  pointer-events: none;
+  z-index: -100;
+}
+
+.CenterContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.CenterObject {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.BiggerPosterCanvas {
+  background: radial-gradient(
+    circle farthest-corner at center center,
+    transparent 35%,
+    hsl(from var(--base-turquoise) h s l) 36%,
+    hsl(from var(--dark) h s l / 0.5) 38%,
+    hsl(from var(--base-turquoise) h s l) 40%,
+    transparent 40%,
+    hsl(from var(--light) h s l) 85%,
+    hsl(from var(--base-turquoise) h s l) 85%,
+    hsl(from var(--dark) h s l / 0.25) 100%
+  ) !important;
+}
+
+/* Game tooltip */
+.StartButton {
+  position: relative;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  width: 120px;
+  height: 40px;
+  border-radius: 12px;
+  border: hsl(from var(--base-turquoise) h s calc(l + 15)) 2px solid;
+  transition: all 0.25s ease-in-out;
+
+  background: linear-gradient(
+    -183deg,
+    hsl(from var(--base-purple) h s calc(l + 15)),
+    hsl(from var(--base-turquoise) h s calc(l + 25)),
+    hsl(from var(--light) h s l) 15%,
+    hsl(from var(--dark) h s calc(l + 40)),
+    hsl(from var(--base-turquoise) h s calc(l + 10)),
+    hsl(from var(--light) h s l),
+    hsl(from var(--base-turquoise) h s calc(l + 25)),
+    hsl(from var(--base-turquoise) h s calc(l - 20))
+  );
+  background-size: 110% 115%;
+  background-position: 0% 100%;
+
+  box-shadow:
+    4px -4px 15px 0px hsl(from var(--base-purple) h s calc(l + 10) / 0.75),
+    -4px 4px 15px 0px hsl(from var(--base-purple) h s calc(l + 10) / 0.75);
+
+  span {
+    position: absolute;
+    color: hsl(from var(--base-purple) h s calc(l + 10));
+    text-shadow:
+      1px 0.75px 0px hsl(from var(--light) h s l),
+      2px 1.5px 0px hsl(from var(--base-purple) h s calc(l + 10));
+    transform: rotate(-2.5deg);
+    white-space: nowrap;
+    pointer-events: none;
+    transition: all 0.25s ease-in-out;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    box-shadow:
+      -2px -1px 15px 0px hsl(from var(--light) h s l),
+      0px 2px 15px 0px hsl(from var(--base-purple) h s calc(l + 10));
+    font-size: 18px;
+    letter-spacing: 1px;
+    background-position: 0% 95%;
+  }
+
+  &:focus:not(:active) {
+    animation: TooltipClick 0.75s alternate;
+    span {
+      animation: TooltipClick_Span 0.75s alternate;
+    }
+  }
+}
+
+.GameMenu {
+  position: absolute;
+  height: 90px;
+  width: 90px;
+  top: 20px;
+  left: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+  -webkit-user-select: none;
+  user-select: none;
+
+  /* Menu */
+  .MenuPoster {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    canvas {
+      position: absolute;
+      width: inherit;
+      height: inherit;
+      background: radial-gradient(
+        circle farthest-corner at center center,
+        rgba(var(--black), 0) 35%,
+        rgb(var(--turquoise)) 36%,
+        rgba(var(--black), 0.5) 38%,
+        rgb(var(--turquoise)) 40%,
+        rgba(var(--black), 0) 40%,
+        rgb(var(--white)) 55%,
+        rgb(var(--turquoise)) 55%,
+        rgb(var(--turquoise)) 57%,
+        rgba(var(--black), 0.5) 75%,
+        rgb(var(--black)) 100%
+      );
+    }
+
+    .PosterCaption {
+      color: hsl(from var(--base-turquoise) h s calc(l + 15));
+      text-shadow:
+        -1px 0px 1px hsl(from var(--base-turquoise) h s calc(l + 15) / 0.5),
+        1px 0px 1px hsl(from var(--base-purple) h s calc(l + 10) / 0.9),
+        0px -1px 1px hsl(from var(--base-turquoise) h s calc(l + 15) / 0.5),
+        0px 1px 1px hsl(from var(--base-purple) h s calc(l + 10) / 0.9);
+      animation: Menu_loading_M 10s ease-in-out infinite;
+      font-size: 40px;
+    }
+  }
+
+  .MenuContent {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+    .MenuButtons {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      align-items: center;
+
+      .MenuButton {
+        position: relative;
+        width: 175px;
+        height: 50px;
+        background: radial-gradient(
+          circle at center,
+          hsl(from var(--base-turquoise) h s l / 0.75) 15%,
+          hsl(from var(--base-blue) h s calc(l - 15) / 0.75) 100%
+        );
+        border: 1.75px hsl(from var(--base-turquoise) h s l / 0.8) solid;
+        transition: 0.125s all ease-in-out;
+        border-radius: 10px;
+        cursor: pointer;
+
+        span {
+          position: absolute;
+          width: inherit;
+          font-size: 20px;
+          background: linear-gradient(
+            0deg,
+            hsl(from var(--light) h s l),
+            hsl(from var(--base-purple) h s l),
+            hsl(from var(--base-blue) h s l / 0.75),
+            hsl(from var(--base-turquoise) h s l),
+            hsl(from var(--light) h s l),
+            hsl(from var(--base-turquoise) h s l)
+          );
+          background-size: 100% 125%;
+          background-position: 0% 0%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          transition: all 0.75s ease-in-out;
+        }
+
+        canvas {
+          position: absolute;
+          width: 125px;
+          height: 3px;
+          top: 20%;
+          left: 50%;
+          transform: translate(-50%, -20%);
+          background: linear-gradient(
+            90deg,
+            hsl(from var(--base-turquoise) h s l / 0.75),
+            hsl(from var(--base-blue) h s calc(l - 15) / 0.75),
+            hsl(from var(--base-purple) h s l / 0.75)
+          );
+          background-color: hsl(from var(--base-turquoise) h s l);
+          border-radius: inherit;
+          transition: 0.5s all ease-in-out;
+          opacity: 0.75;
+          border: 1px solid hsl(from var(--light) h s l / 0.5);
+        }
+
+        &:hover {
+          border: 2px hsl(from var(--base-turquoise) h s calc(l + 15)) solid;
+          transform: scale(1.1);
+          font-size: 125%;
+          box-shadow: 5px 5px 15px
+            hsl(from var(--base-purple) h s calc(l + 10) / 0.75);
+
+          span {
+            background-position: 0% 115%;
+          }
+
+          canvas {
+            opacity: 0.85;
+            width: 120%;
+            border: 1px solid hsl(from var(--light) h s l / 0.75);
+          }
+        }
+
+        &:focus:not(:active) {
+          animation: Menu_Button_Click 1s ease-in-out;
+          border: 1.5px hsl(from var(--light) h s l / 0.75) solid;
+          transform: scale(100%);
+
+          canvas {
+            background: linear-gradient(
+              -90deg,
+              hsl(from var(--base-turquoise) h s l / 0.75),
+              hsl(from var(--base-blue) h s calc(l - 15) / 0.75),
+              hsl(from var(--base-purple) h s l / 0.75)
+            );
+          }
+        }
+      }
+    }
+
+    &::before {
+      position: relative;
+      content: "MENU";
+      transform: translate(15px, 15px);
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-size: 84px;
+      letter-spacing: 30px;
+      background: -moz-linear-gradient(
+        to top,
+        hsl(from var(--base-turquoise) h s calc(l + 15)) 15%,
+        hsl(from var(--base-purple) h s calc(l + 25)) 20%,
+        hsl(from var(--base-purple) h s calc(l + 35)) 39%,
+        hsl(from var(--base-turquoise) h s l) 47%,
+        hsl(from var(--base-turquoise) h s calc(l - 10)) 64%,
+        hsl(from var(--base-purple) h s calc(l + 25)) 74%,
+        hsl(from var(--base-purple) h s calc(l + 20)) 82%,
+        hsl(from var(--base-turquoise) h s calc(l + 15)) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 0.5px rgb(var(--white));
+    }
+  }
+
+  /*Rotating menu background*/
+  &::before {
+    content: "";
+    position: absolute;
+    width: 195%;
+    height: 116%;
+    background: linear-gradient(
+      90deg,
+      hsl(from var(--dark) h s l),
+      hsl(from var(--base-purple) h s calc(l + 20)),
+      hsl(from var(--light) h s calc(l - 10)),
+      hsl(from var(--base-purple) h s calc(l + 10)),
+      hsl(from var(--base-turquoise) h s calc(l + 10))
+    );
+  }
+
+  // Masked background for menu border
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    padding: 5px;
+    border-radius: calc(15px + 3px);
+    background: linear-gradient(
+      45deg,
+      hsl(from var(--light) h s l),
+      hsl(from var(--base-blue) h s calc(l + 15)),
+      hsl(from var(--base-purple) h s calc(l + 20)),
+      hsl(from var(--base-turquoise) h s calc(l + 10)),
+      hsl(from var(--base-purple) h s calc(l + 20)),
+      hsl(from var(--base-blue) h s calc(l + 15)),
+      hsl(from var(--light) h s l)
+    );
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+    -webkit-mask:
+      linear-gradient(hsl(from var(--light) h s l) 0 0) content-box,
+      linear-gradient(hsl(from var(--light) h s l) 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(hsl(from var(--light) h s l) 0 0) content-box,
+      linear-gradient(hsl(from var(--light) h s l) 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    will-change: background-position;
+    transform: translateZ(0);
+  }
+}
+.OpenMenu {
+  height: 500px;
+  width: 300px;
+}
+
+.GameMenu.MenuBefore::before {
+  animation: rotateLeft 10s ease-in-out infinite;
+}
+
+.GameMenu.MenuAfter::after {
+  animation: moveGradient 4s ease-in-out infinite;
+}
+
+/* Backgound star particles */
+.Particle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: 10;
+}
+.JumpParticle {
+  position: absolute;
+  border: hsl(from var(--base-turquoise) h s l) 3px solid;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transform: rotateX(70deg);
+  animation: jumpParticle 0.75s ease-in forwards;
+}
+
+/* Universal colors for button settings*/
+.ToggleActiveColor {
+  background-color: hsl(from var(--light) h s calc(l - 25) / 0.75) !important;
+}
+
+.HilightetElement {
+  outline: hsl(from var(--base-purple) h s calc(l + 25)) 2px dashed;
+  border-radius: 10%;
+  animation: Blink 1s infinite;
+}
+
+.MenuSettings {
+  position: absolute;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  gap: 60px;
+  justify-content: flex-start;
+  padding: 0 40px 0 40px;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  top: 50%;
+  left: 51.5%;
+  transform: translate(-48.5%, -50%);
+  height: 25%;
+  width: 55%;
+  border: hsl(from var(--base-turquoise) h s l) 2px solid;
+  border-radius: 12px;
+  background: radial-gradient(
+    circle at 100%,
+    hsl(from var(--dark) h s calc(l + 15) / 0.5) 10%,
+    hsl(from var(--base-purple) h s l / 0.6) 35%,
+    hsl(from var(--light) h s l / 0.9) 65%,
+    hsl(from var(--dark) h s calc(l + 25) / 0.6) 66%,
+    hsl(from var(--base-purple) h s calc(l + 25) / 0.5) 80%
+  );
+  transition: all 0.25s ease-in-out;
+
+  .Settings_Category {
+    cursor: pointer;
+    position: relative;
+    flex: 0 0 170px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 2px solid hsl(from var(--base-turquoise) h s calc(l + 15));
+    box-shadow: hsl(from var(--base-turquoise) h s l) 0px 0px 10px;
+    // background-color: rgba(var(--gray), 0.75);
+
+    background: radial-gradient(
+      circle at center,
+      hsl(from var(--base-turquoise) h s calc(l + 5) / 0.75) 0%,
+      hsl(from var(--base-blue) h s calc(l + 25) / 0.75) 45%,
+      hsl(from var(--base-turquoise) h s calc(l + 10) / 0.75) 85%,
+      hsl(from var(--light) h s l / 0.75) 100%
+    );
+
+    font-size: 18px;
+    font-weight: bold;
+    color: hsl(from var(--light) h s l);
+    text-shadow: hsl(from var(--base-purple) h s calc(l + 15)) 3px 3px 2px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: hsl(from var(--light) h s l) 0px 0px 15px;
+      text-shadow: hsl(from var(--base-blue) h s calc(l + 15)) 3px 3px 2px;
+      border: 2px solid hsl(from var(--base-turquoise) h s calc(l + 25));
+      background: radial-gradient(
+        circle at center,
+        hsl(from var(--base-turquoise) h s calc(l + 5) / 0.85) 0%,
+        hsl(from var(--base-purple) h s calc(l + 35) / 0.85) 45%,
+        hsl(from var(--base-turquoise) h s calc(l + 10) / 0.85) 85%,
+        hsl(from var(--light) h s l / 0.85) 100%
+      );
+    }
+
+    // &:focus:not(:active) {
+    //   animation: Menu_Button_Click 0.65s ease;
+    // }
+  }
+}
+
+/* Size adjustment for Key display */
+.ToggleMenuSettings {
+  transform: translate(-50%, -50%) scale(0.8);
+  height: 45%;
+  width: 65%;
+}
+
+.Toggle_KA {
+  position: relative;
+  border-radius: 4px;
+  border: 2px solid hsl(from var(--base-turquoise) h s l);
+  box-shadow: hsl(from var(--base-turquoise) h s l) 0px 0px 8px;
+  background-color: hsl(from var(--base-turquoise) h s calc(l + 50) / 0.35);
+  font-size: 14px;
+  font-weight: bold;
+  color: hsl(from var(--light) h s l);
+  text-shadow: hsl(from var(--base-blue) h s calc(l + 25)) 2px 2px 3px;
+  transition: all 0.2s ease-in-out;
+  display: grid;
+  gap: 10px;
+  padding: 6px 8px 12px 8px;
+}
+
+.KA_Category {
+  height: 25px;
+  width: auto;
+  cursor: pointer;
+  border-radius: 2px;
+  border: 1px solid hsl(from var(--base-turquoise) h s l);
+  box-shadow: hsl(from var(--base-turquoise) h s l) 0px 0px 5px;
+  background: radial-gradient(
+    circle at center,
+    hsl(from var(--base-turquoise) h s calc(l + 5) / 0.75) 0%,
+    hsl(from var(--base-blue) h s calc(l + 25) / 0.75) 45%,
+    hsl(from var(--base-turquoise) h s calc(l + 10) / 0.75) 85%,
+    hsl(from var(--light) h s l / 0.75) 100%
+  );
+  text-shadow: hsl(from var(--base-purple) h s calc(l + 15)) 1px 1px 2px;
+
+  color: hsl(from var(--light) h s l);
+  padding: 4px 8px 4px 8px;
+  transition: all 0.2s ease-in-out;
+  gap: 5px;
+}
+
+/* Star background */
+.star {
+  position: fixed;
+  pointer-events: none;
+  background-color: hsl(from var(--light) h s l);
+  border-radius: 50%;
+  z-index: -100;
+  animation: glow 2.5s infinite;
+}
+
+.gameWrapper {
+  position: absolute;
+  z-index: -100;
+
+  /* Game Box for the main game area */
+  .gameBox {
+    position: absolute;
+    image-rendering: pixelated;
+    outline: hsl(from var(--base-purple) h s calc(l + 25)) 2px solid;
+    display: block;
+    height: 75vh;
+    // width: clamp(300px, 80vw, 1400px);
+    // width: clamp(250px, calc(70vw + 100px), 1300px);
+    width: 85vw;
+  }
+}
+
+/* Game Over display */
+.GameOverBoard {
+  position: absolute;
+  font-size: 6vw;
+  font-weight: 900;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  background: yellow;
+  background-size: 600% 600%;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(12.5deg);
+}
+
+// Game over
+.ToggleAnimationState {
+  animation: GameOverAnim 1s ease-in-out infinite;
+}
+
+.SideMenu {
+  position: absolute;
+  bottom: calc(10vh + 2.5vh);
+  right: 2.5vh;
+  width: calc(300px + 20px);
+  height: calc(250px + 20px + 120px + 20px + 20px);
+
+  .Impressum,
+  .GameInfo {
+    position: absolute;
+    right: 0;
+    outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 2px solid;
+    background: radial-gradient(
+      circle farthest-corner at center center,
+      hsl(from var(--dark) h s calc(l + 50)) 20%,
+      hsl(from var(--light) h s l) 59%,
+      hsl(from var(--base-purple) h s calc(l + 15)) 60%,
+      hsl(from var(--dark) h s calc(l + 50)) 61%,
+      hsl(from var(--dark) h s calc(l + 25)) 100%
+    );
+    display: grid;
+    transition:
+      transform 0.75s ease-in-out,
+      opacity 0.75s ease-in-out;
+  }
+
+  .Impressum {
+    bottom: 0px;
+    width: 300px;
+    height: 250px;
+    grid-template-columns: 2fr 3fr;
+    grid-auto-rows: 1fr;
+    padding: 10px;
+    gap: 10px;
+
+    div {
+      position: relative;
+      color: hsl(from var(--base-turquoise) h s calc(l + 15));
+      text-shadow: 1.25px 1.25px 0px hsl(from var(--base-blue) h s l / 0.75);
+      font-size: calc(100% * 1.25);
+      background-color: hsl(from var(--light) h s l / 0.75);
+      box-shadow:
+        1px 1px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        2px 2px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        3px 3px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        4px 4px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375);
+    }
+
+    span {
+      position: relative;
+      outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 2px solid;
+      background-color: hsl(from var(--dark) h s calc(l + 50));
+      border-radius: 15px;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      z-index: 1;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 108%;
+        bottom: -8%;
+        border-radius: inherit;
+        outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 2px solid;
+        background-color: hsl(from var(--dark) h s calc(l + 50));
+        z-index: -1;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 60%;
+        box-shadow: inset -2px 2px 0px 0px hsl(from var(--dark) h s l / 0.5);
+        border-radius: inherit;
+        outline: hsl(from var(--dark) h s calc(l + 20) / 0.75) 1.75px solid;
+        background-color: hsl(from var(--light) h s l);
+        z-index: 0;
+      }
+      h5,
+      a {
+        position: absolute;
+        color: hsl(from var(--base-turquoise) h s l / 0.8);
+        text-shadow: 1px 1px 0px hsl(from var(--base-blue) h s l / 0.6);
+        font-size: 75%;
+      }
+    }
+  }
+
+  .GameInfo {
+    width: 150px;
+    height: 120px;
+    container-type: inline-size;
+    grid-template-columns: 2fr 3fr;
+    gap: 10px;
+    padding: 10px;
+
+    div {
+      position: relative;
+      color: hsl(from var(--base-turquoise) h s calc(l + 15));
+      text-shadow: 1px 1px 0px hsl(from var(--base-blue) h s l / 0.5);
+      font-size: calc(100% * 1.25);
+      background-color: hsl(from var(--light) h s l / 0.75);
+      padding-right: 2px;
+      box-shadow:
+        1px 1px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        2px 2px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        3px 3px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        4px 4px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375);
+    }
+
+    span {
+      position: relative;
+      outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 1.5px solid;
+      background-color: hsl(from var(--dark) h s calc(l + 50));
+      border-radius: 15px;
+      z-index: 1;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 112%;
+        bottom: -12%;
+        border-radius: inherit;
+        outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 1.25px solid;
+        background-color: hsl(from var(--dark) h s calc(l + 50));
+        z-index: -1;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 60%;
+        box-shadow: inset -2px 2px 0px 0px hsl(from var(--dark) h s l / 0.5);
+        border-radius: inherit;
+        outline: hsl(from var(--dark) h s calc(l + 20) / 0.75) 1.25px solid;
+        background-color: hsl(from var(--light) h s l);
+        z-index: 0;
+      }
+
+      * {
+        position: absolute;
+        color: hsl(from var(--base-turquoise) h s l / 0.8);
+        text-shadow: 1px 1px 0px hsl(from var(--base-blue) h s l / 0.6);
+        font-size: 100%;
+      }
+    }
+  }
+}
+.GameInfoFadeOut {
+  transform: translateX(calc(172px + 2px + 2.5vh)) translateY(0);
+}
+
+.ImpressumFadeOut {
+  transform: translateX(calc(322px + 2px + 2.5vh));
+}
+
+.PositionBottom {
+  transform: translateX(0) translateY(290px);
+}
+
+.StartAnimationBox {
+  position: absolute;
+  transform-style: preserve-3d;
+  animation: RotateNumbers 1.5s infinite;
+  perspective: 1000px;
+}
+
+.StartAnimationText {
+  position: absolute;
+  font-size: 25vh;
+  color: hsl(from var(--base-purple) h s calc(l + 25));
+  text-shadow: 0px 0px 3px hsl(from var(--base-blue) h s l);
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  height: 10vh;
+
+  background: hsl(from var(--base-turquoise) h s calc(l - 20));
+  bottom: 0;
+  left: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 22fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+
+  .MuteSymbol {
+    position: relative;
+    image-rendering: pixelated;
+    grid-row: 1 / span 2;
+    height: 8vh;
+    align-self: center;
+    margin-left: 3px;
+    cursor: pointer;
+  }
+
+  .MuteSymbol:hover {
+    filter: drop-shadow(
+        0px 3px 2px hsl(from var(--base-purple) h s calc(l + 25) / 0.75)
+      )
+      drop-shadow(0px 0px 1px hsl(from var(--base-blue) h s l / 0.75));
+  }
+
+  .FooterMain {
+    position: relative;
+    grid-column-start: 2;
+    grid-row: 1;
+    font-size: calc((1vw + 2vh) / 2.25);
+    letter-spacing: 4.5px;
+    color: hsl(from var(--base-turquoise) h s calc(l + 25));
+    text-shadow: 1px 0px 0px hsl(from var(--base-purple) h s l);
+    overflow: hidden;
+  }
+
+  a {
+    position: relative;
+    grid-column-start: 2;
+    grid-row: 2;
+    height: fit-content;
+    width: fit-content;
+    font-size: calc((1vw + 2vh) / 2);
+    letter-spacing: 3px;
+    transition: all 0.25s ease-in-out;
+    text-decoration: unset;
+    background: linear-gradient(
+      to bottom left,
+      hsl(from var(--base-turquoise) h s calc(l + 25)),
+      hsl(from var(--base-purple) h s l),
+      hsl(from var(--base-purple) h s calc(l + 25)),
+      hsl(from var(--base-turquoise) h s l)
+    );
+    background-size: 100% 200%;
+    background-position: 0% 0%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    // Mirrored text
+    &::before {
+      content: "Source code";
+      position: absolute;
+      white-space: nowrap;
+      transform: scaleY(-1);
+      top: 35%;
+      transition: inherit;
+      font-size: inherit;
+      letter-spacing: inherit;
+    }
+
+    // Underline
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 15%;
+      border-radius: 2px;
+      top: 100%;
+      transition: inherit;
+      background: linear-gradient(
+        to left,
+        hsl(from var(--base-purple) h s l / 0.5) 40%,
+        hsl(from var(--base-turquoise) h s l / 0.75)
+      );
+    }
+
+    &:hover {
+      background-position: 0% 100%;
+
+      &::before {
+        text-shadow: 0px -10px 0px
+          hsl(from var(--base-turquoise) h s calc(l + 25) / 0.75);
+      }
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  .ToolWrapper {
+    position: relative;
+    grid-row: 1 / span 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .ImpressumButton,
+    .ReloadButton {
+      position: relative;
+      width: clamp(25px, 2.75vw, 45px);
+      height: 50%;
+      bottom: 0;
+      border: 2px solid hsl(from var(--base-purple) h s calc(l - 15));
+      border-right: unset;
+      background: linear-gradient(
+        to right,
+        hsl(from var(--light) h s l) 50%,
+        hsl(from var(--base-blue) h s calc(l + 20)) 50%
+      );
+      background-size: 220% 100%;
+      font-size: calc((1vw + 2vh) / 1.125);
+      text-shadow:
+        1px 0px 0px hsl(from var(--base-purple) h s calc(l + 5)),
+        2px 0px 0px hsl(from var(--light) h s l);
+      color: hsl(from var(--base-blue) h s calc(l + 35));
+      transition: 0.25s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-4px);
+        background-position: 100% 0%;
+        text-shadow:
+          2px 0px 0px hsl(from var(--base-purple) h s calc(l + 15)),
+          3px 0px 0px hsl(from var(--base-turquoise) h s calc(l + 15));
+        box-shadow:
+          1px 2px 3px 0px hsl(from var(--dark) h s calc(l + 20) / 0.5),
+          1px 4px 0px 0px hsl(from var(--base-blue) h s calc(l + 20)),
+          0px 4px 0px 0px hsl(from var(--base-purple) h s calc(l - 15));
+      }
+
+      &:focus:not(:active) {
+        animation: Footer_Button_Click 0.65s ease;
+      }
+    }
+
+    .ImpressumButton {
+      border-radius: 10px 0 0 0;
+    }
+
+    .ReloadButton {
+      border-radius: 0 0 0 10px;
+    }
+  }
+}
+
+// body.DarkBody .MuteSymbol:hover {
+//   cursor: pointer;
+//   filter: drop-shadow(0px 1px 2px rgba(var(--white), 0.75))
+//     drop-shadow(0px 2px 2px rgba(var(--turquoise), 0.5));
+// }
+
+// Future plans:
+//   Cool sun in space ;)
+// body{
+//   background: radial-gradient(circle at 50%,
+//       rgba(0, 0, 0, 0.6) 10%,
+//       rgba(255, 0, 247, 0.7) 50%,
+//       rgba(115, 0, 0, 0.8) 60%,
+//       rgba(0, 0, 0, 0.9) 70%);
+// }
