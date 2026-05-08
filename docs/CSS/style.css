@@ -16,6 +16,9 @@
 body {
   transition: all 1s ease-in-out;
   overflow: hidden;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
 }
 
 .DarkBody {
@@ -404,12 +407,11 @@ body {
 }
 
 .SideMenu {
-  position: fixed;
+  position: absolute;
   bottom: 12.5vh;
   right: 2.5vh;
   width: 320px;
   height: 430px;
-  outline: red 2px dashed;
 }
 .SideMenu .Impressum,
 .SideMenu .GameInfo {
