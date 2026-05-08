@@ -14,10 +14,8 @@
 <body>
 
     <!-- Menu tooltip -->
-    <button type="button" class="TooltipWrapper CenterObject CenterContent">
-        <div class="GameTooltip" role="banner" onclick="setTimeout(OpenMenu,1250)"></div>
-        <span class="CenterContent">Start Game</span>
-    </button>
+    <button type="button" class="StartButton CenterContent"><span>Start
+            Game</span></button>
 
     <!-- Game menu -->
     <div id="Game_Menu" class="GameMenu CenterContent HiddenContent">
@@ -28,8 +26,6 @@
         </div>
 
         <div id="Menu_Content" class="MenuContent HiddenContent">
-
-            <span class="MenuHead">MENU</span>
 
             <div class="MenuButtons">
                 <button class="MenuButton" type="button" id="New_Game">
@@ -56,61 +52,86 @@
 
             <div id="Menu_Settings" class="MenuSettings VanishedContent CenterContent">
 
-                <button id="Game_Stats" type="button" class="Settings_Category" onclick="ToggleGameStats(this)">
+                <!-- <button id="Game_Stats" type="button" class="Settings_Category">
+                    Game stats <span>off</span>
+                </button> -->
+
+                <button id="Game_Stats" type="button" class="Settings_Category">
                     Game stats <span>off</span>
                 </button>
-                <button id="Game_Sounds" type="button" class="Settings_Category" onclick="ToggleGameSounds()">
+
+                <button id="Game_Sounds" type="button" class="Settings_Category">
                     Game sounds <span>off</span>
                 </button>
 
-                <button id="Settings_Key_Assignment" type="button" class="Settings_Category " onclick="ToggleKeys()">Key
+                <button id="Settings_Key_Assignment" type="button" class="Settings_Category ">Key
                     assignment</button>
 
-                <button type="button" class="Settings_Category" onclick="alert('Not redy jet!')">Instructions</button>
+                <button id="Game_Instructions" type="button" class="Settings_Category">Instructions</button>
 
             </div>
         </div>
     </div>
 
     <div class="gameWrapper CenterObject CenterContent">
-
-        <!-- <video class="gameVideo HiddenContent" preload="auto" muted playsinline>
-            <source src="video/test60_a.mp4" type="video/mp4" />
-        </video>
-
-        <video class="gameVideo HiddenContent" preload="auto" muted playsinline>
-            <source src="video/test60_b.mp4" type="video/mp4" />
-        </video> -->
-
         <canvas id="Game_Container" class="HiddenContent gameBox"></canvas>
     </div>
 
     <h1 id="Game_Over" class="GameOverBoard HiddenContent">GameOver</h1>
 
-    <div id="Game_Info" class="GameInfo GameInfoFade VanishedContent">
-        <div class="CenterContent">Deaths:</div><span id="Deaths" class="CenterContent">
-            <h5>/</h5>
-        </span>
-        <div class="CenterContent">Game:</div><span id="Games_Played" class="CenterContent">
-            <h5>/</h5>
-        </span>
-        <div class="CenterContent">Time:</div><span id="Survived_Time" class="CenterContent">
-            <h5>/</h5>
-        </span>
-    </div>
-
     <footer>
-        <img id="Mute_Symbol" class="MuteSymbol" src="img/mute_Icon_off_day.png" alt="mute icon"
-            onclick="ToggleGameSounds()">
-        <div class="CenterContent"> &copy; 2026 Pixel Art Game &mdash; Created by Jonas Dickert. All rights reserved.
-        </div>
+        <img id="Mute_Symbol" class="MuteSymbol" src="img/mute_Icon_off_day.png" alt="mute icon">
+
+        <p class="FooterMain CenterContent"> &copy; 2026 Pixel Art Game &mdash; Created by Jonas Dickert. All rights
+            reserved.</p>
         <a class="CenterContent" href="https://github.com/UNfassbarer" target="_blank" rel="noopener">
             Source code
         </a>
+
+        <div class="ToolWrapper">
+            <button id="InpressumButton" class="ImpressumButton CenterContent">^</button>
+            <button id="ReloadButton" class="ReloadButton CenterContent">R</button>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="game.js"></script>
+
+    <div class="SideMenu">
+
+        <!-- GameInfoFadeOut -->
+        <div id="Game_Info" class="GameInfo GameInfoFadeOut VanishedContent" inert>
+            <div class="CenterContent">Deaths:</div><span id="Deaths" class="CenterContent">
+                <h5>/</h5>
+            </span>
+            <div class="CenterContent">Game:</div><span id="Games_Played" class="CenterContent">
+                <h5>/</h5>
+            </span>
+            <div class="CenterContent">Time:</div><span id="Survived_Time" class="CenterContent">
+                <h5>/</h5>
+            </span>
+        </div>
+
+        <!-- ImpressumFadeOut -->
+        <div id="ImpressumWrapper" class="Impressum ImpressumFadeOut VanishedContent" inert>
+            <div class="CenterContent">Anbieter:</div> <span class="CenterContent">
+                <h5>Jonas Dickert</h5>
+            </span>
+            <div class="CenterContent">E-Mail:</div> <span class="CenterContent">
+                <h5>djonas2810@gmail.com</h5>
+            </span>
+            <div class="CenterContent">Telefon:</div> <span class="CenterContent">
+                <h5>+49 176 77918864</h5>
+            </span>
+            <div class="CenterContent">Website:</div> <span class="CenterContent">
+                <a href="https://github.com/UNfassbarer" target="_blank" rel="noopener">
+                    github.com/UNfassbarer
+                </a>
+            </span>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script type="module" src="game.js"></script>
+    <script type="module" src="assets.js"></script>
 </body>
 
 </html>

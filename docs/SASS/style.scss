@@ -1,5 +1,4 @@
 :root {
-  --pink: 200, 25, 255;
   --purple: 100, 0, 255;
   --darkBlue: 0, 50, 100;
   --turquoise: 50, 255, 255;
@@ -7,22 +6,18 @@
   --gray: 128, 128, 128;
   --darkGray: 64, 64, 64;
   --black: 0, 0, 0;
-}
 
-.color_preview {
-  color: rgb(200, 25, 255);
-  color: rgb(100, 0, 255);
-  color: rgb(0, 50, 100);
-  color: rgb(50, 255, 255);
-  color: rgb(255, 255, 255);
-  color: rgb(128, 128, 128);
-  color: rgb(64, 64, 64);
-  color: rgb(0, 0, 0);
+  --base-blue: blue;
+  --base-purple: rgb(194, 0, 194);
+  --base-turquoise: turquoise;
+  --dark: black;
+  --light: white;
 }
 
 body {
   transition: all 1s ease-in-out;
   overflow: hidden;
+  // min-height: 100vh;
 }
 .DarkBody {
   background-color: rgb(var(--black));
@@ -55,146 +50,78 @@ body {
   transform: translate(-50%, -50%);
 }
 
-/* Menu */
-.MenuPoster {
-  position: absolute;
-  width: inherit;
-  height: inherit;
-  canvas {
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    background: radial-gradient(
-      circle farthest-corner at center center,
-      rgba(var(--black), 0) 35%,
-      rgb(var(--turquoise)) 36%,
-      rgba(var(--black), 0.5) 38%,
-      rgb(var(--turquoise)) 40%,
-      rgba(var(--black), 0) 40%,
-      rgb(var(--white)) 55%,
-      rgb(var(--turquoise)) 55%,
-      rgb(var(--turquoise)) 57%,
-      rgba(var(--black), 0.5) 75%,
-      rgb(var(--black)) 100%
-    );
-  }
-
-  .PosterCaption {
-    color: rgb(var(--turquoise));
-    text-shadow:
-      -1px 0px 1px rgba(var(--turquoise), 0.5),
-      1px 0px 1px rgba(var(--pink), 0.9),
-      0px -1px 1px rgba(var(--turquoise), 0.5),
-      0px 1px 1px rgba(var(--pink), 0.9);
-    animation: Menu_loading_M 10s ease-in-out infinite;
-    font-size: 40px;
-  }
-}
-
 .BiggerPosterCanvas {
   background: radial-gradient(
     circle farthest-corner at center center,
-    rgba(var(--black), 0) 35%,
-    rgb(var(--turquoise)) 36%,
-    rgba(var(--black), 0.5) 38%,
-    rgb(var(--turquoise)) 40%,
-    rgba(var(--black), 0) 40%,
-    rgb(var(--white)) 85%,
-    rgb(var(--turquoise)) 85%,
-    rgba(var(--black), 0.25) 100%
+    transparent 35%,
+    hsl(from var(--base-turquoise) h s l) 36%,
+    hsl(from var(--dark) h s l / 0.5) 38%,
+    hsl(from var(--base-turquoise) h s l) 40%,
+    transparent 40%,
+    hsl(from var(--light) h s l) 85%,
+    hsl(from var(--base-turquoise) h s l) 85%,
+    hsl(from var(--dark) h s l / 0.25) 100%
   ) !important;
 }
 
 /* Game tooltip */
-.TooltipWrapper {
-  position: absolute;
-  width: 120px;
-  height: 40px;
-  border-radius: 12px;
-  border: rgba(var(--white));
-  background-color: rgba(var(--white));
+.StartButton {
+  position: relative;
   font-family:
     "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  .GameTooltip {
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    border-radius: inherit;
-    background-color: aqua;
-    border: rgb(var(--turquoise)) 2px solid;
-    background: linear-gradient(
-      -3deg,
-      rgb(var(--gray)),
-      rgb(var(--darkGray)),
-      rgb(var(--white))
-    );
-    overflow: hidden;
-    box-shadow:
-      -2px -1px 15px 0px rgb(var(--white)),
-      2px 1px 15px 0px rgb(var(--pink)),
-      1px 2px 15px 0px rgb(var(--pink)),
-      -1px -2px 15px 0px rgb(var(--white));
-    transition: all 0.25s ease-in-out;
-    box-sizing: border-box;
-    background-clip: padding-box;
-    &::after {
-      content: "";
-      position: absolute;
-      left: 32%;
-      top: -125%;
-      rotate: 87deg;
-      width: 40%;
-      height: 375%;
-      background: linear-gradient(
-        90deg,
-        rgba(var(--pink), 0),
-        rgba(var(--darkBlue), 0.2),
-        rgba(var(--turquoise), 0.6),
-        rgb(var(--white)),
-        rgba(var(--turquoise), 0.8),
-        rgb(var(--gray))
-      );
-    }
-  }
-  span {
-    pointer-events: none;
-    position: absolute;
-    width: 120px;
-    height: 40px;
-    font-size: 16px;
-    top: -0.5px;
-    rotate: -3deg;
-    color: rgb(var(--pink));
-    text-shadow:
-      1px 1px 0px rgb(var(--white)),
-      2px 2px 0px rgb(var(--pink));
-    transition: font-size 0.25s ease-in-out;
-  }
-}
+  width: 120px;
+  height: 40px;
+  border-radius: 12px;
+  border: hsl(from var(--base-turquoise) h s calc(l + 15)) 2px solid;
+  transition: all 0.25s ease-in-out;
 
-.TooltipWrapper:hover {
-  .GameTooltip {
+  background: linear-gradient(
+    -183deg,
+    hsl(from var(--base-purple) h s calc(l + 15)),
+    hsl(from var(--base-turquoise) h s calc(l + 25)),
+    hsl(from var(--light) h s l) 15%,
+    hsl(from var(--dark) h s calc(l + 40)),
+    hsl(from var(--base-turquoise) h s calc(l + 10)),
+    hsl(from var(--light) h s l),
+    hsl(from var(--base-turquoise) h s calc(l + 25)),
+    hsl(from var(--base-turquoise) h s calc(l - 20))
+  );
+  background-size: 110% 115%;
+  background-position: 0% 100%;
+
+  box-shadow:
+    4px -4px 15px 0px hsl(from var(--base-purple) h s calc(l + 10) / 0.75),
+    -4px 4px 15px 0px hsl(from var(--base-purple) h s calc(l + 10) / 0.75);
+
+  span {
+    position: absolute;
+    color: hsl(from var(--base-purple) h s calc(l + 10));
+    text-shadow:
+      1px 0.75px 0px hsl(from var(--light) h s l),
+      2px 1.5px 0px hsl(from var(--base-purple) h s calc(l + 10));
+    transform: rotate(-2.5deg);
+    white-space: nowrap;
+    pointer-events: none;
+    transition: all 0.25s ease-in-out;
+  }
+
+  &:hover {
     cursor: pointer;
     transform: scale(1.2);
     box-shadow:
-      -2px -1px 15px 0px rgb(var(--white)),
-      0px 2px 15px 0px rgb(var(--pink));
+      -2px -1px 15px 0px hsl(from var(--light) h s l),
+      0px 2px 15px 0px hsl(from var(--base-purple) h s calc(l + 10));
+    font-size: 18px;
+    letter-spacing: 1px;
+    background-position: 0% 95%;
   }
-  span {
-    font-size: 21px;
-  }
-}
 
-.TooltipWrapper:focus:not(:active) {
-  .GameTooltip {
-    animation: TooltipClick 1s alternate;
-    &::after {
-      animation: TooltipClick_After 1s alternate;
+  &:focus:not(:active) {
+    animation: TooltipClick 0.75s alternate;
+    span {
+      animation: TooltipClick_Span 0.75s alternate;
     }
-  }
-  span {
-    animation: TooltipClick_Span 1s alternate;
   }
 }
 
@@ -210,21 +137,186 @@ body {
   -webkit-user-select: none;
   user-select: none;
 
+  /* Menu */
+  .MenuPoster {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    canvas {
+      position: absolute;
+      width: inherit;
+      height: inherit;
+      background: radial-gradient(
+        circle farthest-corner at center center,
+        rgba(var(--black), 0) 35%,
+        rgb(var(--turquoise)) 36%,
+        rgba(var(--black), 0.5) 38%,
+        rgb(var(--turquoise)) 40%,
+        rgba(var(--black), 0) 40%,
+        rgb(var(--white)) 55%,
+        rgb(var(--turquoise)) 55%,
+        rgb(var(--turquoise)) 57%,
+        rgba(var(--black), 0.5) 75%,
+        rgb(var(--black)) 100%
+      );
+    }
+
+    .PosterCaption {
+      color: hsl(from var(--base-turquoise) h s calc(l + 15));
+      text-shadow:
+        -1px 0px 1px hsl(from var(--base-turquoise) h s calc(l + 15) / 0.5),
+        1px 0px 1px hsl(from var(--base-purple) h s calc(l + 10) / 0.9),
+        0px -1px 1px hsl(from var(--base-turquoise) h s calc(l + 15) / 0.5),
+        0px 1px 1px hsl(from var(--base-purple) h s calc(l + 10) / 0.9);
+      animation: Menu_loading_M 10s ease-in-out infinite;
+      font-size: 40px;
+    }
+  }
+
+  .MenuContent {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+    .MenuButtons {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      align-items: center;
+
+      .MenuButton {
+        position: relative;
+        width: 175px;
+        height: 50px;
+        background: radial-gradient(
+          circle at center,
+          hsl(from var(--base-turquoise) h s l / 0.75) 15%,
+          hsl(from var(--base-blue) h s calc(l - 15) / 0.75) 100%
+        );
+        border: 1.75px hsl(from var(--base-turquoise) h s l / 0.8) solid;
+        transition: 0.125s all ease-in-out;
+        border-radius: 10px;
+        cursor: pointer;
+
+        span {
+          position: absolute;
+          width: inherit;
+          font-size: 20px;
+          background: linear-gradient(
+            0deg,
+            hsl(from var(--light) h s l),
+            hsl(from var(--base-purple) h s l),
+            hsl(from var(--base-blue) h s l / 0.75),
+            hsl(from var(--base-turquoise) h s l),
+            hsl(from var(--light) h s l),
+            hsl(from var(--base-turquoise) h s l)
+          );
+          background-size: 100% 125%;
+          background-position: 0% 0%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          transition: all 0.75s ease-in-out;
+        }
+
+        canvas {
+          position: absolute;
+          width: 125px;
+          height: 3px;
+          top: 20%;
+          left: 50%;
+          transform: translate(-50%, -20%);
+          background: linear-gradient(
+            90deg,
+            hsl(from var(--base-turquoise) h s l / 0.75),
+            hsl(from var(--base-blue) h s calc(l - 15) / 0.75),
+            hsl(from var(--base-purple) h s l / 0.75)
+          );
+          background-color: hsl(from var(--base-turquoise) h s l);
+          border-radius: inherit;
+          transition: 0.5s all ease-in-out;
+          opacity: 0.75;
+          border: 1px solid hsl(from var(--light) h s l / 0.5);
+        }
+
+        &:hover {
+          border: 2px hsl(from var(--base-turquoise) h s calc(l + 15)) solid;
+          transform: scale(1.1);
+          font-size: 125%;
+          box-shadow: 5px 5px 15px
+            hsl(from var(--base-purple) h s calc(l + 10) / 0.75);
+
+          span {
+            background-position: 0% 115%;
+          }
+
+          canvas {
+            opacity: 0.85;
+            width: 120%;
+            border: 1px solid hsl(from var(--light) h s l / 0.75);
+          }
+        }
+
+        &:focus:not(:active) {
+          animation: Menu_Button_Click 1s ease-in-out;
+          border: 1.5px hsl(from var(--light) h s l / 0.75) solid;
+          transform: scale(100%);
+
+          canvas {
+            background: linear-gradient(
+              -90deg,
+              hsl(from var(--base-turquoise) h s l / 0.75),
+              hsl(from var(--base-blue) h s calc(l - 15) / 0.75),
+              hsl(from var(--base-purple) h s l / 0.75)
+            );
+          }
+        }
+      }
+    }
+
+    &::before {
+      position: relative;
+      content: "MENU";
+      transform: translate(15px, 15px);
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-size: 84px;
+      letter-spacing: 30px;
+      background: -moz-linear-gradient(
+        to top,
+        hsl(from var(--base-turquoise) h s calc(l + 15)) 15%,
+        hsl(from var(--base-purple) h s calc(l + 25)) 20%,
+        hsl(from var(--base-purple) h s calc(l + 35)) 39%,
+        hsl(from var(--base-turquoise) h s l) 47%,
+        hsl(from var(--base-turquoise) h s calc(l - 10)) 64%,
+        hsl(from var(--base-purple) h s calc(l + 25)) 74%,
+        hsl(from var(--base-purple) h s calc(l + 20)) 82%,
+        hsl(from var(--base-turquoise) h s calc(l + 15)) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 0.5px rgb(var(--white));
+    }
+  }
+
   /*Rotating menu background*/
   &::before {
     content: "";
     position: absolute;
-    width: 200%;
-    height: 200%;
+    width: 195%;
+    height: 116%;
     background: linear-gradient(
       90deg,
-      rgba(var(--black)),
-      rgb(var(--pink)),
-      rgba(var(--white), 0.5),
-      rgb(var(--pink)),
-      rgb(var(--pink))
+      hsl(from var(--dark) h s l),
+      hsl(from var(--base-purple) h s calc(l + 20)),
+      hsl(from var(--light) h s calc(l - 10)),
+      hsl(from var(--base-purple) h s calc(l + 10)),
+      hsl(from var(--base-turquoise) h s calc(l + 10))
     );
   }
+
+  // Masked background for menu border
   &::after {
     content: "";
     position: absolute;
@@ -233,24 +325,27 @@ body {
     border-radius: calc(15px + 3px);
     background: linear-gradient(
       45deg,
-      rgb(var(--white)),
-      rgb(var(--darkBlue)),
-      rgb(var(--pink)),
-      rgb(var(--turquoise)),
-      rgb(var(--pink)),
-      rgb(var(--darkBlue)),
-      rgb(var(--white))
+      hsl(from var(--light) h s l),
+      hsl(from var(--base-blue) h s calc(l + 15)),
+      hsl(from var(--base-purple) h s calc(l + 20)),
+      hsl(from var(--base-turquoise) h s calc(l + 10)),
+      hsl(from var(--base-purple) h s calc(l + 20)),
+      hsl(from var(--base-blue) h s calc(l + 15)),
+      hsl(from var(--light) h s l)
     );
     background-size: 200% 100%;
+    background-position: 0% 50%;
     -webkit-mask:
-      linear-gradient(rgb(var(--white)) 0 0) content-box,
-      linear-gradient(rgb(var(--white)) 0 0);
+      linear-gradient(hsl(from var(--light) h s l) 0 0) content-box,
+      linear-gradient(hsl(from var(--light) h s l) 0 0);
     -webkit-mask-composite: xor;
     mask:
-      linear-gradient(rgb(var(--white)) 0 0) content-box,
-      linear-gradient(rgb(var(--white)) 0 0);
+      linear-gradient(hsl(from var(--light) h s l) 0 0) content-box,
+      linear-gradient(hsl(from var(--light) h s l) 0 0);
     mask-composite: exclude;
     pointer-events: none;
+    will-change: background-position;
+    transform: translateZ(0);
   }
 }
 .OpenMenu {
@@ -263,131 +358,9 @@ body {
 }
 
 .GameMenu.MenuAfter::after {
-  animation: moveGradient 4s linear infinite;
+  animation: moveGradient 4s ease-in-out infinite;
 }
 
-.MenuContent {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 10px;
-  .MenuHead {
-    position: relative;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    margin-left: 10px;
-    font-size: 80px;
-    letter-spacing: 30px;
-    background: -moz-linear-gradient(
-      to top,
-      rgb(var(--turquoise)) 15%,
-      rgb(var(--pink)) 20%,
-      rgb(var(--pink)) 39%,
-      rgb(var(--turquoise)) 47%,
-      rgb(var(--turquoise)) 64%,
-      rgb(var(--pink)) 74%,
-      rgb(var(--pink)) 86%,
-      rgb(var(--turquoise)) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0.5px rgb(var(--white));
-  }
-
-  .MenuButtons {
-    display: grid;
-    grid-template-rows: repeat(5, auto);
-    gap: 35px;
-    margin-right: 10px;
-
-    .MenuButton {
-      position: relative;
-      width: 175px;
-      height: 50px;
-      background: radial-gradient(
-        circle at center,
-        rgba(var(--turquoise), 0.6) 15%,
-        rgb(var(--darkBlue)) 100%
-      );
-      border: 1.75px rgba(var(--turquoise), 0.75) solid;
-      transition: 0.125s all ease-in-out;
-      border-radius: 10px;
-      cursor: pointer;
-
-      span {
-        position: absolute;
-        width: inherit;
-        font-size: 20px;
-        background: linear-gradient(
-          0deg,
-          rgb(var(--white)),
-          rgb(var(--pink)),
-          rgba(var(--darkBlue), 0.75),
-          rgb(var(--turquoise)),
-          rgb(var(--white)),
-          rgb(var(--turquoise))
-        );
-        background-size: 100% 125%;
-        background-position: 0% 0%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        transition: all 0.125s ease-in-out;
-      }
-
-      canvas {
-        position: absolute;
-        width: 125px;
-        height: 3px;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -20%);
-        background: linear-gradient(
-          90deg,
-          rgb(var(--turquoise)),
-          rgba(var(--purple), 0.75),
-          rgb(var(--pink))
-        );
-        background-color: rgb(var(--turquoise));
-        border-radius: inherit;
-        transition: 0.5s all ease-in-out;
-        opacity: 0.75;
-      }
-    }
-  }
-}
-
-.MenuButton:hover {
-  border: 1.5px rgba(var(--turquoise), 0.25) solid;
-  transform: scale(1.1);
-  font-size: 125%;
-  box-shadow: 5px 5px 15px rgba(var(--pink), 0.4);
-
-  span {
-    background-position: 0% 115%;
-  }
-
-  canvas {
-    width: 130%;
-    opacity: 0.5;
-  }
-}
-
-.MenuButton:focus:not(:active) {
-  animation: click-glow 0.75s ease;
-  color: rgb(var(--white));
-  border: 1.5px rgba(var(--white), 0.75) solid;
-
-  canvas {
-    background: linear-gradient(
-      -90deg,
-      rgb(var(--turquoise)),
-      rgba(var(--purple), 0.75),
-      rgb(var(--pink))
-    );
-    width: 120px;
-  }
-}
 /* Backgound star particles */
 .Particle {
   position: fixed;
@@ -398,59 +371,53 @@ body {
 }
 .JumpParticle {
   position: absolute;
-  border: rgb(var(--turquoise)) 3px solid;
+  border: hsl(from var(--base-turquoise) h s l) 3px solid;
   border-radius: 50%;
   transform-style: preserve-3d;
   transform: rotateX(70deg);
   animation: jumpParticle 0.75s ease-in forwards;
 }
 
-/* .JumpParticle::after {
-  position: absolute;
-  height: 100px; 
-  width: 100px;
-  background-color: black;
-  left: 30%;
-  border-radius: 50%; 
-} */
-
 /* Universal colors for button settings*/
 .ToggleActiveColor {
-  background-color: rgba(var(--white), 0.7) !important;
+  background-color: hsl(from var(--light) h s calc(l - 25) / 0.75) !important;
 }
 
 .HilightetElement {
-  outline: rgb(var(--pink)) 2px dashed;
+  outline: hsl(from var(--base-purple) h s calc(l + 25)) 2px dashed;
   border-radius: 10%;
   animation: Blink 1s infinite;
 }
 
 .MenuSettings {
-  overflow-x: auto;
-  top: 39.25%;
-  left: 55%;
-  transform: translate(-50%, -12%);
   position: absolute;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  gap: 60px;
+  justify-content: flex-start;
+  padding: 0 40px 0 40px;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  top: 50%;
+  left: 51.5%;
+  transform: translate(-48.5%, -50%);
   height: 25%;
   width: 55%;
-  border: rgba(var(--turquoise), 0.75) 2px solid;
+  border: hsl(from var(--base-turquoise) h s l) 2px solid;
   border-radius: 12px;
   background: radial-gradient(
     circle at 100%,
-    rgba(var(--black), 0.5) 10%,
-    rgba(var(--pink), 0.6) 50%,
-    rgba(var(--white), 0.9) 65%,
-    rgba(var(--black), 0.6) 66%,
-    rgba(var(--purple), 0.5) 80%
+    hsl(from var(--dark) h s calc(l + 15) / 0.5) 10%,
+    hsl(from var(--base-purple) h s l / 0.6) 35%,
+    hsl(from var(--light) h s l / 0.9) 65%,
+    hsl(from var(--dark) h s calc(l + 25) / 0.6) 66%,
+    hsl(from var(--base-purple) h s calc(l + 25) / 0.5) 80%
   );
   transition: all 0.25s ease-in-out;
-  display: flex;
-  gap: 60px;
-  justify-content: flex-start;
-  white-space: nowrap;
-  scroll-behavior: smooth;
-  padding-left: 40px;
-  padding-right: 40px;
 
   .Settings_Category {
     cursor: pointer;
@@ -459,26 +426,42 @@ body {
     height: 40px;
     padding: 10px;
     border-radius: 4px;
-    border: 2px solid rgb(var(--turquoise));
-    box-shadow: rgb(var(--turquoise)) 0px 0px 8px;
-    background-color: rgba(var(--gray), 0.75);
+    border: 2px solid hsl(from var(--base-turquoise) h s calc(l + 15));
+    box-shadow: hsl(from var(--base-turquoise) h s l) 0px 0px 10px;
+    // background-color: rgba(var(--gray), 0.75);
+
+    background: radial-gradient(
+      circle at center,
+      hsl(from var(--base-turquoise) h s calc(l + 5) / 0.75) 0%,
+      hsl(from var(--base-blue) h s calc(l + 25) / 0.75) 45%,
+      hsl(from var(--base-turquoise) h s calc(l + 10) / 0.75) 85%,
+      hsl(from var(--light) h s l / 0.75) 100%
+    );
+
     font-size: 18px;
     font-weight: bold;
-    color: rgb(var(--white));
-    text-shadow: rgb(var(--purple)) 2px 2px 3px;
+    color: hsl(from var(--light) h s l);
+    text-shadow: hsl(from var(--base-purple) h s calc(l + 15)) 3px 3px 2px;
     transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: hsl(from var(--light) h s l) 0px 0px 15px;
+      text-shadow: hsl(from var(--base-blue) h s calc(l + 15)) 3px 3px 2px;
+      border: 2px solid hsl(from var(--base-turquoise) h s calc(l + 25));
+      background: radial-gradient(
+        circle at center,
+        hsl(from var(--base-turquoise) h s calc(l + 5) / 0.85) 0%,
+        hsl(from var(--base-purple) h s calc(l + 35) / 0.85) 45%,
+        hsl(from var(--base-turquoise) h s calc(l + 10) / 0.85) 85%,
+        hsl(from var(--light) h s l / 0.85) 100%
+      );
+    }
+
+    // &:focus:not(:active) {
+    //   animation: Menu_Button_Click 0.65s ease;
+    // }
   }
-}
-
-.Settings_Category:hover {
-  transform: scale(1.1);
-  box-shadow: rgb(var(--white)) 0px 0px 15px;
-  color: rgb(var(--purple));
-  text-shadow: rgb(var(--white)) -2px -2px 2px;
-}
-
-.Settings_Category:focus:not(:active) {
-  animation: click-glow 0.75s ease;
 }
 
 /* Size adjustment for Key display */
@@ -491,13 +474,13 @@ body {
 .Toggle_KA {
   position: relative;
   border-radius: 4px;
-  border: 2px solid rgb(var(--turquoise));
-  box-shadow: rgb(var(--turquoise)) 0px 0px 8px;
-  background-color: transparent;
+  border: 2px solid hsl(from var(--base-turquoise) h s l);
+  box-shadow: hsl(from var(--base-turquoise) h s l) 0px 0px 8px;
+  background-color: hsl(from var(--base-turquoise) h s calc(l + 50) / 0.35);
   font-size: 14px;
   font-weight: bold;
-  color: rgb(var(--white));
-  text-shadow: rgb(var(--purple)) 2px 2px 3px;
+  color: hsl(from var(--light) h s l);
+  text-shadow: hsl(from var(--base-blue) h s calc(l + 25)) 2px 2px 3px;
   transition: all 0.2s ease-in-out;
   display: grid;
   gap: 10px;
@@ -509,10 +492,18 @@ body {
   width: auto;
   cursor: pointer;
   border-radius: 2px;
-  border: 1px solid rgba(var(--turquoise), 0.75);
-  box-shadow: rgba(var(--turquoise), 0.75) 0px 0px 5px;
-  background-color: rgba(var(--gray), 0.7);
-  color: rgb(var(--white));
+  border: 1px solid hsl(from var(--base-turquoise) h s l);
+  box-shadow: hsl(from var(--base-turquoise) h s l) 0px 0px 5px;
+  background: radial-gradient(
+    circle at center,
+    hsl(from var(--base-turquoise) h s calc(l + 5) / 0.75) 0%,
+    hsl(from var(--base-blue) h s calc(l + 25) / 0.75) 45%,
+    hsl(from var(--base-turquoise) h s calc(l + 10) / 0.75) 85%,
+    hsl(from var(--light) h s l / 0.75) 100%
+  );
+  text-shadow: hsl(from var(--base-purple) h s calc(l + 15)) 1px 1px 2px;
+
+  color: hsl(from var(--light) h s l);
   padding: 4px 8px 4px 8px;
   transition: all 0.2s ease-in-out;
   gap: 5px;
@@ -522,7 +513,7 @@ body {
 .star {
   position: fixed;
   pointer-events: none;
-  background-color: rgb(var(--white));
+  background-color: hsl(from var(--light) h s l);
   border-radius: 50%;
   z-index: -100;
   animation: glow 2.5s infinite;
@@ -536,22 +527,13 @@ body {
   .gameBox {
     position: absolute;
     image-rendering: pixelated;
-    outline: rgb(var(--pink)) 2px solid;
+    outline: hsl(from var(--base-purple) h s calc(l + 25)) 2px solid;
     display: block;
-    /* zoom: 1; */
+    height: 75vh;
+    // width: clamp(300px, 80vw, 1400px);
+    // width: clamp(250px, calc(70vw + 100px), 1300px);
+    width: 85vw;
   }
-
-  // .gameVideo {
-  //   position: absolute;
-  //   image-rendering: pixelated;
-  //   /* Ai improvement */
-  //   object-fit: contain;
-  //   backface-visibility: hidden;
-  //   transform: translateZ(0);
-  //   image-rendering: -webkit-optimize-contrast;
-  //   image-rendering: crisp-edges;
-  //   image-rendering: -moz-crisp-edges;
-  // }
 }
 
 /* Game Over display */
@@ -561,15 +543,7 @@ body {
   font-weight: 900;
   letter-spacing: 10px;
   text-transform: uppercase;
-  background: linear-gradient(
-    270deg,
-    rgb(var(--black)),
-    red,
-    rgb(var(--pink)),
-    red,
-    rgb(var(--black)),
-    rgb(var(--black))
-  );
+  background: yellow;
   background-size: 600% 600%;
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
@@ -579,102 +553,172 @@ body {
   transform: translate(-50%, -50%) rotate(12.5deg);
 }
 
-/* Game Info display */
-.GameInfo {
-  position: absolute;
-  bottom: 3%;
-  width: 150px;
-  height: 120px;
-  right: 1.5%;
-  outline: rgb(var(--turquoise)) 2px solid;
-  transition: all 1s ease-in-out;
-  container-type: inline-size;
-  display: grid;
-  grid-template-columns: 2fr 3fr;
-  grid-template-rows: 2fr 2fr 2fr;
-  gap: 10px;
-  padding: 10px;
+// Game over
+.ToggleAnimationState {
+  animation: GameOverAnim 1s ease-in-out infinite;
+}
 
-  &::before {
-    width: 100%;
-    height: 100%;
-    content: "";
+.SideMenu {
+  position: fixed;
+  bottom: calc(10vh + 2.5vh);
+  right: 2.5vh;
+  width: calc(300px + 20px);
+  height: calc(250px + 20px + 120px + 20px + 20px);
+  outline: red 2px dashed;
+
+  .Impressum,
+  .GameInfo {
     position: absolute;
+    right: 0;
+    outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 2px solid;
     background: radial-gradient(
       circle farthest-corner at center center,
-      rgb(var(--gray)) 20%,
-      rgb(var(--white)) 59%,
-      rgb(var(--pink)) 60%,
-      rgb(var(--gray)) 61%,
-      rgb(var(--darkGray)) 100%
+      hsl(from var(--dark) h s calc(l + 50)) 20%,
+      hsl(from var(--light) h s l) 59%,
+      hsl(from var(--base-purple) h s calc(l + 15)) 60%,
+      hsl(from var(--dark) h s calc(l + 50)) 61%,
+      hsl(from var(--dark) h s calc(l + 25)) 100%
     );
-    z-index: -3;
+    display: grid;
+    transition:
+      transform 0.75s ease-in-out,
+      opacity 0.75s ease-in-out;
   }
 
-  div {
-    position: relative;
-    color: rgb(var(--turquoise));
-    text-shadow: 1px 1px 0px rgba(var(--darkBlue), 0.5);
-    font-size: 12cqw;
-    background-color: rgba(var(--white), 0.75);
-    /* outline: rgba(var(--turquoise), 0.5) 1.5px solid; */
-    box-shadow:
-      1px 1px 0px 0px rgba(var(--gray), 0.375),
-      2px 2px 0px 0px rgba(var(--gray), 0.375),
-      3px 3px 0px 0px rgba(var(--gray), 0.375),
-      4px 4px 0px 0px rgba(var(--gray), 0.375);
+  .Impressum {
+    bottom: 0px;
+    width: 300px;
+    height: 250px;
+    grid-template-columns: 2fr 3fr;
+    grid-auto-rows: 1fr;
+    padding: 10px;
+    gap: 10px;
+
+    div {
+      position: relative;
+      color: hsl(from var(--base-turquoise) h s calc(l + 15));
+      text-shadow: 1.25px 1.25px 0px hsl(from var(--base-blue) h s l / 0.75);
+      font-size: calc(100% * 1.25);
+      background-color: hsl(from var(--light) h s l / 0.75);
+      box-shadow:
+        1px 1px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        2px 2px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        3px 3px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        4px 4px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375);
+    }
+
+    span {
+      position: relative;
+      outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 2px solid;
+      background-color: hsl(from var(--dark) h s calc(l + 50));
+      border-radius: 15px;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      z-index: 1;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 108%;
+        bottom: -8%;
+        border-radius: inherit;
+        outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 2px solid;
+        background-color: hsl(from var(--dark) h s calc(l + 50));
+        z-index: -1;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 60%;
+        box-shadow: inset -2px 2px 0px 0px hsl(from var(--dark) h s l / 0.5);
+        border-radius: inherit;
+        outline: hsl(from var(--dark) h s calc(l + 20) / 0.75) 1.75px solid;
+        background-color: hsl(from var(--light) h s l);
+        z-index: 0;
+      }
+      h5,
+      a {
+        position: absolute;
+        color: hsl(from var(--base-turquoise) h s l / 0.8);
+        text-shadow: 1px 1px 0px hsl(from var(--base-blue) h s l / 0.6);
+        font-size: 75%;
+      }
+    }
   }
 
-  span {
-    position: relative;
-    outline: rgba(var(--turquoise), 0.75) 1.5px solid;
-    background-color: rgb(var(--gray));
-    border-radius: 15px;
+  .GameInfo {
+    width: 150px;
+    height: 120px;
+    container-type: inline-size;
+    grid-template-columns: 2fr 3fr;
+    gap: 10px;
+    padding: 10px;
 
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100.5%;
-      height: 113%;
-      bottom: -12%;
-      border-radius: inherit;
-      outline: rgba(var(--turquoise), 0.75) 1.25px solid;
-      background-color: rgb(var(--gray));
-      z-index: -2;
-    }
-    &::before {
-      content: "";
-      position: absolute;
-      width: 60%;
-      height: 60%;
-      box-shadow: inset -2px 2px 0px 0px rgba(var(--black), 0.5);
-      border-radius: inherit;
-      outline: rgba(var(--darkBlue), 0.75) 1.25px solid;
-      background-color: rgb(var(--white));
+    div {
+      position: relative;
+      color: hsl(from var(--base-turquoise) h s calc(l + 15));
+      text-shadow: 1px 1px 0px hsl(from var(--base-blue) h s l / 0.5);
+      font-size: calc(100% * 1.25);
+      background-color: hsl(from var(--light) h s l / 0.75);
+      padding-right: 2px;
+      box-shadow:
+        1px 1px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        2px 2px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        3px 3px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375),
+        4px 4px 0px 0px hsl(from var(--dark) h s calc(l + 50) / 0.375);
     }
 
-    h5 {
-      position: absolute;
-      color: rgba(var(--turquoise), 0.8);
-      text-shadow: 1px 1px 0px rgba(var(--darkBlue), 0.6);
-      font-size: 11cqw;
+    span {
+      position: relative;
+      outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 1.5px solid;
+      background-color: hsl(from var(--dark) h s calc(l + 50));
+      border-radius: 15px;
+      z-index: 1;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 112%;
+        bottom: -12%;
+        border-radius: inherit;
+        outline: hsl(from var(--base-turquoise) h s calc(l + 15)) 1.25px solid;
+        background-color: hsl(from var(--dark) h s calc(l + 50));
+        z-index: -1;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 60%;
+        box-shadow: inset -2px 2px 0px 0px hsl(from var(--dark) h s l / 0.5);
+        border-radius: inherit;
+        outline: hsl(from var(--dark) h s calc(l + 20) / 0.75) 1.25px solid;
+        background-color: hsl(from var(--light) h s l);
+        z-index: 0;
+      }
+
+      * {
+        position: absolute;
+        color: hsl(from var(--base-turquoise) h s l / 0.8);
+        text-shadow: 1px 1px 0px hsl(from var(--base-blue) h s l / 0.6);
+        font-size: 100%;
+      }
     }
   }
 }
-
-.GameInfoFade {
-  transform: translateX(75%);
+.GameInfoFadeOut {
+  transform: translateX(calc(172px + 2px + 2.5vh)) translateY(0);
 }
 
-// Future plans:
-//   Cool sun in space ;)
-// body{
-//   background: radial-gradient(circle at 50%,
-//       rgba(0, 0, 0, 0.6) 10%,
-//       rgba(255, 0, 247, 0.7) 50%,
-//       rgba(115, 0, 0, 0.8) 60%,
-//       rgba(0, 0, 0, 0.9) 70%);
-// }
+.ImpressumFadeOut {
+  transform: translateX(calc(322px + 2px + 2.5vh));
+}
+
+.PositionBottom {
+  transform: translateX(0) translateY(290px);
+}
 
 .StartAnimationBox {
   position: absolute;
@@ -686,47 +730,58 @@ body {
 .StartAnimationText {
   position: absolute;
   font-size: 25vh;
-  color: rgb(var(--pink));
+  color: hsl(from var(--base-purple) h s calc(l + 25));
+  text-shadow: 0px 0px 3px hsl(from var(--base-blue) h s l);
 }
 
 footer {
   position: absolute;
   width: 100%;
   height: 10vh;
-  background: rgba(var(--darkBlue), 0.5);
-  bottom: 0px;
-  left: 0px;
+
+  background: hsl(from var(--base-turquoise) h s calc(l - 20));
+  bottom: 0;
+  left: 0;
   -webkit-user-select: none;
   user-select: none;
-  display: grid;
-  grid-template-columns: 1fr 20fr;
-  grid-template-rows: repeat(2, 1fr);
   justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 22fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
 
   .MuteSymbol {
+    position: relative;
     image-rendering: pixelated;
     grid-row: 1 / span 2;
-    height: 90%;
+    height: 8vh;
     align-self: center;
-    margin-left: 6px;
+    margin-left: 3px;
     cursor: pointer;
   }
+
   .MuteSymbol:hover {
-    filter: drop-shadow(0px 3px 2px rgb(var(--turquoise)))
-      drop-shadow(0px 0px 1px rgba(var(--darkBlue), 0.75));
+    filter: drop-shadow(
+        0px 3px 2px hsl(from var(--base-purple) h s calc(l + 25) / 0.75)
+      )
+      drop-shadow(0px 0px 1px hsl(from var(--base-blue) h s l / 0.75));
   }
-  div {
+
+  .FooterMain {
+    position: relative;
     grid-column-start: 2;
-    font-size: calc((1vw + 2vh) / 2);
-    letter-spacing: 5px;
-    color: rgba(var(--turquoise), 0.75);
-    text-shadow: 1px 0px 0px rgba(var(--pink), 0.75);
+    grid-row: 1;
+    font-size: calc((1vw + 2vh) / 2.25);
+    letter-spacing: 4.5px;
+    color: hsl(from var(--base-turquoise) h s calc(l + 25));
+    text-shadow: 1px 0px 0px hsl(from var(--base-purple) h s l);
+    overflow: hidden;
   }
+
   a {
     position: relative;
     grid-column-start: 2;
-    grid-row-start: 2;
-    height: 1.75vh;
+    grid-row: 2;
+    height: fit-content;
     width: fit-content;
     font-size: calc((1vw + 2vh) / 2);
     letter-spacing: 3px;
@@ -734,26 +789,30 @@ footer {
     text-decoration: unset;
     background: linear-gradient(
       to bottom left,
-      rgb(var(--turquoise)),
-      rgb(var(--purple)),
-      rgb(var(--pink)),
-      rgb(var(--turquoise))
+      hsl(from var(--base-turquoise) h s calc(l + 25)),
+      hsl(from var(--base-purple) h s l),
+      hsl(from var(--base-purple) h s calc(l + 25)),
+      hsl(from var(--base-turquoise) h s l)
     );
-    background-size: 200% 200%;
+    background-size: 100% 200%;
     background-position: 0% 0%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+
+    // Mirrored text
     &::before {
       content: "Source code";
       position: absolute;
       white-space: nowrap;
-      font-size: inherit;
-      letter-spacing: inherit;
       transform: scaleY(-1);
       top: 35%;
       transition: inherit;
+      font-size: inherit;
+      letter-spacing: inherit;
     }
+
+    // Underline
     &::after {
       content: "";
       position: absolute;
@@ -764,25 +823,94 @@ footer {
       transition: inherit;
       background: linear-gradient(
         to left,
-        rgba(var(--pink), 0.75) 40%,
-        rgba(var(--turquoise), 0.75)
+        hsl(from var(--base-purple) h s l / 0.5) 40%,
+        hsl(from var(--base-turquoise) h s l / 0.75)
       );
     }
+
+    &:hover {
+      background-position: 0% 100%;
+
+      &::before {
+        text-shadow: 0px -10px 0px
+          hsl(from var(--base-turquoise) h s calc(l + 25) / 0.75);
+      }
+
+      &::after {
+        width: 100%;
+      }
+    }
   }
 
-  a:hover {
-    background-position: 0% 85%;
-    &::before {
-      text-shadow: 0px -10px 0px rgba(var(--turquoise), 0.25);
+  .ToolWrapper {
+    position: relative;
+    grid-row: 1 / span 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .ImpressumButton,
+    .ReloadButton {
+      position: relative;
+      width: clamp(25px, 2.75vw, 45px);
+      height: 50%;
+      bottom: 0;
+      border: 2px solid hsl(from var(--base-purple) h s calc(l - 15));
+      border-right: unset;
+      background: linear-gradient(
+        to right,
+        hsl(from var(--light) h s l) 50%,
+        hsl(from var(--base-blue) h s calc(l + 20)) 50%
+      );
+      background-size: 220% 100%;
+      font-size: calc((1vw + 2vh) / 1.125);
+      text-shadow:
+        1px 0px 0px hsl(from var(--base-purple) h s calc(l + 5)),
+        2px 0px 0px hsl(from var(--light) h s l);
+      color: hsl(from var(--base-blue) h s calc(l + 35));
+      transition: 0.25s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-4px);
+        background-position: 100% 0%;
+        text-shadow:
+          2px 0px 0px hsl(from var(--base-purple) h s calc(l + 15)),
+          3px 0px 0px hsl(from var(--base-turquoise) h s calc(l + 15));
+        box-shadow:
+          1px 2px 3px 0px hsl(from var(--dark) h s calc(l + 20) / 0.5),
+          1px 4px 0px 0px hsl(from var(--base-blue) h s calc(l + 20)),
+          0px 4px 0px 0px hsl(from var(--base-purple) h s calc(l - 15));
+      }
+
+      &:focus:not(:active) {
+        animation: Footer_Button_Click 0.65s ease;
+      }
     }
-    &::after {
-      width: 100%;
+
+    .ImpressumButton {
+      border-radius: 10px 0 0 0;
+    }
+
+    .ReloadButton {
+      border-radius: 0 0 0 10px;
     }
   }
 }
 
-body.DarkBody .MuteSymbol:hover {
-  cursor: pointer;
-  filter: drop-shadow(0px 1px 2px rgba(var(--white), 0.75))
-    drop-shadow(0px 2px 2px rgba(var(--turquoise), 0.5));
-}
+// body.DarkBody .MuteSymbol:hover {
+//   cursor: pointer;
+//   filter: drop-shadow(0px 1px 2px rgba(var(--white), 0.75))
+//     drop-shadow(0px 2px 2px rgba(var(--turquoise), 0.5));
+// }
+
+// Future plans:
+//   Cool sun in space ;)
+// body{
+//   background: radial-gradient(circle at 50%,
+//       rgba(0, 0, 0, 0.6) 10%,
+//       rgba(255, 0, 247, 0.7) 50%,
+//       rgba(115, 0, 0, 0.8) 60%,
+//       rgba(0, 0, 0, 0.9) 70%);
+// }

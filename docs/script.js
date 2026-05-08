@@ -1,3 +1,6 @@
+// All changeable Keys in game
+import { AssignmentKeys } from "./assets.js";
+
 // Utility functions
 // Fast, seedable random generator
 const rand = (() => {
@@ -173,7 +176,8 @@ function OpenMenu() {
     menuStart = true;
     Menu.classList.remove("HiddenContent");
     Menu.classList.add("MenuBefore", "MenuAfter");
-    document.querySelector(".TooltipWrapper").classList.add("HiddenContent");
+    document.querySelector(".StartButton").classList.add("HiddenContent");
+    setTimeout(() => document.querySelector(".StartButton").remove(), 1000);
     document.body.classList.add("DarkBody");
     ToggleGameSounds(true);
     createStar();
@@ -218,7 +222,7 @@ settingsMenu.addEventListener("wheel", (e) => {
 const GameInfoBox = document.getElementById("Game_Info");
 
 const ToggleGameStats = (element) => {
-  GameInfoBox.classList.toggle("VanishedContent");
+  GameInfoBox.classList.toggle("VanishedContent")
   GameInfoBox.classList.toggle("GameInfoFade");
   ToggleInnerSettings(element.id);
 };
@@ -268,14 +272,6 @@ const ToggleKeys = () => {
   //adjusted height & padding
   settingsMenu.classList.toggle("ToggleMenuSettings"); //for settings menu
   KA_Button.classList.toggle("Settings_Category"); //for KA button's
-};
-
-// All changeable Keys in game
-const AssignmentKeys = {
-  GoRight: ["ArrowRight", "KeyD"],
-  GoLeft: ["ArrowLeft", "KeyA"],
-  Jump: ["ArrowUp", "Space"],
-  PauseGame: ["Escape"],
 };
 
 function GlobalClickControll() {
@@ -376,54 +372,114 @@ function createStar() {
   if (createStars) setTimeout(createStar, 75);
 }
 
-// 17:06:16.192 Menu opened script.js:166:11
-// 17:06:23.224 Creating star at (483, 374) script.js:364:11
-// 17:06:23.309 Creating star at (312, 442) script.js:364:11
-// 17:06:23.392 Creating star at (18, 342) script.js:364:11
-// 17:06:23.474 Creating star at (169, 177) script.js:364:11
-// 17:06:23.550 Creating star at (496, 320) script.js:364:11
-// 17:06:23.626 Creating star at (184, 334) script.js:364:11
-// 17:06:23.704 Creating star at (555, 315) script.js:364:11
-// 17:06:23.789 Creating star at (13, 412) script.js:364:11
-// 17:06:23.874 Creating star at (464, 378) script.js:364:11
-// 17:06:23.957 Creating star at (360, 319) script.js:364:11
-// 17:06:24.044 Creating star at (374, 272) script.js:364:11
-// 17:06:24.122 Creating star at (276, 83) script.js:364:11
-// 17:06:24.209 Creating star at (576, 340) script.js:364:11
-// 17:06:24.289 Creating star at (635, 150) script.js:364:11
-// 17:06:24.376 Creating star at (675, 223) script.js:364:11
-// 17:06:24.458 Creating star at (169, 285) script.js:364:11
-// 17:06:24.542 Creating star at (214, 218) script.js:364:11
-// 17:06:24.623 Creating star at (228, 427) script.js:364:11
-// 17:06:24.705 Creating star at (565, 207) script.js:364:11
-// 17:06:24.782 Creating star at (637, 416) script.js:364:11
-// 17:06:24.862 Creating star at (518, 47) script.js:364:11
-// 17:06:24.940 Creating star at (460, 249) script.js:364:11
-// 17:06:25.025 Creating star at (296, 52) script.js:364:11
-// 17:06:25.109 Creating star at (60, 138) script.js:364:11
-// 17:06:25.192 Creating star at (310, 103) script.js:364:11
-// 17:06:25.274 Creating star at (491, 386) script.js:364:11
-// 17:06:25.359 Creating star at (34, 129) script.js:364:11
-// 17:06:25.442 Creating star at (221, 45) script.js:364:11
-// 17:06:25.525 Creating star at (390, 431) script.js:364:11
-// 17:06:25.607 Creating star at (11, 154) script.js:364:11
-// 17:06:25.692 Creating star at (519, 392) script.js:364:11
-// 17:06:25.783 Creating star at (129, 75) script.js:364:11
-// 17:06:25.873 Creating star at (648, 52) script.js:364:11
-// 17:06:25.959 Creating star at (331, 8) script.js:364:11
-// 17:06:26.045 Creating star at (167, 52) script.js:364:11
-// 17:06:26.124 Creating star at (46, 260) script.js:364:11
-// 17:06:26.203 Creating star at (248, 308) script.js:364:11
-// 17:06:26.288 Creating star at (509, 99) script.js:364:11
-// 17:06:26.378 Creating star at (678, 334) script.js:364:11
-// 17:06:26.457 Creating star at (481, 362) script.js:364:11
-// 17:06:26.542 Creating star at (144, 8) script.js:364:11
-// 17:06:26.625 Creating star at (89, 58) script.js:364:11
-// 17:06:26.709 Creating star at (256, 361) script.js:364:11
-// 17:06:26.800 Creating star at (134, 105) script.js:364:11
-// 17:06:26.892 Creating star at (287, 29) script.js:364:11
-// 17:06:26.974 Creating star at (388, 333) script.js:364:11
-// 17:06:27.059 Creating star at (614, 71) script.js:364:11
-// 17:06:27.142 Creating star at (178, 239) script.js:364:11
-// 17:06:27.226 Creating star at (527, 347) script.js:364:11
-// 17:06:27.307 Creating star at (201, 403) script.js:364:11
+const VisibillityOptions = {
+  ImpressumWrapper: ImpressumAddition,
+  Game_Info: GameInfoAddition,
+  Game_Over: () => console.log("Game Over")
+};
+
+function ToggleElementVisibillity(elName) {
+  const el = document.getElementById(elName);
+
+  // Toggle visibillity
+  el.classList.toggle("VanishedContent");
+
+  // Execute additional function
+  VisibillityOptions[elName]?.(el);
+}
+
+function ImpressumAddition(el) {
+  el.classList.toggle("ImpressumFadeOut");
+  el.inert = !el.inert;
+  checkRightSideLayout(el);
+  updateRightSideLayout();
+}
+
+function GameInfoAddition(el) {
+  checkRightSideLayout(el);
+  updateRightSideLayout();
+}
+
+const Right_Side_Layout = [];
+
+function checkRightSideLayout(el) {
+
+  const i = Right_Side_Layout.indexOf(el)
+
+  if (i > -1) Right_Side_Layout.splice(i, 1) // Remove
+  else Right_Side_Layout.push(el); //Add
+}
+
+function updateRightSideLayout() {
+  console.log(Right_Side_Layout);
+  if (Right_Side_Layout.length === 0) return;
+
+  const el1 = Right_Side_Layout[0];
+  const el2 = Right_Side_Layout[1];
+
+  if (el1.id === "Game_Info") {
+
+    // el1.style.position = 0;
+    // el1.classList.remove("PositionBottom");
+    // setTimeout(() => {
+    el1.classList.add("PositionBottom");
+
+    if (el2 && el2.id === "ImpressumWrapper") {
+      // setTimeout(() => {
+      el1.classList.remove("PositionBottom");
+      // el1.classList.add("PositionTop");
+      // }, 750);
+    }
+
+    // }, 750);
+
+
+  }
+
+  if (el1.id === "ImpressumWrapper") {
+
+    if (!el2) return;
+
+    if (el2.id === "Game_Info") {
+      el2.classList.add("PositionTop");
+    }
+  }
+}
+
+
+
+// Events 
+window.addEventListener("DOMContentLoaded", loadEvents);
+
+class Event {
+  constructor(el, func) {
+    this.el = el;
+    this.func = func;
+  }
+
+  register() {
+    if (!this.el) return;
+
+    this.el.addEventListener("click", this.func);
+  }
+};
+
+function loadEvents() {
+  const StartButton = new Event(document.querySelector(".StartButton"), () => setTimeout(OpenMenu, 1250));
+  const GameStatsButton = new Event(document.getElementById("Game_Stats"), () => ToggleElementVisibillity("Game_Info"));
+  const GameSoundsButton = new Event(document.getElementById("Game_Sounds"), () => ToggleGameSounds());
+  const KeyAssignmentButton = new Event(document.getElementById("Settings_Key_Assignment"), () => ToggleKeys());
+  const GameInstructionsButton = new Event(document.getElementById("Game_Instructions"), () => alert("Not ready yet!"));
+  const MuteElement = new Event(document.getElementById("Mute_Symbol"), () => ToggleGameSounds());
+  const ImpressumButton = new Event(document.getElementById("InpressumButton"), () => ToggleElementVisibillity("ImpressumWrapper"));
+  const ReloadButton = new Event(document.getElementById("ReloadButton"), () => setTimeout(() => { location.reload() }, 650));
+
+  StartButton.register();
+  GameStatsButton.register();
+  GameSoundsButton.register();
+  KeyAssignmentButton.register();
+  GameInstructionsButton.register();
+  MuteElement.register();
+  ImpressumButton.register();
+  ReloadButton.register();
+}
