@@ -56,7 +56,6 @@ export async function loadAssets() {
     assets.playerJump = await Promise.all(jumpSources.map(loadImage));
 }
 
-
 // All changeable Keys in game
 const AssignmentKeys = {
   GoRight: ["ArrowRight", "KeyD"],
