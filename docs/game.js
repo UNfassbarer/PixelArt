@@ -762,7 +762,7 @@ function checkPlayerCollision(object, o, i) {
     if (object === spikes) {
         playerProtection ?
             console.log("Protected!")
-            : console.log("Game-Over"); /* resetGame(); */
+            : resetGame();
     }
 }
 
