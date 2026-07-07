@@ -58,9 +58,27 @@ export async function loadAssets() {
 
 // All changeable Keys in game
 const AssignmentKeys = {
-  GoRight: ["ArrowRight", "KeyD"],
-  GoLeft: ["ArrowLeft", "KeyA"],
-  Jump: ["ArrowUp", "Space"],
-  PauseGame: ["Escape"],
+    GoRight: ["ArrowRight", "KeyD"],
+    GoLeft: ["ArrowLeft", "KeyA"],
+    Jump: ["ArrowUp", "Space"],
+    PauseGame: ["Escape", "Escape"],
 };
 export { AssignmentKeys };
+
+
+export class ClickEvent {
+    constructor(el, func) {
+        this.el = el;
+        this.func = func;
+    }
+
+    register() {
+        if (!this.el) return;
+        this.el.addEventListener("click", this.func);
+    }
+
+    remove() {
+        if (!this.el) return;
+        this.el.removeEventListener("click", this.func);
+    }
+};

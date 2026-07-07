@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --purple: 100, 0, 255;
   --darkBlue: 0, 50, 100;
@@ -11,6 +12,121 @@
   --base-turquoise: turquoise;
   --dark: black;
   --light: white;
+}
+
+:root {
+  --menu-poster-background-c: radial-gradient(
+    transparent 35%,
+    hsl(from var(--base-turquoise) h s l) 36%,
+    hsl(from var(--dark) h s calc(l + 35)) 38%,
+    hsl(from var(--base-turquoise) h s l) 40%,
+    transparent 41%,
+    hsl(from var(--base-turquoise) h s l) 55%,
+    hsl(from var(--dark) h s calc(l + 35) / 0.5) 75%,
+    hsl(from var(--dark) h s l)
+  );
+  --menu-poster-background-o: radial-gradient(
+    circle farthest-corner at center center,
+    transparent 35%,
+    hsl(from var(--base-turquoise) h s l) 36%,
+    hsl(from var(--dark) h s l / 0.5) 38%,
+    hsl(from var(--base-turquoise) h s l) 40%,
+    transparent 40%,
+    hsl(from var(--light) h s l) 85%,
+    hsl(from var(--base-turquoise) h s l) 85%,
+    hsl(from var(--dark) h s l / 0.25) 100%
+  );
+  --menu-rotating-background: linear-gradient(
+    90deg,
+    hsl(from var(--base-purple) h s calc(l + 20)) 20%,
+    hsl(from var(--light) h s l) 50%,
+    hsl(from var(--base-purple) h s calc(l + 10)) 70%,
+    hsl(from var(--base-turquoise) h s calc(l + 10))
+  );
+  --menu-border-background: linear-gradient(
+    45deg,
+    hsl(from var(--light) h s l),
+    hsl(from var(--base-blue) h s calc(l + 15)),
+    hsl(from var(--base-purple) h s calc(l + 20)),
+    hsl(from var(--base-turquoise) h s calc(l + 10)),
+    hsl(from var(--base-purple) h s calc(l + 20)),
+    hsl(from var(--base-blue) h s calc(l + 15)),
+    hsl(from var(--light) h s l)
+  );
+  --menu-text-background: linear-gradient(
+    to top,
+    hsl(from var(--base-turquoise) h s calc(l + 15)) 15%,
+    hsl(from var(--base-purple) h s calc(l + 25)) 20%,
+    hsl(from var(--base-purple) h s calc(l + 35)) 39%,
+    hsl(from var(--base-turquoise) h s l) 47%,
+    hsl(from var(--base-turquoise) h s calc(l - 10)) 64%,
+    hsl(from var(--base-purple) h s calc(l + 25)) 74%,
+    hsl(from var(--base-purple) h s calc(l + 20)) 82%,
+    hsl(from var(--base-turquoise) h s calc(l + 15)) 100%
+  );
+  --menu-caption-textShadow:
+    -1px 0px 1px hsl(from var(--base-turquoise) h s calc(l + 15) / 0.5),
+    1px 0px 1px hsl(from var(--base-purple) h s calc(l + 10) / 0.9),
+    0px -1px 1px hsl(from var(--base-turquoise) h s calc(l + 15) / 0.5),
+    0px 1px 1px hsl(from var(--base-purple) h s calc(l + 10) / 0.9);
+  --menu-buttons-background: radial-gradient(
+    circle at center,
+    hsl(from var(--base-turquoise) h s l / 0.75) 45%,
+    hsl(from var(--base-blue) h s calc(l - 15) / 0.75) 100%
+  );
+  --menu-buttons-text-background: linear-gradient(
+    0deg,
+    hsl(from var(--light) h s l),
+    hsl(from var(--base-purple) h s l),
+    hsl(from var(--base-blue) h s l / 0.75),
+    hsl(from var(--base-turquoise) h s l),
+    hsl(from var(--light) h s l),
+    hsl(from var(--base-turquoise) h s l)
+  );
+  --menu-buttons-canvas: linear-gradient(
+    90deg,
+    hsl(from var(--base-turquoise) h s l / 0.75),
+    hsl(from var(--base-blue) h s calc(l - 15) / 0.75),
+    hsl(from var(--base-purple) h s l / 0.75)
+  );
+  --menu-buttons-canvas-clicked: linear-gradient(
+    -90deg,
+    hsl(from var(--base-turquoise) h s l / 0.75),
+    hsl(from var(--base-blue) h s calc(l - 15) / 0.75),
+    hsl(from var(--base-purple) h s l / 0.75)
+  );
+  --settings-background: radial-gradient(
+    circle at 100%,
+    hsl(from var(--dark) h s calc(l + 15) / 0.75) 10%,
+    hsl(from var(--base-purple) h s l / 0.75) 35%,
+    hsl(from var(--light) h s l / 0.75) 65%,
+    hsl(from var(--dark) h s calc(l + 25) / 0.6) 66%,
+    hsl(from var(--base-purple) h s calc(l + 25) / 0.5) 80%
+  );
+  --settings-child-background: radial-gradient(
+    circle at center,
+    hsl(from var(--base-turquoise) h s calc(l + 5) / 0.75) 0%,
+    hsl(from var(--base-blue) h s calc(l + 25) / 0.75) 45%,
+    hsl(from var(--base-turquoise) h s calc(l + 10) / 0.75) 85%,
+    hsl(from var(--light) h s l / 0.75) 100%
+  );
+  --settings-button-background: radial-gradient(
+    hsl(from var(--base-turquoise) h s l) 0%,
+    hsl(from var(--base-turquoise) h s l) 43%,
+    hsl(from var(--base-blue) h s calc(l + 20)) 45%,
+    hsl(from var(--base-turquoise) h s l) 65%
+  );
+  --start-button-background: linear-gradient(
+    -183deg,
+    hsl(from var(--base-purple) h s calc(l + 15)),
+    hsl(from var(--base-turquoise) h s calc(l + 25)),
+    hsl(from var(--light) h s l) 15%,
+    hsl(from var(--dark) h s calc(l + 40)),
+    hsl(from var(--base-turquoise) h s calc(l + 10)),
+    hsl(from var(--light) h s l),
+    hsl(from var(--base-turquoise) h s calc(l + 25)),
+    hsl(from var(--base-turquoise) h s calc(l - 20))
+  );
 }
 
 body {
@@ -27,7 +143,7 @@ body {
 
 /* Global Classes */
 .HiddenContent {
-  display: none;
+  display: none !important;
   pointer-events: none;
   position: absolute;
   visibility: hidden;
@@ -36,7 +152,6 @@ body {
 .VanishedContent {
   opacity: 0;
   pointer-events: none;
-  z-index: -100;
 }
 
 .CenterContent {
@@ -53,7 +168,7 @@ body {
 }
 
 .BiggerPosterCanvas {
-  background: radial-gradient(circle farthest-corner at center center, transparent 35%, hsl(from var(--base-turquoise) h s l) 36%, hsl(from var(--dark) h s l/0.5) 38%, hsl(from var(--base-turquoise) h s l) 40%, transparent 40%, hsl(from var(--light) h s l) 85%, hsl(from var(--base-turquoise) h s l) 85%, hsl(from var(--dark) h s l/0.25) 100%) !important;
+  background: var(--menu-poster-background-o) !important;
 }
 
 /* Game tooltip */
@@ -65,7 +180,7 @@ body {
   border-radius: 12px;
   border: hsl(from var(--base-turquoise) h s calc(l + 15)) 2px solid;
   transition: all 0.25s ease-in-out;
-  background: linear-gradient(-183deg, hsl(from var(--base-purple) h s calc(l + 15)), hsl(from var(--base-turquoise) h s calc(l + 25)), hsl(from var(--light) h s l) 15%, hsl(from var(--dark) h s calc(l + 40)), hsl(from var(--base-turquoise) h s calc(l + 10)), hsl(from var(--light) h s l), hsl(from var(--base-turquoise) h s calc(l + 25)), hsl(from var(--base-turquoise) h s calc(l - 20)));
+  background: var(--start-button-background);
   background-size: 110% 115%;
   background-position: 0% 100%;
   box-shadow: 4px -4px 15px 0px hsl(from var(--base-purple) h s calc(l + 10)/0.75), -4px 4px 15px 0px hsl(from var(--base-purple) h s calc(l + 10)/0.75);
@@ -115,18 +230,33 @@ body {
   position: absolute;
   width: inherit;
   height: inherit;
-  background: radial-gradient(circle farthest-corner at center center, rgba(var(--black), 0) 35%, rgb(var(--turquoise)) 36%, rgba(var(--black), 0.5) 38%, rgb(var(--turquoise)) 40%, rgba(var(--black), 0) 40%, rgb(var(--white)) 55%, rgb(var(--turquoise)) 55%, rgb(var(--turquoise)) 57%, rgba(var(--black), 0.5) 75%, rgb(var(--black)) 100%);
+  background: var(--menu-poster-background-c);
 }
 .GameMenu .MenuPoster .PosterCaption {
   color: hsl(from var(--base-turquoise) h s calc(l + 15));
-  text-shadow: -1px 0px 1px hsl(from var(--base-turquoise) h s calc(l + 15)/0.5), 1px 0px 1px hsl(from var(--base-purple) h s calc(l + 10)/0.9), 0px -1px 1px hsl(from var(--base-turquoise) h s calc(l + 15)/0.5), 0px 1px 1px hsl(from var(--base-purple) h s calc(l + 10)/0.9);
-  animation: Menu_loading_M 10s ease-in-out infinite;
+  text-shadow: var(--menu-caption-textShadow);
+  animation: Menu_passive_rotate 15s ease-in-out infinite;
   font-size: 40px;
 }
 .GameMenu .MenuContent {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 3fr;
+}
+.GameMenu .MenuContent::before {
+  content: "MENU";
+  position: relative;
+  transform: translate(15px, 15px);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: 84px;
+  letter-spacing: 30px;
+  font-family: Georgia;
+  background: var(--menu-text-background);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 0.5px rgb(var(--white));
 }
 .GameMenu .MenuContent .MenuButtons {
   position: relative;
@@ -138,7 +268,7 @@ body {
   position: relative;
   width: 175px;
   height: 50px;
-  background: radial-gradient(circle at center, hsl(from var(--base-turquoise) h s l/0.75) 15%, hsl(from var(--base-blue) h s calc(l - 15)/0.75) 100%);
+  background: var(--menu-buttons-background);
   border: 1.75px hsl(from var(--base-turquoise) h s l/0.8) solid;
   transition: 0.125s all ease-in-out;
   border-radius: 10px;
@@ -148,7 +278,7 @@ body {
   position: absolute;
   width: inherit;
   font-size: 20px;
-  background: linear-gradient(0deg, hsl(from var(--light) h s l), hsl(from var(--base-purple) h s l), hsl(from var(--base-blue) h s l/0.75), hsl(from var(--base-turquoise) h s l), hsl(from var(--light) h s l), hsl(from var(--base-turquoise) h s l));
+  background: var(--menu-buttons-text-background);
   background-size: 100% 125%;
   background-position: 0% 0%;
   -webkit-background-clip: text;
@@ -163,7 +293,7 @@ body {
   top: 20%;
   left: 50%;
   transform: translate(-50%, -20%);
-  background: linear-gradient(90deg, hsl(from var(--base-turquoise) h s l/0.75), hsl(from var(--base-blue) h s calc(l - 15)/0.75), hsl(from var(--base-purple) h s l/0.75));
+  background: var(--menu-buttons-canvas);
   background-color: hsl(from var(--base-turquoise) h s l);
   border-radius: inherit;
   transition: 0.5s all ease-in-out;
@@ -190,21 +320,7 @@ body {
   transform: scale(100%);
 }
 .GameMenu .MenuContent .MenuButtons .MenuButton:focus:not(:active) canvas {
-  background: linear-gradient(-90deg, hsl(from var(--base-turquoise) h s l/0.75), hsl(from var(--base-blue) h s calc(l - 15)/0.75), hsl(from var(--base-purple) h s l/0.75));
-}
-.GameMenu .MenuContent::before {
-  position: relative;
-  content: "MENU";
-  transform: translate(15px, 15px);
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-  font-size: 84px;
-  letter-spacing: 30px;
-  background: -moz-linear-gradient(to top, hsl(from var(--base-turquoise) h s calc(l + 15)) 15%, hsl(from var(--base-purple) h s calc(l + 25)) 20%, hsl(from var(--base-purple) h s calc(l + 35)) 39%, hsl(from var(--base-turquoise) h s l) 47%, hsl(from var(--base-turquoise) h s calc(l - 10)) 64%, hsl(from var(--base-purple) h s calc(l + 25)) 74%, hsl(from var(--base-purple) h s calc(l + 20)) 82%, hsl(from var(--base-turquoise) h s calc(l + 15)) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.5px rgb(var(--white));
+  background: var(--menu-buttons-canvas-clicked);
 }
 .GameMenu {
   /*Rotating menu background*/
@@ -212,22 +328,23 @@ body {
 .GameMenu::before {
   content: "";
   position: absolute;
-  width: 195%;
-  height: 116%;
-  background: linear-gradient(90deg, hsl(from var(--dark) h s l), hsl(from var(--base-purple) h s calc(l + 20)), hsl(from var(--light) h s calc(l - 10)), hsl(from var(--base-purple) h s calc(l + 10)), hsl(from var(--base-turquoise) h s calc(l + 10)));
+  width: 200%;
+  height: 120%;
+  background: var(--menu-rotating-background);
 }
 .GameMenu::after {
+  --mask:
+    linear-gradient(hsl(from var(--light) h s l) 0 0) content-box,
+    linear-gradient(hsl(from var(--light) h s l) 0 0);
   content: "";
   position: absolute;
   inset: -2px;
   padding: 5px;
   border-radius: 18px;
-  background: linear-gradient(45deg, hsl(from var(--light) h s l), hsl(from var(--base-blue) h s calc(l + 15)), hsl(from var(--base-purple) h s calc(l + 20)), hsl(from var(--base-turquoise) h s calc(l + 10)), hsl(from var(--base-purple) h s calc(l + 20)), hsl(from var(--base-blue) h s calc(l + 15)), hsl(from var(--light) h s l));
+  background: var(--menu-border-background);
   background-size: 200% 100%;
   background-position: 0% 50%;
-  -webkit-mask: linear-gradient(hsl(from var(--light) h s l) 0 0) content-box, linear-gradient(hsl(from var(--light) h s l) 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(hsl(from var(--light) h s l) 0 0) content-box, linear-gradient(hsl(from var(--light) h s l) 0 0);
+  mask: var(--mask);
   mask-composite: exclude;
   pointer-events: none;
   will-change: background-position;
@@ -239,8 +356,12 @@ body {
   width: 300px;
 }
 
+:root {
+  --deg: 360deg;
+}
+
 .GameMenu.MenuBefore::before {
-  animation: rotateLeft 10s ease-in-out infinite;
+  animation: spin 20s ease-in-out infinite;
 }
 
 .GameMenu.MenuAfter::after {
@@ -278,86 +399,129 @@ body {
 
 .MenuSettings {
   position: absolute;
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-auto-flow: column;
-  gap: 60px;
-  justify-content: flex-start;
-  padding: 0 40px 0 40px;
+  display: flex;
+  flex-direction: row;
+  gap: 6em;
   white-space: nowrap;
   scroll-behavior: smooth;
-  overflow-x: auto;
-  overflow-y: hidden;
+  justify-content: flex-start;
   top: 50%;
-  left: 51.5%;
-  transform: translate(-48.5%, -50%);
-  height: 25%;
-  width: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem 0;
+  width: 89%;
   border: hsl(from var(--base-turquoise) h s l) 2px solid;
   border-radius: 12px;
-  background: radial-gradient(circle at 100%, hsl(from var(--dark) h s calc(l + 15)/0.5) 10%, hsl(from var(--base-purple) h s l/0.6) 35%, hsl(from var(--light) h s l/0.9) 65%, hsl(from var(--dark) h s calc(l + 25)/0.6) 66%, hsl(from var(--base-purple) h s calc(l + 25)/0.5) 80%);
+  background: var(--settings-background);
+}
+.MenuSettings .First_Setting {
+  margin-left: 2.5em;
+}
+.MenuSettings .Last_Setting {
+  margin-right: 2.5em;
+}
+.MenuSettings {
   transition: all 0.25s ease-in-out;
+  overflow-x: auto;
+}
+.MenuSettings::-webkit-scrollbar {
+  display: none;
+}
+.MenuSettings {
+  anchor-name: --carousel;
+  scroll-snap-type: x mandatory;
+}
+.MenuSettings::scroll-button(left), .MenuSettings::scroll-button(right) {
+  content: "»";
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: none;
+  font-size: 16px;
+  color: hsl(from var(--base-purple) h s calc(l + 25));
+  background: var(--settings-button-background);
+  padding-bottom: 0.125em;
+  cursor: pointer;
+  position: fixed;
+  position-anchor: --carousel;
+  position-area: right center;
+  translate: -50%;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+}
+.MenuSettings::scroll-button(left) {
+  content: "«";
+  position-area: left center;
+  translate: 50%;
+}
+.MenuSettings::scroll-button(right):disabled, .MenuSettings::scroll-button(left):disabled {
+  cursor: auto;
+  opacity: 0.5;
+}
+.MenuSettings::scroll-button(right):focus:not(:active), .MenuSettings::scroll-button(left):focus:not(:active) {
+  animation: arrow_rotate 0.75s alternate;
+}
+.MenuSettings.VanishedContent::scroll-button(left), .MenuSettings.VanishedContent::scroll-button(right) {
+  opacity: 0;
+  pointer-events: none;
 }
 .MenuSettings .Settings_Category {
-  cursor: pointer;
   position: relative;
-  flex: 0 0 170px;
-  height: 40px;
-  padding: 10px;
-  border-radius: 4px;
-  border: 2px solid hsl(from var(--base-turquoise) h s calc(l + 15));
+  scroll-snap-align: center;
+  flex: 0 0 225px;
+  height: 50px;
+  border-radius: 8px;
+  border: 2px solid hsl(from var(--base-turquoise) h s calc(l + 20));
   box-shadow: hsl(from var(--base-turquoise) h s l) 0px 0px 10px;
-  background: radial-gradient(circle at center, hsl(from var(--base-turquoise) h s calc(l + 5)/0.75) 0%, hsl(from var(--base-blue) h s calc(l + 25)/0.75) 45%, hsl(from var(--base-turquoise) h s calc(l + 10)/0.75) 85%, hsl(from var(--light) h s l/0.75) 100%);
+  background: var(--settings-child-background);
   font-size: 18px;
   font-weight: bold;
   color: hsl(from var(--light) h s l);
   text-shadow: hsl(from var(--base-purple) h s calc(l + 15)) 3px 3px 2px;
+  cursor: pointer;
   transition: all 0.3s ease-in-out;
+  display: grid;
+  place-items: center;
 }
 .MenuSettings .Settings_Category:hover {
   transform: scale(1.1);
   box-shadow: hsl(from var(--light) h s l) 0px 0px 15px;
   text-shadow: hsl(from var(--base-blue) h s calc(l + 15)) 3px 3px 2px;
-  border: 2px solid hsl(from var(--base-turquoise) h s calc(l + 25));
-  background: radial-gradient(circle at center, hsl(from var(--base-turquoise) h s calc(l + 5)/0.85) 0%, hsl(from var(--base-purple) h s calc(l + 35)/0.85) 45%, hsl(from var(--base-turquoise) h s calc(l + 10)/0.85) 85%, hsl(from var(--light) h s l/0.85) 100%);
 }
-
-/* Size adjustment for Key display */
-.ToggleMenuSettings {
-  transform: translate(-50%, -50%) scale(0.8);
-  height: 45%;
-  width: 65%;
+.MenuSettings .Settings_Category p {
+  margin: 0;
 }
-
-.Toggle_KA {
+.MenuSettings .Settings_Category .KA_Category {
   position: relative;
-  border-radius: 4px;
-  border: 2px solid hsl(from var(--base-turquoise) h s l);
-  box-shadow: hsl(from var(--base-turquoise) h s l) 0px 0px 8px;
-  background-color: hsl(from var(--base-turquoise) h s calc(l + 50)/0.35);
-  font-size: 14px;
-  font-weight: bold;
-  color: hsl(from var(--light) h s l);
-  text-shadow: hsl(from var(--base-blue) h s calc(l + 25)) 2px 2px 3px;
-  transition: all 0.2s ease-in-out;
-  display: grid;
-  gap: 10px;
-  padding: 6px 8px 12px 8px;
-}
-
-.KA_Category {
-  height: 25px;
-  width: auto;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  background: var(--settings-child-background);
   cursor: pointer;
-  border-radius: 2px;
-  border: 1px solid hsl(from var(--base-turquoise) h s l);
-  box-shadow: hsl(from var(--base-turquoise) h s l) 0px 0px 5px;
-  background: radial-gradient(circle at center, hsl(from var(--base-turquoise) h s calc(l + 5)/0.75) 0%, hsl(from var(--base-blue) h s calc(l + 25)/0.75) 45%, hsl(from var(--base-turquoise) h s calc(l + 10)/0.75) 85%, hsl(from var(--light) h s l/0.75) 100%);
-  text-shadow: hsl(from var(--base-purple) h s calc(l + 15)) 1px 1px 2px;
-  color: hsl(from var(--light) h s l);
-  padding: 4px 8px 4px 8px;
+  border-radius: inherit;
+  border: 1px solid hsl(from var(--base-blue) h s l);
+  text-shadow: hsl(from var(--light) h s l) 1px 1px 2px;
+  color: hsl(from var(--base-blue) h s calc(l + 10));
   transition: all 0.2s ease-in-out;
   gap: 5px;
+}
+.MenuSettings .Settings_Category .Close_KA {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-family: "Times New Roman", serif;
+}
+
+.MenuSettings .BiggerSettings_Category {
+  height: 170px;
+  padding: 5px;
+  background: hsl(from var(--light) h s calc(l + 15)/0.375);
+  backdrop-filter: blur(4px);
+  cursor: default;
 }
 
 /* Star background */
@@ -686,4 +850,5 @@ footer .ToolWrapper .ImpressumButton {
 }
 footer .ToolWrapper .ReloadButton {
   border-radius: 0 0 0 10px;
+  padding-bottom: 6px;
 }

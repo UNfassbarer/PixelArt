@@ -1,5 +1,5 @@
 // All changeable Keys in game
-import { AssignmentKeys } from "./assets.js";
+import { AssignmentKeys, ClickEvent } from "./assets.js";
 import { StartAnimation, newGame } from './game.js';
 
 // Utility functions
@@ -16,9 +16,6 @@ const rand = (() => {
 
 // Delay function for async operations
 const DLY = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-// function TimeOut(ms, handler) { setTimeout(() => { handler }, ms) };
-
 
 // Random integer between min and max (inclusive)
 export const getRandomInt = (min, max) => Math.floor(rand() * (max - min + 1)) + min;
@@ -202,24 +199,7 @@ function SettingsHidden(condition) {
   condition ?
     settingsMenu.classList.add("VanishedContent") :
     settingsMenu.classList.remove("VanishedContent");
-
-  // document.addEventListener("click", (e) => {
-  //   console.log("click")
-  //   settingsMenu.querySelectorAll('[data-group="GeneratedSettingsElement"]').forEach((el) => {
-  //     el.classList.add("HiddenContent");
-  //   });
-  // });
 }
-
-// Scroll bar for settings menu
-settingsMenu.addEventListener("wheel", (e) => {
-  let delta = settingsMenu.offsetWidth / 2;
-  e.preventDefault(); // prevent vertical page scroll
-
-  e.deltaY > 0
-    ? settingsMenu.scrollLeft += delta
-    : settingsMenu.scrollLeft -= delta;
-});
 
 const GameInfoBox = document.getElementById("Game_Info");
 
@@ -263,96 +243,138 @@ function ToggleInnerSettings(el) {
 // Game key assignment toggle (KA)
 const KA_Button = document.getElementById("Settings_Key_Assignment");
 
-// When clicked, show/hide key assignment options
-const ToggleKeys = () => {
-  KA_Button.classList.contains("Settings_Category") ?
-    document.addEventListener("click", GlobalClickControll) :
-    document.removeEventListener("click", GlobalClickControll);
+const ToggleKeys = (KA_Button) => {
 
-  KA_Button.querySelectorAll(".KA_Category").forEach((el) => { el.classList.toggle("HiddenContent") });
-  KA_Button.classList.toggle("Toggle_KA");
-  //adjusted height & padding
-  settingsMenu.classList.toggle("ToggleMenuSettings"); //for settings menu
-  KA_Button.classList.toggle("Settings_Category"); //for KA button's
-};
+  const KeyAssignment = event.target.closest("button");
+  if (KeyAssignment) {
 
-function GlobalClickControll() {
+    const Keys = KeyAssignment.querySelectorAll("span");
 
-  KA_Button.querySelectorAll("button.KA_Category").forEach(button => {
-    if (button.classList.contains("ToggleActiveColor")) button.classList.remove("ToggleActiveColor");
-    button.querySelectorAll(".KA_Button_Key").forEach(element => {
-      if (element.classList.contains("HilightetElement")) element.classList.remove("HilightetElement");
-    });
-    if (button._handleKey) document.removeEventListener("keyup", button._handleKey);
-  });
-}
+    Keys[0].classList.add("HilightetElement");
+    Keys[0].innerText = "Press any key";
 
-// Generate buttons for all actions access- & changable with a key's
-for (const [action, keys] of Object.entries(AssignmentKeys)) {
-  const NewButton = document.createElement("button");
-  NewButton.dataset.group = "GeneratedSettingsElement";
-  NewButton.className = "KA_Category HiddenContent CenterContent";
+    document.addEventListener("keyup", handleKey);
 
-  // Create action catagory
-  const Action_Div = document.createElement("div");
-  Action_Div.dataset.group = "GeneratedSettingsElement";
-  Action_Div.innerText = action;
-  NewButton.appendChild(Action_Div)
+    function handleKey(event) {
 
-  // Create keys for category
-  for (let i = 0; i < keys.length; i++) {
-    const keyDiv = document.createElement("div");
-    keyDiv.dataset.group = "GeneratedSettingsElement";
-    keyDiv.innerText = keys[i];
-    keyDiv.className = "KA_Button_Key"
-    NewButton.dataset.action = action;
+      // Update actual AssignmentKeys object
+      const action = KeyAssignment.dataset.action;
+      AssignmentKeys[action] = Array.from(Keys).map(key => key.innerText);
 
-    NewButton.appendChild(keyDiv);
-  }
-  KA_Button.appendChild(NewButton);
+      // Visual update
+      const EditingElement = document.querySelector(".HilightetElement");
+      if (!EditingElement) return;
+      EditingElement.innerText = event.code;
+      EditingElement.classList.remove("HilightetElement");
 
-  // Event for generated button
-  NewButton.addEventListener("click", HandleButtonClick);
-}
+      if (EditingElement === Keys[0]) {
+        if (Keys[1] === undefined) return;
+        Keys[1].classList.add("HilightetElement");
+        Keys[1].innerText = "Press any key";
+      }
 
-// AI Implementation for cleaner code
-function HandleButtonClick(e) {
-  const button = e.currentTarget;
-  const action = button.dataset.action;
-  e.stopPropagation();
-  const KeyList = button.querySelectorAll(".KA_Button_Key");
-  let inputCounter = 0;
-
-  // Check for button click: 1st or 2end
-  if (!button.classList.toggle("ToggleActiveColor")) {
-    // cancel mode
-    if (button._handleKey) document.removeEventListener("keyup", button._handleKey);
-
-    KeyList.forEach(k => k.classList.remove("HilightetElement"));
-    return;
-  }
-
-  // activate mode
-  KeyList[0].classList.add("HilightetElement");
-  KeyList[0].innerText = "Press any key";
-
-  button._handleKey = function handleKey(event) {
-    KeyList[inputCounter].innerText = event.code;
-    KeyList[inputCounter].classList.remove("HilightetElement");
-    inputCounter++;
-
-    // Update the actual AssignmentKeys object
-    if (inputCounter >= KeyList.length) AssignmentKeys[action] = Array.from(KeyList).map(k => k.innerText);
-
-    // Reset key buttons
-    if (inputCounter < KeyList.length) KeyList[inputCounter].classList.add("HilightetElement")
-    else {
-      button.classList.remove("ToggleActiveColor");
-      document.removeEventListener("keyup", button._handleKey);
+      if (EditingElement === Keys[1]) {
+        document.removeEventListener("keyup", handleKey);
+      }
     }
   };
-  document.addEventListener("keyup", button._handleKey);
-}
+
+  // Break if click on inner buttons
+  if (event.target.closest("button")) return;
+  // Adopted settings size
+  KA_Button.classList.toggle("BiggerSettings_Category");
+  // Header visible
+  KA_Button.querySelector("p").classList.toggle("HiddenContent");
+  // KA_Button.classList.toggle("Settings_Category"); //for KA button's
+
+
+  // Options visibillity
+  KA_Button.querySelectorAll("button").forEach((button) => {
+    button.classList.toggle("HiddenContent");
+    button.classList.toggle("VanishedContent");
+    button.inert = !button.inert;
+  });
+};
+
+// function GlobalClickControll() {
+
+//   KA_Button.querySelectorAll("button.KA_Category").forEach(button => {
+//     if (button.classList.contains("ToggleActiveColor")) button.classList.remove("ToggleActiveColor");
+//     button.querySelectorAll(".KA_Button_Key").forEach(element => {
+//       if (element.classList.contains("HilightetElement")) element.classList.remove("HilightetElement");
+//     });
+//     if (button._handleKey) document.removeEventListener("keyup", button._handleKey);
+//   });
+// }
+
+// Generate buttons for all actions access- & changable with a key's
+// for (const [action, keys] of Object.entries(AssignmentKeys)) {
+//   const NewButton = document.createElement("button");
+//   NewButton.dataset.group = "GeneratedSettingsElement";
+//   NewButton.className = "KA_Category HiddenContent CenterContent";
+
+//   // Create action catagory
+//   const Action_Div = document.createElement("div");
+//   Action_Div.dataset.group = "GeneratedSettingsElement";
+//   Action_Div.innerText = action;
+//   NewButton.appendChild(Action_Div)
+
+//   // Create keys for category
+//   for (let i = 0; i < keys.length; i++) {
+//     const keyDiv = document.createElement("div");
+//     keyDiv.dataset.group = "GeneratedSettingsElement";
+//     keyDiv.innerText = keys[i];
+//     keyDiv.className = "KA_Button_Key"
+//     NewButton.dataset.action = action;
+
+//     NewButton.appendChild(keyDiv);
+//   }
+//   KA_Button.appendChild(NewButton);
+
+//   const NewButton_Event = new ClickEvent(NewButton, () => SettingsButtonClick);
+//   NewButton_Event.register();
+
+//   // NewButton.addEventListener("click", HandleButtonClick);
+// }
+
+// AI Implementation for cleaner code
+// function SettingsButtonClick(e) {
+//   const button = e.currentTarget;
+//   const action = button.dataset.action;
+//   e.stopPropagation();
+//   const KeyList = button.querySelectorAll(".KA_Button_Key");
+//   let inputCounter = 0;
+
+//   // Check for button click: 1st or 2end
+//   if (!button.classList.toggle("ToggleActiveColor")) {
+//     // cancel mode
+//     if (button._handleKey) document.removeEventListener("keyup", button._handleKey);
+
+//     KeyList.forEach(k => k.classList.remove("HilightetElement"));
+//     return;
+//   }
+
+//   // activate mode
+//   KeyList[0].classList.add("HilightetElement");
+//   KeyList[0].innerText = "Press any key";
+
+//   button._handleKey = function handleKey(event) {
+//     KeyList[inputCounter].innerText = event.code;
+//     KeyList[inputCounter].classList.remove("HilightetElement");
+//     inputCounter++;
+
+//     // Update the actual AssignmentKeys object
+//     if (inputCounter >= KeyList.length) AssignmentKeys[action] = Array.from(KeyList).map(k => k.innerText);
+
+//     // Reset key buttons
+//     if (inputCounter < KeyList.length) KeyList[inputCounter].classList.add("HilightetElement")
+//     else {
+//       button.classList.remove("ToggleActiveColor");
+//       document.removeEventListener("keyup", button._handleKey);
+//     }
+//   };
+//   document.addEventListener("keyup", button._handleKey);
+// }
 
 // Create star background with canvas
 export const Settings = {
@@ -485,35 +507,37 @@ function updateRightSideLayout() {
 // Events 
 window.addEventListener("DOMContentLoaded", loadEvents);
 
-class Event {
-  constructor(el, func) {
-    this.el = el;
-    this.func = func;
-  }
-
-  register() {
-    if (!this.el) return;
-    this.el.addEventListener("click", this.func);
-  }
-};
-
 function loadEvents() {
-  // const StartButton = new Event(document.querySelector(".StartButton"), () => setTimeout(OpenMenu, 1250));
-  const StartButton = new Event(document.getElementById("Start_Button"), () => setTimeout(OpenMenu, 1250));
-  const GameStatsButton = new Event(document.getElementById("Game_Stats"), () => ToggleElementVisibillity("Game_Info"));
-  const GameSoundsButton = new Event(document.getElementById("Game_Sounds"), () => ToggleGameSounds());
-  const KeyAssignmentButton = new Event(document.getElementById("Settings_Key_Assignment"), () => ToggleKeys());
-  const GameInstructionsButton = new Event(document.getElementById("Game_Instructions"), () => alert("Not ready yet!"));
-  const MuteElement = new Event(document.getElementById("Mute_Symbol"), () => ToggleGameSounds());
-  const ImpressumButton = new Event(document.getElementById("InpressumButton"), () => ToggleElementVisibillity("ImpressumWrapper"));
-  const ReloadButton = new Event(document.getElementById("ReloadButton"), () => setTimeout(() => { location.reload() }, 650));
+  const StartButton_Event = new ClickEvent(document.getElementById("Start_Button"), () => setTimeout(OpenMenu, 1250));
+  const GameStatsButton_Event = new ClickEvent(document.getElementById("Game_Stats"), () => ToggleElementVisibillity("Game_Info"));
+  const GameSoundsButton_Event = new ClickEvent(document.getElementById("Game_Sounds"), () => ToggleGameSounds());
+  const KA_Button = document.getElementById("Settings_Key_Assignment");
+  const KeyAssignmentButton_Event = new ClickEvent(KA_Button, () => ToggleKeys(KA_Button));
+  const GameInstructionsButton_Event = new ClickEvent(document.getElementById("Game_Instructions"), () => alert("Not ready yet!"));
+  const MuteElement_Event = new ClickEvent(document.getElementById("Mute_Symbol"), () => ToggleGameSounds());
+  const ImpressumButton_Event = new ClickEvent(document.getElementById("InpressumButton"), () => ToggleElementVisibillity("ImpressumWrapper"));
+  const ReloadButton_Event = new ClickEvent(document.getElementById("ReloadButton"), () => setTimeout(() => { location.reload() }, 650));
 
-  StartButton.register();
-  GameStatsButton.register();
-  GameSoundsButton.register();
-  KeyAssignmentButton.register();
-  GameInstructionsButton.register();
-  MuteElement.register();
-  ImpressumButton.register();
-  ReloadButton.register();
-}
+  StartButton_Event.register();
+  GameStatsButton_Event.register();
+  GameSoundsButton_Event.register();
+  KeyAssignmentButton_Event.register();
+  GameInstructionsButton_Event.register();
+  MuteElement_Event.register();
+  ImpressumButton_Event.register();
+  ReloadButton_Event.register();
+
+  // Other Events
+
+  // Scroll bar for settings menu
+  settingsMenu.addEventListener("wheel", (e) => {
+    const delta = settingsMenu.offsetWidth / 2;
+    e.preventDefault();
+    e.deltaY > 0 ?
+      settingsMenu.scrollLeft += delta :
+      settingsMenu.scrollLeft -= delta;
+  },
+    { passive: false }
+  );
+
+};

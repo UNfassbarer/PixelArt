@@ -21,7 +21,7 @@
 
         <div id="Menu_Poster" class="MenuPoster CenterContent">
             <div id="Poster_Caption" class="PosterCaption">M</div>
-            <canvas role="presentation"></canvas> <!-- -> class="BiggerPosterCanvas" -->
+            <canvas role="presentation"></canvas> <!-- class="BiggerPosterCanvas" -->
         </div>
 
         <div id="Menu_Content" class="MenuContent HiddenContent">
@@ -49,24 +49,54 @@
                 </button>
             </div>
 
-            <div id="Menu_Settings" class="MenuSettings VanishedContent CenterContent">
+            <div id="Menu_Settings" class="MenuSettings VanishedContent">
 
-                <!-- <button id="Game_Stats" type="button" class="Settings_Category">
-                    Game stats <span>off</span>
-                </button> -->
-
-                <button id="Game_Stats" type="button" class="Settings_Category">
-                    Game stats <span>off</span>
+                <button id="Game_Stats" type="button" class="Settings_Category First_Setting">
+                    <p>
+                        Game Stats: <span>off</span>
+                    </p>
                 </button>
 
                 <button id="Game_Sounds" type="button" class="Settings_Category">
-                    Game sounds <span>off</span>
+                    <p>
+                        Game Sounds: <span>off</span>
+                    </p>
                 </button>
 
-                <button id="Settings_Key_Assignment" type="button" class="Settings_Category ">Key
-                    assignment</button>
+                <button id="Game_Instructions" type="button" class="Settings_Category">
+                    <p>Instructions</p>
+                </button>
 
-                <button id="Game_Instructions" type="button" class="Settings_Category">Instructions</button>
+                <div id="Settings_Key_Assignment" type="button" class="Settings_Category Last_Setting">
+                    <p>Key assignment</p>
+
+                    <button type="button" class="Close_KA HiddenContent VanishedContent CenterContent">&#10008;</button>
+
+                    <button type="button" class="KA_Category HiddenContent VanishedContent CenterContent" data-action="GoRight" inert>
+                        <div><strong>GoRight: </strong></div>
+                        <span class="KA_Key_Button">KeyW</span> /
+                        <span class="KA_Key_Button">ArrowLeft</span>
+                    </button>
+
+                    <button type="button" class="KA_Category HiddenContent VanishedContent CenterContent" data-action="GoLeft" inert>
+                        <div><strong>GoLeft: </strong></div>
+                        <span class="KA_Key_Button">KeyS</span> /
+                        <span class="KA_Key_Button">ArrowDown</span>
+                    </button>
+
+                    <button type="button" class="KA_Category HiddenContent VanishedContent CenterContent" data-action="Jump" inert>
+                        <div><strong>Jump: </strong></div>
+                        <span class="KA_Key_Button">KeySpace</span> /
+                        <span class="KA_Key_Button">ArrowUp</span>
+                    </button>
+
+                    <button type="button" class="KA_Category HiddenContent VanishedContent CenterContent" data-action="PauseGame" inert>
+                        <div><strong>Pause Game: </strong></div>
+                        <span class="KA_Key_Button">Escape</span> /
+                        <span class="KA_Key_Button">'not bound'</span>
+                    </button>
+
+                </div>
 
             </div>
         </div>
@@ -88,11 +118,10 @@
         </a>
 
         <div class="ToolWrapper">
-            <button id="InpressumButton" class="ImpressumButton CenterContent">^</button>
-            <button id="ReloadButton" class="ReloadButton CenterContent">R</button>
+            <button id="InpressumButton" class="ImpressumButton CenterContent">🡩</button>
+            <button id="ReloadButton" class="ReloadButton CenterContent">↺</button>
         </div>
     </footer>
-
 
     <div class="SideMenu">
 
